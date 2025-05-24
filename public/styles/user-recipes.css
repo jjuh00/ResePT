@@ -1,0 +1,24 @@
+.content {
+    margin: 2rem;
+    padding: 2rem;
+}
+
+.user-recipes-section {
+    margin: 1.5rem auto;
+    max-width: 800px;
+}
+
+.navigation-buttons {
+    display: flex;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+}
+
+.recipe {
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.recipe-meta {
+    margin-top: 0.5rem;
+}

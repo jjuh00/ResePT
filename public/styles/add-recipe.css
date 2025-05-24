@@ -1,0 +1,27 @@
+.content {
+    margin: 2rem;
+    padding: 2rem;
+}
+
+.add-recipe-section {
+    margin: 1.5rem auto;
+    max-width: 800px;
+}
+
+.add-recipe-form {
+    padding: 1rem;
+}
+
+.ingredient, .step {
+    margin: 0.5rem;
+}
+
+.step-number {
+    padding-top: 0.5rem;
+}
+
+.form-buttons {
+    display: flex;
+    margin-top: 2rem;
+    gap: 1rem;
+}

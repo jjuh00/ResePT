@@ -1,0 +1,17 @@
+.content {
+    margin: 2rem;
+    padding: 2rem;
+}
+
+.main-title, .welcome-message {
+    margin-bottom: 1rem;
+}
+
+.recipes-section {
+    margin: 1.5rem auto;
+    max-width: 800px;
+}
+
+.repices-list {
+    margin-top: 1.5rem;
+}

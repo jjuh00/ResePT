@@ -1,0 +1,17 @@
+.content {
+    margin: 2rem;
+    padding: 2rem;
+}
+
+.login-section, .register-section {
+    margin: 1.5rem auto;
+    max-width: 400px;
+}
+
+.login-title, .login-subtitle {
+    margin-bottom: 1rem;
+}
+
+.login-form, .register-form {
+    padding: 1rem;
+}

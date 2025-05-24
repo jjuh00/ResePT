@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "id": "1e4aa076-5dba-43e2-8c61-c5c6b5c4f125",
+      "username": "jjuh00",
+      "email": "juho@testi.com",
+      "password": "$2b$10$62pcFshDIlDCs3lRAyGWZuR4KdPiTWM8WilOjL2tODYpo190UXcNC"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "d092b4d0-97d0-424e-85eb-c784a607027b",
+      "name": "Kaakao",
+      "ingredients": [
+        {
+          "amountAndUnit": "3 rkl",
+          "ingredientName": "Kaakao"
+        },
+        {
+          "amountAndUnit": "4 dl",
+          "ingredientName": "Maito"
+        }
+      ],
+      "steps": [
+        "Kaada maito mukiin",
+        "Lisää kaakao",
+        "Sekoita ja nauti"
+      ],
+      "tags": [],
+      "authorId": "1e4aa076-5dba-43e2-8c61-c5c6b5c4f125",
+      "authorName": "jjuh00",
+      "dateCreated": "2025-05-24T07:40:49.626Z",
+      "dateModified": "2025-05-24T07:40:49.626Z"
+    }
+  ]
+}
