@@ -9,12 +9,12 @@
   ],
   "recipes": [
     {
-      "id": "d092b4d0-97d0-424e-85eb-c784a607027b",
+      "id": "4c6db5a0-671b-4511-b57e-dc47b60922a2",
       "name": "Kaakao",
       "ingredients": [
         {
           "amountAndUnit": "3 rkl",
-          "ingredientName": "Kaakao"
+          "ingredientName": "Kaakaojauhe"
         },
         {
           "amountAndUnit": "4 dl",
@@ -22,15 +22,136 @@
         }
       ],
       "steps": [
-        "Kaada maito mukiin",
-        "Lisää kaakao",
-        "Sekoita ja nauti"
+        "Kaada maito mukiin, lisää kaakaojauhe, sekoita ja nauti"
       ],
       "tags": [],
+      "servingSize": 1,
+      "preparationTime": 3,
       "authorId": "1e4aa076-5dba-43e2-8c61-c5c6b5c4f125",
       "authorName": "jjuh00",
-      "dateCreated": "2025-05-24T07:40:49.626Z",
-      "dateModified": "2025-05-24T07:40:49.626Z"
+      "dateCreated": "2025-05-24T16:02:11.365Z",
+      "dateModified": "2025-05-24T16:02:11.365Z",
+      "imagePath": "1748102531362-268979893-images.jpg"
+    },
+    {
+      "id": "941ca007-43ef-48f2-936b-be9de51f38dc",
+      "name": "Kaurapuuro",
+      "ingredients": [
+        {
+          "amountAndUnit": "2 dl",
+          "ingredientName": "Vettä"
+        },
+        {
+          "amountAndUnit": "1 dl",
+          "ingredientName": "Kaurahiutaleita"
+        },
+        {
+          "amountAndUnit": "1/2 tl",
+          "ingredientName": "Suolaa"
+        },
+        {
+          "amountAndUnit": "2 tl",
+          "ingredientName": "Sokeria"
+        }
+      ],
+      "steps": [
+        "Mittaa vesi syvään lautaseen.",
+        "Lisää veteen suola ja kaurahiutaleet. Sekoita.",
+        "Laita annos mikroon noin 2 minuutiksi. Lopuksi lisää sokeri ja halutessasi marjoja."
+      ],
+      "tags": [],
+      "servingSize": 1,
+      "preparationTime": 5,
+      "authorId": "1e4aa076-5dba-43e2-8c61-c5c6b5c4f125",
+      "authorName": "jjuh00",
+      "dateCreated": "2025-05-24T16:52:44.864Z",
+      "dateModified": "2025-05-24T16:52:44.864Z",
+      "imagePath": "1748105564860-631267124-lataus.jpg"
+    },
+    {
+      "id": "d64a6c73-47a4-4fd2-8a5a-191d2eed602a",
+      "name": "Kalapuikkopelti",
+      "ingredients": [
+        {
+          "amountAndUnit": "600g",
+          "ingredientName": "Perunoita"
+        },
+        {
+          "amountAndUnit": "3 tl",
+          "ingredientName": "Öljyä"
+        },
+        {
+          "amountAndUnit": "1 tl",
+          "ingredientName": "Suolaa"
+        },
+        {
+          "amountAndUnit": "Ripaus",
+          "ingredientName": "Mustapippuria"
+        },
+        {
+          "amountAndUnit": "1 pkt",
+          "ingredientName": "Kalapuikkoja"
+        }
+      ],
+      "steps": [
+        "Pilko perunat lohkoiksi ja sekoita niitä öljyssä.",
+        "Mausta perunat pippurilla ja suolalla.",
+        "Laita perunat uuniin 225 asteeseen noin 10 minuutiksi.",
+        "Siirrä perunoita ja lisää kalapuikot. Laita pelti takaisin uuniin noin 15 minuutiksi, jonka jälkeen nauti ruoasta!"
+      ],
+      "tags": [
+        "t2",
+        "t4",
+        "t16",
+        "t42",
+        "t47",
+        "t59",
+        "t64"
+      ],
+      "servingSize": 2,
+      "preparationTime": 35,
+      "authorId": "1e4aa076-5dba-43e2-8c61-c5c6b5c4f125",
+      "authorName": "jjuh00",
+      "dateCreated": "2025-05-24T17:03:12.222Z",
+      "dateModified": "2025-05-24T17:03:12.222Z",
+      "imagePath": "1748106192218-215030090-kalapuikkopelti_KR5_21.avif"
+    },
+    {
+      "id": "eadf1c3a-d3d3-40fe-bd61-7e8b184105e4",
+      "name": "Riisipuuro",
+      "ingredients": [
+        {
+          "amountAndUnit": "1 dl",
+          "ingredientName": "Puuroriisiä"
+        },
+        {
+          "amountAndUnit": "1 dl",
+          "ingredientName": "Vettä"
+        },
+        {
+          "amountAndUnit": "1 l",
+          "ingredientName": "Täysmaitoa"
+        },
+        {
+          "amountAndUnit": "1/2 tl",
+          "ingredientName": "Suolaa"
+        }
+      ],
+      "steps": [
+        "Kiehauta vesi. Lisää riisit. Anna kiehua, kunnes vesi on imeytynyt riiseihin (n. 5 min)",
+        "Lisää maito. Keitä puuroa hiljalleen 45 min koko ajan sekoitellen.",
+        "Lisää suola, sekoita. Odota että puuro jäähtyy ja nauti."
+      ],
+      "tags": [
+        "t10"
+      ],
+      "servingSize": 2,
+      "preparationTime": 30,
+      "authorId": "1e4aa076-5dba-43e2-8c61-c5c6b5c4f125",
+      "authorName": "jjuh00",
+      "dateCreated": "2025-05-24T17:39:00.046Z",
+      "dateModified": "2025-05-24T17:39:00.046Z",
+      "imagePath": "1748108340040-515156716-lataus (3).jpg"
     }
   ]
 }

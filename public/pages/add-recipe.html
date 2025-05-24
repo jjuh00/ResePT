@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../styles/add-recipe.css">
 </head>
 <body>
-    <main class="content">
+    <main>
         <h1 class="add-recipe-title text-center mb-4">Lisää uusi resepti</h1>
 
         <!--Osio reseptin lisäämiselle-->
@@ -17,6 +17,20 @@
                 <section class="mb-3">
                     <label for="recipe-name" class="form-label">Reseptin nimi*</label>
                     <input type="text" class="form-control" id="recipe-name" required>
+                </section>
+
+                <!--Annoskoko-->
+                <section class="mb-3">
+                    <label for="recipe-serving-size" class="form-label">Annokset*</label>
+                    <input type="number" class="form-control" id="recipe-serving-size" min="1" required>
+                </section>
+
+                <!--Valmistusaika-->
+                <section class="mb-3">
+                    <label for="recipe-preparation-time" class="form-label">
+                        Valmistusaika (minuutteina)*
+                    </label>
+                    <input type="number" class="form-control" id="recipe-preparation-time" min="1" required>
                 </section>
 
                 <!--Mitat ja ainesosat-->
@@ -34,7 +48,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-secondary btn-sm" id="add-ingredient-button">+ Lisää uusi ainesosa</button>
+                    <button type="button" class="btn btn-secondary mt-2" id="add-ingredient-button">+</button>
                 </section>
 
                 <!--Valmistusohjeet-->
@@ -52,7 +66,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-secondary btn-sm" id="add-step-button">+ Lisää vaihe</button>
+                    <button type="button" class="btn btn-secondary mt-2" id="add-step-button">+</button>
                 </section>
 
                 <!--Halutessaan voi lisätä kuvan reseptistä-->
@@ -62,10 +76,12 @@
                 </section>
 
                 <!--Reseptin tagit-->
-                <!--Tämä on vain väliaikainen ratkaisu-->
                 <section class="mb-3">
-                    <label for="recipe-tags" class="form-label">Tagit pilkulla eroteltuna (valinnainen)</label>
-                    <input type="text" class="form-control" id="recipe-tags" placeholder="Esim. juoma, suklaa">
+                    <label for="recipe-tags" class="form-label">Tagit (valinnainen)</label>
+                    <button type="button" class="btn btn-secondary" 
+                    data-bs-toggle="modal"
+                    data-bs-target="#recipe-tags-modal">Valitse tagit</button>
+                    <div id="selected-tags" class="mt-2"></div>
                 </section>
 
                 <section class="form-buttons">
@@ -75,6 +91,315 @@
             </form>
         </section>
     </main>
+
+    <!--Modal (dialogi) tagin/tagien valinnalle-->
+    <section class="modal fade" id="recipe-tags-modal" tabindex="-1"
+        aria-labelledby="recipe-tags-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="recipe-tags-modal-label">Valitse tagi/tagit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sulje"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="tag-checkboxes">
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-1" value="t1">
+                            <label class="form-check-label" for="recipe-tag-checkbox-1">air fryer</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-2" value="t2">
+                            <label class="form-check-label" for="recipe-tag-checkbox-2">arki</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-3" value="t3">
+                            <label class="form-check-label" for="recipe-tag-checkbox-3">gluteetiton</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-4" value="t4">
+                            <label class="form-check-label" for="recipe-tag-checkbox-4">grilliruoka</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-5" value="t5">
+                            <label class="form-check-label" for="recipe-tag-checkbox-5">hedelmät</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-6" value="t6">
+                            <label class="form-check-label" for="recipe-tag-checkbox-6">hitaasti haudutettu</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-7" value="t7">
+                            <label class="form-check-label" for="recipe-tag-checkbox-7">höyrytetty ruoka</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-8" value="t8">
+                            <label class="form-check-label" for="recipe-tag-checkbox-8">intialainen</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-9" value="t9">
+                            <label class="form-check-label" for="recipe-tag-checkbox-9">japanilainen</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-10" value="t10">
+                            <label class="form-check-label" for="recipe-tag-checkbox-10">joulu</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-11" value="t11">
+                            <label class="form-check-label" for="recipe-tag-checkbox-11">juhannus</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-12" value="t12">
+                            <label class="form-check-label" for="recipe-tag-checkbox-12">juhlava</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-13" value="t13">
+                            <label class="form-check-label" for="recipe-tag-checkbox-13">juoma</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-14" value="t14">
+                            <label class="form-check-label" for="recipe-tag-checkbox-14">jälkiruoka</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-15" value="t15">
+                            <label class="form-check-label" for="recipe-tag-checkbox-15">kakku</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-16" value="t16">
+                            <label class="form-check-label" for="recipe-tag-checkbox-16">kala</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-17" value="t17">
+                            <label class="form-check-label" for="recipe-tag-checkbox-17">kana</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-18" value="t18">
+                            <label class="form-check-label" for="recipe-tag-checkbox-18">kastike</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-19" value="t19">
+                            <label class="form-check-label" for="recipe-tag-checkbox-19">kasvis</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-20" value="t20">
+                            <label class="form-check-label" for="recipe-tag-checkbox-20">kasvisruoka</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-21" value="t21">
+                            <label class="form-check-label" for="recipe-tag-checkbox-21">keitto</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-22" value="t22">
+                            <label class="form-check-label" for="recipe-tag-checkbox-22">keksi</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-23" value="t23">
+                            <label class="form-check-label" for="recipe-tag-checkbox-23">kiinalainen</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-24" value="t24">
+                            <label class="form-check-label" for="recipe-tag-checkbox-24">laatikkoruoka</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-25" value="t25">
+                            <label class="form-check-label" for="recipe-tag-checkbox-25">laktoositon</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-26" value="t26">
+                            <label class="form-check-label" for="recipe-tag-checkbox-26">leipä</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-27" value="t27">
+                            <label class="form-check-label" for="recipe-tag-checkbox-27">leivos</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-28" value="t28">
+                            <label class="form-check-label" for="recipe-tag-checkbox-28">liharuoka</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-29" value="t29">
+                            <label class="form-check-label" for="recipe-tag-checkbox-29">lihaton</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-30" value="t30">
+                            <label class="form-check-label" for="recipe-tag-checkbox-30">lisuke</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-31" value="t31">
+                            <label class="form-check-label" for="recipe-tag-checkbox-31">maidoton</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-32" value="t32">
+                            <label class="form-check-label" for="recipe-tag-checkbox-32">makeinen</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-33" value="t33">
+                            <label class="form-check-label" for="recipe-tag-checkbox-33">marinoitu</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-34" value="t34">
+                            <label class="form-check-label" for="recipe-tag-checkbox-34">marjat</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-35" value="t35">
+                            <label class="form-check-label" for="recipe-tag-checkbox-35">mausteinen</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-36" value="t36">
+                            <label class="form-check-label" for="recipe-tag-checkbox-36">meksikolainen</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-37" value="t37">
+                            <label class="form-check-label" for="recipe-tag-checkbox-37">merenelävät</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-38" value="t38">
+                            <label class="form-check-label" for="recipe-tag-checkbox-38">mikrossa tehty</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-39" value="t39">
+                            <label class="form-check-label" for="recipe-tag-checkbox-39">munaruoka</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-40" value="t40">
+                            <label class="form-check-label" for="recipe-tag-checkbox-40">munaton</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-41" value="t41">
+                            <label class="form-check-label" for="recipe-tag-checkbox-41">muu</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-42" value="t42">
+                            <label class="form-check-label" for="recipe-tag-checkbox-42">nopea</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-43" value="t43">
+                            <label class="form-check-label" for="recipe-tag-checkbox-43">paistettu</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-44" value="t44">
+                            <label class="form-check-label" for="recipe-tag-checkbox-44">pasta</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-45" value="t45">
+                            <label class="form-check-label" for="recipe-tag-checkbox-45">pataruoka</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-46" value="t46">
+                            <label class="form-check-label" for="recipe-tag-checkbox-46">perinneruoka</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-47" value="t47">
+                            <label class="form-check-label" for="recipe-tag-checkbox-47">peruna</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-48" value="t48">
+                            <label class="form-check-label" for="recipe-tag-checkbox-48">piirakka</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-49" value="t49">
+                            <label class="form-check-label" for="recipe-tag-checkbox-49">pikaruoka</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-50" value="t50">
+                            <label class="form-check-label" for="recipe-tag-checkbox-50">pirtelö</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-51" value="t51">
+                            <label class="form-check-label" for="recipe-tag-checkbox-51">pääsiäinen</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-52" value="t52">
+                            <label class="form-check-label" for="recipe-tag-checkbox-52">salaatti</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-53" value="t53">
+                            <label class="form-check-label" for="recipe-tag-checkbox-53">sisältää maitoa</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-54" value="t54">
+                            <label class="form-check-label" for="recipe-tag-checkbox-54">sisältää viljoja</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-55" value="t55">
+                            <label class="form-check-label" for="recipe-tag-checkbox-55">sokerillinen</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-56" value="t56">
+                            <label class="form-check-label" for="recipe-tag-checkbox-56">sokeriton</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-57" value="t57">
+                            <label class="form-check-label" for="recipe-tag-checkbox-57">suklaa</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-58" value="t58">
+                            <label class="form-check-label" for="recipe-tag-checkbox-58">suolainen</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-59" value="t59">
+                            <label class="form-check-label" for="recipe-tag-checkbox-59">suomalainen</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-60" value="t60">
+                            <label class="form-check-label" for="recipe-tag-checkbox-60">tex-mex</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-61" value="t61">
+                            <label class="form-check-label" for="recipe-tag-checkbox-61">tofu</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-62" value="t62">
+                            <label class="form-check-label" for="recipe-tag-checkbox-62">trendikäs</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-63" value="t63">
+                            <label class="form-check-label" for="recipe-tag-checkbox-63">tulinen</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-64" value="t64">
+                            <label class="form-check-label" for="recipe-tag-checkbox-64">uunissa tehty</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-65" value="t65">
+                            <label class="form-check-label" for="recipe-tag-checkbox-65">valmistujaiset</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-66" value="t66">
+                            <label class="form-check-label" for="recipe-tag-checkbox-66">vappu</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-67" value="t67">
+                            <label class="form-check-label" for="recipe-tag-checkbox-67">vegaaninen</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-68" value="t68">
+                            <label class="form-check-label" for="recipe-tag-checkbox-68">vehnätön</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-69" value="t69">
+                            <label class="form-check-label" for="recipe-tag-checkbox-69">voileipäkakku</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-70" value="t70">
+                            <label class="form-check-label" for="recipe-tag-checkbox-70">vähähiilihydraattinen</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-71" value="t71">
+                            <label class="form-check-label" for="recipe-tag-checkbox-71">välimerellinen</label>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="checkbox" class="form-check-input" id="recipe-tag-checkbox-72" value="t72">
+                            <label class="form-check-label" for="recipe-tag-checkbox-72">yrtit</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="save-tags-button">Tallenna</button>
+                    <button type="button" class="btn btn-secondar" data-bs-dismiss="modal">Peruuta</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

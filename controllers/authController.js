@@ -1,13 +1,9 @@
-import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs/promises";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const dbPath = path.join(__dirname, "..", "db.json");
+const dbPath = path.resolve("db.json");
 
 // Kirjautumisohjain
 const login = async (req, res) => {
@@ -33,7 +29,7 @@ const login = async (req, res) => {
 
         res.json({ success: true, message: "Kirjautuminen onnistui ", id: user.id });
     } catch (error) {
-        res.status(500).json({ success: false, message: "Palvelinvirhe" });
+        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
     }
 };
 
@@ -61,7 +57,7 @@ const register = async (req, res) => {
 
         res.json({ success: true, message: "Rekisteröityminen onnistui", id: id });
     } catch (error) {
-        res.status(500).json({ success: false, message: "Palvelinvirhe" });
+        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
     }
 };
 

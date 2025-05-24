@@ -9,11 +9,11 @@ $(document).ready(function() {
     }
 
     // Navigointinapit
-    $(".back-button").click(function() {
+    $("#back-button").click(function() {
         window.location.href = "/pages/main-page.html";
     });
 
-    $(".add-new-recipe-button").click(function() {
+    $("#add-new-recipe-button").click(function() {
         window.location.href = "/pages/add-recipe.html";
     });
 
@@ -49,16 +49,21 @@ $(document).ready(function() {
         recipes.forEach(recipe => {
             const tagsText = recipe.tags.length > 0 ? recipe.tags.join(", ") : "Ei tageja";
             const createdDate = new Date(recipe.dateCreated).toLocaleString("fi-FI");
+            const imageHtml = recipe.imagePath ? `<img src="/images/${recipe.imagePath}" alt="${recipe.name}" class="img-fluid mb-2"
+            style="max-width;200px;">` : "";
             
             html += `
                 <div class="recipe border rounded">
+                    ${imageHtml}
                     <h5>${recipe.name}</h5>
                     <div class="recipe-meta">
                         <p class="mb-1><strong>Tagit:</strong> ${tagsText}</p>
+                        <p class="mb-1><strong>Annokset:</strong> ${recipe.servingSize}</p>
+                        <p class="mb-1"><strong>Valmistusaika:</strong> ${recipe.preparationTime}</p>
                         <p class="mb-0"><small class="text-muted">Luotu: ${createdDate}</small></p>
                     </div>
                 </div>
-            `
+            `;
         });
         $(".recipes-list").html(html);
     }

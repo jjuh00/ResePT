@@ -8,21 +8,18 @@
     <link rel="stylesheet" href="../styles/user-recipes.css">
 </head>
 <body>
-    <main class="content">
+    <main>
         <h1 class="user-recipes-title text-center mb-4">Omat reseptit</h1>
 
         <!--Osio käyttäjän lisäämille resepteille (ja ehkä tulevaisuudessa tallennettuille resepteille)-->
         <section class="user-recipes-section mx-auto">
-            <div class="navigation-buttons mb-3">
+            <nav class="navigation-buttons mb-3">
                 <button class="btn btn-secondary" id="back-button">Takaisin etusivulle</button>
                 <button class="btn btn-primary" id="add-new-recipe-button">Lisää uusi resepti</button>
-            </div>
-
+            </nav>
             <!--Lisättyjen reseptien lista-->
-            <section class="recipes">
-                <p class="loading-message text-center">Ladataan reseptejä...</p>
-                <div class="recipes-list"></div>
-            </section>
+            <p class="loading-message text-center">Ladataan reseptejä...</p>
+            <div class="recipes-list"></div>
         </section>
     </main>
 

@@ -1,4 +1,4 @@
-.content {
+main {
     margin: 2rem;
     padding: 2rem;
 }
@@ -24,4 +24,8 @@
     display: flex;
     margin-top: 2rem;
     gap: 1rem;
+}
+
+#selected-tags {
+    margin-top: 1rem;
 }

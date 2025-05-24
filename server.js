@@ -21,22 +21,22 @@ app.use("/authentication", authRoutes);
 app.use("/recipes", recipeRoutes);
 
 // Tarjoillaan kirjautumissivua
-app.get("/index.html", (res) => {
+app.get("/index.html", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
 })
 
 // Tarjoillaan pääsivua
-app.get("/pages/main-page.html", (res) => {
+app.get("/pages/main-page.html", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "pages", "main-page.html"));
 });
 
 // Tarjoillaan reseptin lisäyssivua
-app.get("/pages/add-recipe.html", (res) => {
+app.get("/pages/add-recipe.html", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "pages", "add-recipe.html"));
 });
 
 // Tarjoillaan käyttäjän reseptisivua
-app.get("/pages/user-recipes.html", (res) => {
+app.get("/pages/user-recipes.html", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "pages", "user-recipes.html"))
 });
 
