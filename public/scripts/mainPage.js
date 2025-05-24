@@ -29,7 +29,7 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: `recipes/search?query=${encodeURIComponent(query)}`,
+            url: `/recipes/search?query=${encodeURIComponent(query)}`,
             method: "GET",
             success: function(response) {
                 if (response.success && response.recipes) {
