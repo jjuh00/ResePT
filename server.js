@@ -35,8 +35,8 @@ app.get("/pages/add-recipe.html", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "pages", "add-recipe.html"));
 });
 
-// Tarjoillaan käyttäjän reseptisivua
-app.get("/pages/user-recipes.html", (req, res) => {
+// Tarjoillaan käyttäjän profiilisivua
+app.get("/pages/user-page.html", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "pages", "user-recipes.html"))
 });
 
