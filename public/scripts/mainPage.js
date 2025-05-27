@@ -77,8 +77,9 @@ $(document).ready(function() {
                 const buttonText = isFavourited ? "Poista suosikeista" : "Lisää suosikkeihin";
                 const buttonClass = isFavourited ? "favourited" : "";
                 const imagePath = recipe.imagePath ? `/images/${recipe.imagePath}` : "";
-                const tagsText = recipe.tags.length > 0 ?
-                    recipe.tags.map(tag => tagMap[tag] ||tag).join(", ") : "Ei tageja";
+                const tagsText = recipe.tags.length > 0 ? 
+                    recipe.tags.map(tag => typeof tag === "string" ? tagMap[tag] || tag : tag.label).join(", ") : 
+                    "Ei tageja";
 
                 html += `
                     <div class="col-md-4 recipe-card">

@@ -38,8 +38,10 @@ $(document).ready(function() {
         const imagePath = recipe.imagePath ? `/images/${recipe.imagePath}` : "";
         const createdDate = new Date(recipe.dateCreated).toLocaleString("fi-FI");
         let ingredientsHtml = "<h4>Ainesosat</h4><ul>";
-        const tagsText = recipe.tags.length > 0 ?
-            recipe.tags.map(tag => tagMap[tag] || tag).join(", ") : "Ei tageja";
+        const tagsText = recipe.tags.length > 0 ? 
+            recipe.tags.map(tag => typeof tag === "string" ? tagMap[tag] || tag : tag.label).join(", ") : 
+            "Ei tageja";
+
 
         recipe.ingredients.forEach(ing => {
             ingredientsHtml += `<li>${ing.amountAndUnit} ${ing.ingredientName}</li>`;

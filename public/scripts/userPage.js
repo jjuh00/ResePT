@@ -77,7 +77,8 @@ $(document).ready(function() {
                 const imagePath = recipe.imagePath ? `/images/${recipe.imagePath}` : "";
                 const createdDate = new Date(recipe.dateCreated).toLocaleString("fi-FI");
                 const tagsText = recipe.tags.length > 0 ? 
-                    recipe.tags.map(tag => tagMap[tag] || tag).join(", ") : "Ei tageja";
+                    recipe.tags.map(tag => typeof tag === "string" ? tagMap[tag] || tag : tag.label).join(", ") : 
+                    "Ei tageja";
 
                 html += `
                     <div class="col-md-4 recipe-card">
