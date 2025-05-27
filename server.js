@@ -40,8 +40,23 @@ app.get("/pages/user-page.html", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "pages", "user-recipes.html"))
 });
 
+// Tarjoillaan reseptin hakusivua
+app.get("/pages/search-page.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "pages", "search-page.html"));
+});
+
+// Tarjoillaan reseptin näkymäsivua
+app.get("/pages/recipe-view.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "pages", "recipe-view.html"));
+});
+
+// Tarjoillaan käyttäjän suosikkireseptien sivua
+app.get("/pages/favourites.html", (req, res) => {
+    res.sendFile(__dirname, "public", "pages", "favourites.html");
+});
+
 // Käynnistetään palvelin
 const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
     console.log(`Palvelin on käynnissä portissa ${PORT}`);
-})
+});

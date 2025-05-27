@@ -16,32 +16,26 @@ main {
     padding: 2rem;
 }
 
-.user-recipes-section {
+.recipe-view-section {
     margin: 1.5rem auto;
     max-width: 800px;
 }
 
-.user-profile {
-    margin-bottom: 2rem;
+.recipe-meta {
+    display: flex;
+    margin-bottom: 0.5rem;
+    gap: 1rem;
 }
 
-.recipe-card {
+.recipe-details {
     margin-bottom: 1.5rem;
-    padding: 1rem;
-    border: 1px solid #dee2e6;
 }
 
-.recipe-card img {
+.recipe-details img {
     margin-bottom: 1rem;
     width: 100%;
-    height: 200px;
+    height: 300px;
     object-fit: cover;
-}
-
-.recipe-buttons {
-    display: flex;
-    margin-top: 1rem;
-    gap: 1rem;
 }
 
 footer {

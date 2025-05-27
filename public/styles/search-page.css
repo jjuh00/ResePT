@@ -16,13 +16,9 @@ main {
     padding: 2rem;
 }
 
-.user-recipes-section {
-    margin: 1.5rem auto;
-    max-width: 800px;
-}
-
-.user-profile {
-    margin-bottom: 2rem;
+.search-section {
+    margin-bottom: 1.5rem auto;
+    max-width: 1200px;
 }
 
 .recipe-card {

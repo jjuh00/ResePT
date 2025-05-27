@@ -20,6 +20,7 @@ const storage = multer.diskStorage({
         cb(null, `${uniqueSuffix}-${file.originalname}`);
     }
 });
+
 const upload = multer({
     storage,
     fileFilter: (req, file, cb) => {
@@ -45,13 +46,26 @@ const addRecipe = async (req, res) => {
             const parsedSteps = JSON.parse(steps);
             const parsedTags = JSON.parse(tags);
 
-            if (!name || !ingredients || !steps || !authorId || !servingSize || !preparationTime) {
+            // Tarkistus
+            if (!name || name.length < 2 || name.length > 60) {
+                return res.status(400).json({ success: false, message: "Reseptin nimen pitää olla 2-60 merkki" });
+            }
+            if (!ingredients || !steps || !authorId || !servingSize || !preparationTime) {
                 return res.status(400).json({ success: false, message: "Pakollisia tietoja puuttuu" });
             }
-
             if (!Array.isArray(parsedIngredients) || parsedIngredients.length === 0 ||
                 !Array.isArray(parsedSteps) || parsedSteps.length === 0) {
-                return res.status(400).json({ success: false, message: "Ainesosat ja valmistusvaiheet ovat pakollisia" });
+                return res.status(400).json({ success: false, message: "Ainesosat ja valmistusvaiheet ovat pakollisia tietoja" });
+            }
+            if (parsedIngredients.some(ing => !ing.amountAndUnit || !ing.ingredientName ||
+                ing.amountAndUnit.length > 15 || ing.ingredientName.length > 50)) {
+                return res.status(400).json({ success: false, message: "Virheellinen ainesosa" });
+            }
+            if (parsedSteps.some(step => step.length > 600)) {
+                return res.status(400).json({ success: false, message: "Valmistusvaihe on liian pitkä" });
+            }
+            if (!Array.isArray(parsedTags)) {
+                return res.status(400).json({ success: false, message: "Tagien pitää olla lista" });
             }
 
             const servSize = parseInt(servingSize);
@@ -69,7 +83,7 @@ const addRecipe = async (req, res) => {
 
             const user = db.users.find(u => u.id === authorId);
             if (!user) {
-                return res.status(400).json({ success: false, message: "Käyttäjää ei löytynyt" });
+                return res.status(404).json({ success: false, message: "Käyttäjää ei löytynyt" });
             }
 
             const recipe = {
@@ -91,8 +105,9 @@ const addRecipe = async (req, res) => {
             await fs.writeFile(dbPath, JSON.stringify(db, null, 2));
 
             res.json({ success: true, message: "Resepti lisätty onnistuneesti", recipeId: recipe.id });
-        } catch (err) {
-            res.status(500).json({ success: false, message: "Palvelinvirhe: " + err.message });
+
+        } catch (error) {
+            res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
         }
     });
 };
@@ -100,49 +115,74 @@ const addRecipe = async (req, res) => {
 // Ohjain reseptien hakuun
 const searchRecipes = async (req, res) => {
     try {
-        const { query, tags } = req.query;
         const db = JSON.parse(await fs.readFile(dbPath, "utf-8"));
-        let recipes = db.recipes;
+        const { query = "", tags = "" } = req.query;
+        const trimmedQuery = query.trim().toLowerCase();
+        const tagArray = tags ? tags.split(",").map(t => t.trim()) : [];
+        let filteredRecipes;
 
-        if (query && query.trim()) {
-            const searchTerm = query.toLowerCase().trim()
-            recipes = recipes.filter(recipe =>
-                recipe.name.toLowerCase().includes(searchTerm) ||
-                recipe.tags.some(tag => tag.toLowerCase().includes(searchTerm))
-            );
+        // Palautetaan kaikki reseptit, jos hakusana ja tagit olivat tyhjiä
+        if (!trimmedQuery && tagArray.length === 0) {
+            filteredRecipes = db.recipes;
+        } else {
+            // Suodatetaan reseptit hakusanan ja/tai tagien perusteella
+            filteredRecipes = db.recipes.filter(recipe => {
+                const matchesQuery = trimmedQuery ?
+                    recipe.name.toLowerCase().includes(trimmedQuery) : false;
+
+                const matchesTags = tagArray.length > 0 ?
+                    recipe.tags.some(tag => tagArray.includes(tag)) : false;
+
+                return ((trimmedQuery && matchesQuery) || (tagArray.length > 0 && matchesTags)); 
+            });
         }
 
-        if (tags && tags.trim()) {
-            const searchTags = tags.split(",").map(tag => tag.trim());
-            recipes = recipes.filter(recipe =>
-                searchTags.every(searchTag => recipe.tags.some(tag => tag === searchTag))
-            );
-        }
+        res.json({ success: true, recipes: filteredRecipes });
 
-        // Palautetaan hakua vastaavat reseptit
-        const searchResults = recipes.map(recipe => ({
-            id: recipe.id,
-            name: recipe.name,
-            tags: recipe.tags,
-            servingSize: recipe.servingSize,
-            preparationTime: recipe.preparationTime,
-            authorName: recipe.authorName,
-            dateCreated: recipe.dateCreated,
-            imagePath: recipe.imagePath
-        }));
-
-        res.json({ success: true, recipes: searchResults });
     } catch (error) {
         res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
     }
 };
 
-// Ohjain käyttäjän reseptien hakemiselle
+// Ohjain reseptin tarkasteluun
+const viewRecipe = async (req, res) => {
+    try {
+        const { recipeId } = req.params;
+        const db = JSON.parse(await fs.readFile(dbPath, "utf-8"));
+        const recipe = db.recipes.find(r => r.id === recipeId);
+
+        if (!recipe) {
+            return res.status(404).json({ success: false, message: "Reseptiä ei löytynyt" });
+        }
+
+        res.json({
+            success: true,
+            recipe: {
+                id: recipe.id,
+                name: recipe.name,
+                tags: recipe.tags,
+                servingSize: recipe.servingSize,
+                preparationTime: recipe.preparationTime,
+                authorName: recipe.authorName,
+                dateCreated: recipe.dateCreated,
+                imagePath: recipe.imagePath,
+                ingredients: recipe.ingredients,
+                steps: recipe.steps
+            }
+        });
+
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+    }
+};
+
+// Ohjain käyttäjän reseptien hakuun
 const getUserRecipes = async (req, res) => {
     try {
         const { userId } = req.params;
         const db = JSON.parse(await fs.readFile(dbPath, "utf-8"));
 
+        // Haetaan käyttäjän reseptit tietokannasta
         const userRecipes = db.recipes.filter(recipe => recipe.authorId === userId);
 
         const recipeList = userRecipes.map(recipe => ({
@@ -157,9 +197,83 @@ const getUserRecipes = async (req, res) => {
         }));
 
         res.json({ success: true, recipes: recipeList });
+
     } catch (error) {
         res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
     }
 };
 
-export { addRecipe, searchRecipes, getUserRecipes };
+// Ohjain reseptin lisäämiseksi suosikkeihin
+const addToFavourites = async (req, res) => {
+    try {
+        const { userId } = req.body;
+        const recipeId = req.params.id;
+        const db = JSON.parse(await fs.readFile(dbPath, "utf-8"));
+
+        // Haetaan reseptin tiedot tietokannasta
+        const recipe = db.recipes.find(r => r.id === recipeId);
+        if (!recipe) {
+            return res.status(404).json({ success: false, message: "Reseptiä ei löytynyt" });
+        }
+
+        if (!recipe.favouritedBy) recipe.favouritedBy = [];
+        if (!recipe.favouritedBy.includes(userId)) {
+            // Lisätään resepti käyttäjän suosikkeihin
+            recipe.favouritedBy.push(userId);
+            await fs.writeFile(dbPath, JSON.stringify(db, null, 2));
+        }
+        res.json({ success: true });
+
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+    }
+};
+
+// Ohjain reseptin poistamiseksi suosikeista
+const removeFromFavourites = async (req, res) => {
+    try {
+        const { userId } = req.body;
+        const recipeId = req.params.id;
+        const db = JSON.parse(await fs.readFile(dbPath, "utf-8"));
+
+        // Haetaan resepti tietokannasta
+        const recipe = db.recipes.find(r => r.id === recipeId);
+        if (!recipe) {
+            return res.status(404).json({ success: false, message: "Reseptiä ei löytynyt" });
+        }
+
+        if (recipe.favouritedBy) {
+            // Poistetaan resepti käyttäjän suosikeista
+            recipe.favouritedBy = recipe.favouritedBy.filter(id => id !== userId);
+            await fs.writeFile(dbPath, JSON.stringify(db, null, 2));
+        }
+        res.json({ success: true });
+
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+    }
+};
+
+// Ohjain käyttäjän suosikkireseptien hakuun
+const getUserFavourites = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const db = JSON.parse(await fs.readFile(dbPath, "utf-8"));
+
+        // Haetaan käyttäjän suosikkireseptit tietokannasta
+        const recipes = db.recipes.filter(r => r.favouritedBy?.includes(userId));
+        res.json({ success: true, recipes });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+    }
+};
+
+export { 
+    addRecipe, 
+    searchRecipes, 
+    viewRecipe, 
+    getUserRecipes, 
+    addToFavourites,
+    removeFromFavourites,
+    getUserFavourites
+};

@@ -20,7 +20,7 @@ $(document).ready(function() {
     // Käsitellään hakutagien valinta
     $("#save-search-tags-button").click(function() {
         selectedSearchTags = [];
-        $("input.form-check-input:checked").each(function() {
+        $(".input.form-check-input:checked").each(function() {
             selectedSearchTags.push($(this).val());
         });
         $("#search-tags-modal").modal("hide");
@@ -28,45 +28,52 @@ $(document).ready(function() {
 
     // Käsitellään käyttäjän uloskirjautuminen
     $("#logout-link").click(function() {
-        // Tyhjennetään kaikki tallennetut käyttäjätiedot (esim. käyttäjäid localStoragessa)
         localStorage.removeItem("id");
-        // Uudelleenohjataan kirjautumissivulle
         window.location.href = "/index.html";
     });
 
-    // Käsitellään reseptien haku
+    // Käsitellään haku
     $(".search-form").submit(function(e) {
         e.preventDefault();
-        const query = $("#search-input").val().trim();
-        const tags = selectedSearchTags.join(",");
-        window.location.href = `/pages/search-page.html?query=${encodeURIComponent(query)}&tags=${encodeURIComponent(tags)}`;
+        searchRecipes();
     });
 
-    loadLatestRecipes();
+    // Ladataan hakutulokset URL-parametrien perusteella
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get("query") || "";
+    const tags = urlParams.get("tags") ? urlParams.get("tags").split(",") : [];
+    $("#search-input").val(query);
+    selectedSearchTags = tags;
+    searchRecipes();
 
-    // Ladataan viimeisimmäksi lisätyt reseptit
-    function loadLatestRecipes() {
+    // Suoritetaan haku
+    function searchRecipes() {
+        const query = $("#search-input").val().trim();
+        if (!query && selectedSearchTags.length === 0) {
+            alert("Syötä hakusana tai valitse ainakin yksi tagi");
+            return;
+        }
+
+        const tags = selectedSearchTags.join(",");
+        const url = `/recipes/search?query=${encodeURIComponent(query)}&tags=${encodeURIComponent(tags)}`;
+
         $.ajax({
-            url: "/recipes/search",
+            url: url,
             method: "GET",
             success: function(response) {
                 if (response.success && response.recipes) {
-                    // Haetaan 6 viimeisimmäksi lisättyä reseptiä
-                    const latestRecipes = response.recipes
-                        .sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated))
-                        .slice(0, 6);
-                    displayRecipes(latestRecipes);
+                    displayRecipes(response.recipes);
                 } else {
-                    $("#latest-recipes").html('<p class="text-center">Virhe reseptien lataamisessa</p>')
+                    $("#search-results").html('<p class="text-center">Virhe reseptien haussa</p>');
                 }
             },
             error: function() {
-                $("#latest-recipes").html('<p class="text-center">Palvelimeen yhdistäminen epäonnistui</p>')
+                $("#search-results").html('<p class="text-center">Palvelimeen ei saatu yhteyttä</p>');
             }
         });
     }
 
-    // Näytetään reseptit ja niiden tiedot
+    // Näytetään hakutulokset
     function displayRecipes(recipes) {
         let html = "";
         if (recipes.length === 0) {
@@ -97,7 +104,7 @@ $(document).ready(function() {
                 `;
             });
         }
-        $("#latest-recipes").html(html);
+        $("#search-results").html(html);
     }
 
     $(document).on("click", ".favourite-button", function() {
@@ -109,7 +116,7 @@ $(document).ready(function() {
 
         // Lisätään tai poistetaan suosikkiresepti
         $.ajax({
-            url: `/recipes/favourites/${recipeId}`,
+            url: `recipes/favourites/${recipeId}`,
             method: isFavourited ? "DELETE" : "POST",
             contentType: "application/json",
             data: JSON.stringify({ userId }),

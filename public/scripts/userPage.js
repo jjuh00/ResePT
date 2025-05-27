@@ -1,23 +1,51 @@
+import { tagMap } from "../utils/tagUtils.js";
+
 $(document).ready(function() {
     const id = localStorage.getItem("id");
 
-    // Tarkistetaa, että onko käyttäjä kirjautunut sisään
+    // Tarkistetaan, että onko käyttäjä kirjautunut sisään
     if (!id) {
         alert("Kirjaudu sisään nähdäksesi omat reseptit");
         window.location.href = "/index.html";
         return;
     }
 
-    // Navigointinapit
-    $("#back-button").click(function() {
-        window.location.href = "/pages/main-page.html";
+    // Käsitellään käyttäjän uloskirjautuminen
+    $("#logout-link").click(function() {
+        localStorage.removeItem("id");
+        window.location.href = "/index.html";
     });
 
-    $("#add-new-recipe-button").click(function() {
-        window.location.href = "/pages/add-recipe.html";
-    });
-
+    loadUserProfile();
     loadUserRecipes();
+
+    // Ladataan käyttäjän tiedot
+    function loadUserProfile(){
+        $.ajax({
+            url: `/authentication/user/${id}`,
+            method: "GET",
+            success: function(response) {
+                if (response.success && response.user) {
+                    const html = `
+                        <tr>
+                            <th>Käyttäjänimi</th>
+                            <td>${response.user.username}</td>
+                        </tr>
+                        <tr>
+                            <th>Sähköposti</th>
+                            <td>${response.user.email}</td>
+                        </tr>
+                    `;
+                    $("#user-profile-meta").html(html);
+                } else {
+                    $("#user-profile-meta").html('<tr><td colspan="2">Virhe käyttäjätietojen lataamisessa</td></tr>');
+                }
+            },
+            error: function() {
+                $("#user-profile-meta").html('<tr><td colspan="2">Palvelimeen yhdistäminen epäonnistui</td></tr>');
+            }
+        });
+    }
 
     // Ladataan käyttäjän reseptit
     function loadUserRecipes() {
@@ -39,32 +67,35 @@ $(document).ready(function() {
         });
     }
 
+    // Näytetään käyttäjän lisäämät reseptit
     function displayRecipes(recipes) {
-        if (recipes.length === 0) {
-            $(".recipes-length").html('<p class="text-center">Et ole lisännyt yhtään reseptiä</p>');
-            return;
-        }
-
         let html = "";
-        recipes.forEach(recipe => {
-            const tagsText = recipe.tags.length > 0 ? recipe.tags.join(", ") : "Ei tageja";
-            const createdDate = new Date(recipe.dateCreated).toLocaleString("fi-FI");
-            const imageHtml = recipe.imagePath ? `<img src="/images/${recipe.imagePath}" alt="${recipe.name}" class="img-fluid mb-2"
-            style="max-width;200px;">` : "";
-            
-            html += `
-                <div class="recipe border rounded">
-                    ${imageHtml}
-                    <h5>${recipe.name}</h5>
-                    <div class="recipe-meta">
-                        <p class="mb-1><strong>Tagit:</strong> ${tagsText}</p>
-                        <p class="mb-1><strong>Annokset:</strong> ${recipe.servingSize}</p>
-                        <p class="mb-1"><strong>Valmistusaika:</strong> ${recipe.preparationTime}</p>
+        if (recipes.length === 0) {
+            html = '<p class="text-center">Et ole lisännyt yhtään reseptiä</p>';
+        } else {
+            recipes.forEach(recipe => {
+                const imagePath = recipe.imagePath ? `/images/${recipe.imagePath}` : "";
+                const createdDate = new Date(recipe.dateCreated).toLocaleString("fi-FI");
+                const tagsText = recipe.tags.length > 0 ? 
+                    recipe.tags.map(tag => tagMap[tag] || tag).join(", ") : "Ei tageja";
+
+                html += `
+                    <div class="col-md-4 recipe-card">
+                        <img src="${imagePath}" alt="${recipe.name}">
+                        <h5>${recipe.name}</h5>
+                        <p class="mb-1"><strong>Tagit:</strong> ${tagsText}</p>
+                        <p class="mb-0">Annokset: ${recipe.servingSize}</p>
+                        <p class="mb-0">Valmistusaika: ${recipe.preparationTime}</p>
                         <p class="mb-0"><small class="text-muted">Luotu: ${createdDate}</small></p>
+                        <div class="recipe-buttons">
+                            <a class="btn btn-primary" href="/pages/recipe-view.html?id=${recipe.id}">Näytä resepti</a>
+                            <button type="button" class="btn btn-primary" id="edit-button" data-recipe-id="${recipe.id}">Muokkaa</button>
+                            <button type="button" class="btn btn-primary" id="delete-button" data-recipe-id="${recipe.id}">Poista</button>
+                        </div>
                     </div>
-                </div>
-            `;
-        });
+                `;
+            });
+        }
         $(".recipes-list").html(html);
     }
 });

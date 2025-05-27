@@ -28,6 +28,7 @@ const login = async (req, res) => {
         }
 
         res.json({ success: true, message: "Kirjautuminen onnistui ", id: user.id });
+        
     } catch (error) {
         res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
     }
@@ -56,9 +57,28 @@ const register = async (req, res) => {
         await fs.writeFile(dbPath, JSON.stringify(db, null, 2));
 
         res.json({ success: true, message: "Rekisteröityminen onnistui", id: id });
+
     } catch (error) {
         res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
     }
 };
 
-export { login, register };
+// Ohjain käyttäjätiedoille
+const getUserProfile = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const db = JSON.parse(await fs.readFile(dbPath, "utf-8"));
+        const user = db.users.find(u => u.id === userId);
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: "Käyttäjää ei löytynyt" });
+        }
+
+        res.json({ success: true, user: { username: user.username, email: user.email } });
+
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+    }
+};
+
+export { login, register, getUserProfile };
