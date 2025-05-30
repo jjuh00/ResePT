@@ -1,31 +1,4 @@
-.navbar {
-    padding: 1rem 2rem;
-}
-
-.navbar-brand {
-    margin-right: 2rem;
-}
-
-.nav-dropdown, .dropdown-menu {
-    margin-right: auto;
-    right: 0;
-}
-
-main {
-    margin: 2rem;
-    padding: 2rem;
-}
-
 .favourites-section {
     margin: 1.5em auto;
     max-width: 1200px;
-}
-
-footer {
-    margin-top: 2rem;
-    padding: 1rem 2rem;
-}
-
-.footer-designed, .footer-developed, .footer-powered {
-    padding: 1rem;
 }
