@@ -84,10 +84,10 @@ $(document).ready(function() {
                     <div class="col-md-4 recipe-card">
                         <img src="${imagePath}" alt="${recipe.name}">
                         <h5>${recipe.name}</h5>
-                        <p class="mb-1"><strong>Tagit:</strong> ${tagsText}</p>
-                        <p class="mb-0">Annokset: ${recipe.servingSize}</p>
+                        <p class="mb-1"><i class="fi fi-sr-tags"></i> ${tagsText}</p>
+                        <p class="mb-0"><i class="fi fi-sr-plate-utensils"></i> ${recipe.servingSize}</p>
                         <p class="mb-0"><i class="fi fi-sr-clock-three"></i>: ${recipe.preparationTime} min</p>
-                        <p class="mb-1">Tekijä: ${recipe.authorName}<p>
+                        <p class="mb-1"><i class="fi fi-sr-user-writer"></i> ${recipe.authorName}<p>
                         <p class="mb-0"><small class="text-muted">Luotu: ${new Date(recipe.dateCreated).toLocaleString("fi-FI")}</small></p>
                         <div class="recipe-buttons">
                             <a class="btn" href="/pages/recipe-view.html?id=${recipe.id}">

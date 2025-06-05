@@ -58,15 +58,15 @@ $(document).ready(function() {
 
         const html = `
             <img src="${imagePath}" alt="${recipe.name}">
-            <p class="mb-1"><strong>Tagit:</strong> ${tagsText}</p>
-            <p class="mb-0">Annokset: ${recipe.servingSize}</p>
+            <p class="mb-1"><i class="fi fi-sr-tags"></i> ${tagsText}</p>
+            <p class="mb-0"><i class="fi fi-sr-plate-utensils"></i> ${recipe.servingSize}</p>
             <p class="mb-0"><i class="fi fi-sr-clock-three"></i>: ${recipe.preparationTime} min</p>
-            <p class="mb-1">Tekijä: ${recipe.authorName}</p>
+            <p class="mb-1"><i class="fi fi-sr-user-writer"></i> ${recipe.authorName}</p>
             <p class="mb-0"><small class="text-muted">Luotu: ${createdDate}</small></p>
             <div class="recipe-details">
                 ${ingredientsHtml}
                 ${stepsHtml}
-            </div>
+            </div>§
         `;
         $("#recipe-details").html(html);
     }
