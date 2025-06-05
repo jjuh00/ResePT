@@ -60,7 +60,7 @@ $(document).ready(function() {
             <img src="${imagePath}" alt="${recipe.name}">
             <p class="mb-1"><strong>Tagit:</strong> ${tagsText}</p>
             <p class="mb-0">Annokset: ${recipe.servingSize}</p>
-            <p class="mb-0">Valmistusaika: ${recipe.preparationTime} min</p>
+            <p class="mb-0"><i class="fi fi-sr-clock-three"></i>: ${recipe.preparationTime} min</p>
             <p class="mb-1">Tekijä: ${recipe.authorName}</p>
             <p class="mb-0"><small class="text-muted">Luotu: ${createdDate}</small></p>
             <div class="recipe-details">

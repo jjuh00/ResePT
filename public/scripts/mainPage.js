@@ -74,7 +74,6 @@ $(document).ready(function() {
         } else {
             recipes.forEach(recipe => {
                 const isFavourited = recipe.favouritedBy?.includes(id);
-                const buttonText = isFavourited ? "Poista suosikeista" : "Lisää suosikkeihin";
                 const buttonClass = isFavourited ? "favourited" : "";
                 const imagePath = recipe.imagePath ? `/images/${recipe.imagePath}` : "";
                 const tagsText = recipe.tags.length > 0 ? 
@@ -87,12 +86,16 @@ $(document).ready(function() {
                         <h5>${recipe.name}</h5>
                         <p class="mb-1"><strong>Tagit:</strong> ${tagsText}</p>
                         <p class="mb-0">Annokset: ${recipe.servingSize}</p>
-                        <p class="mb-0">Valmistusaika: ${recipe.preparationTime} min</p>
+                        <p class="mb-0"><i class="fi fi-sr-clock-three"></i>: ${recipe.preparationTime} min</p>
                         <p class="mb-1">Tekijä: ${recipe.authorName}<p>
                         <p class="mb-0"><small class="text-muted">Luotu: ${new Date(recipe.dateCreated).toLocaleString("fi-FI")}</small></p>
                         <div class="recipe-buttons">
-                            <a class="btn btn-primary" href="/pages/recipe-view.html?id=${recipe.id}">Näytä resepti</a>
-                            <button class="btn btn-primary ${id ? '' : 'd-none'} favourite-button ${buttonClass}" style="${isFavourited ? 'background-color: red;' : ''}" data-recipe-id="${recipe.id}">${buttonText}</button>
+                            <a class="btn" href="/pages/recipe-view.html?id=${recipe.id}">
+                                <i class="fi fi-rr-magnifying-glass-eye"></i>
+                            </a>
+                            <button class="btn ${id ? '' : 'd-none'} favourite-button ${buttonClass}" data-recipe-id="${recipe.id}">
+                                <i class="fi ${isFavourited ? 'fi-sr-star' : 'fi-rr-star'}"></i>
+                            </button>
                         </div>
                     </div>
                 `;
@@ -105,8 +108,10 @@ $(document).ready(function() {
         const userId = localStorage.getItem("id");
         if (!userId) return;
 
+        const $button = $(this);
         const recipeId = $(this).data("recipe-id");
         const isFavourited = $(this).hasClass("favourited");
+        const $icon = $button.find("i");
 
         // Lisätään tai poistetaan suosikkiresepti
         $.ajax({
@@ -115,11 +120,13 @@ $(document).ready(function() {
             contentType: "application/json",
             data: JSON.stringify({ userId }),
             success: () => {
-                // favourite-button -napin teksti ja taustaväri riippuu siitä, onko käyttäjä lisännyt reseptin suosikkeihinsa
+                // favourite-button -napin sisältö riippuu siitä, onko käyttäjä lisännyt reseptin suosikkeihinsa
                 if (isFavourited) {
-                    $(this).removeClass("favourited").text("Lisää suosikkeihin").css("backgroud-color", "");
+                    $button.removeClass("favourited");
+                    $icon.removeClass("fi-sr-star").addClass("fi-rr-star");
                 } else {
-                    $(this).addClass("favourited").text("Poista suosikeista").css("background-color", "red");
+                    $button.addClass("favourited");
+                    $icon.removeClass("fi-rr-star").addClass("fi-sr-star");
                 }
             }
         });

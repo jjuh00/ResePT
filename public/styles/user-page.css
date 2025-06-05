@@ -10,6 +10,7 @@
 .recipe-card {
     margin-bottom: 1.5rem;
     padding: 1rem;
+    font-family: Fira Sans, sans-serif;
     border: 1px solid #dee2e6;
 }
 
@@ -20,8 +21,17 @@
     object-fit: cover;
 }
 
+.recipe-card h5 {
+    font-family: Merriweather, serif;   
+}
+
 .recipe-buttons {
     display: flex;
     margin-top: 1rem;
     gap: 1rem;
+}
+
+.recipe-buttons .btn {
+    flex: 1;
+    text-align: center;
 }

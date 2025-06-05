@@ -19,8 +19,15 @@
     display: flex;
     margin-top: 2rem;
     gap: 1rem;
+    flex-wrap: nowrap;
+}
+
+.form-buttons .btn {
+    flex: 1;
+    text-align: center;
 }
 
 #selected-tags {
     margin-top: 1rem;
+    font-family: Fira Sans, sans-serif;
 }

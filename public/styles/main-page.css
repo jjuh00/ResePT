@@ -32,6 +32,7 @@
     max-width: calc(33.333% - 1rem); /* Varmistetaan, että leveys aina sama */
     border: 1px solid #dee2e6;
     box-sizing: border-box;
+    font-family: Fira Sans, sans-serif;
 }
 
 .recipe-card img {
@@ -39,4 +40,20 @@
     width: 100%;
     height: 200px;
     object-fit: cover;
+}
+
+.recipe-card h5 {
+    font-family: Merriweather, serif;
+}
+
+.recipe-buttons {
+    display: flex;
+    margin-top: 1rem;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+}
+
+.recipe-buttons .btn {
+    flex: 1;
+    text-align: center;
 }

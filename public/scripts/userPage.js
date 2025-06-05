@@ -86,12 +86,18 @@ $(document).ready(function() {
                         <h5>${recipe.name}</h5>
                         <p class="mb-1"><strong>Tagit:</strong> ${tagsText}</p>
                         <p class="mb-0">Annokset: ${recipe.servingSize}</p>
-                        <p class="mb-0">Valmistusaika: ${recipe.preparationTime}</p>
+                        <p class="mb-0"><i class="fi fi-sr-clock-three"></i>: ${recipe.preparationTime} min</p>
                         <p class="mb-0"><small class="text-muted">Luotu: ${createdDate}</small></p>
                         <div class="recipe-buttons">
-                            <a class="btn btn-primary" href="/pages/recipe-view.html?id=${recipe.id}">Näytä resepti</a>
-                            <button type="button" class="btn btn-primary" id="edit-button" data-recipe-id="${recipe.id}">Muokkaa</button>
-                            <button type="button" class="btn btn-primary" id="delete-button" data-recipe-id="${recipe.id}">Poista</button>
+                            <a class="btn" href="/pages/recipe-view.html?id=${recipe.id}">
+                                <i class="fi fi-rr-magnifying-glass-eye"></i>
+                            </a>
+                            <button type="button" class="btn" id="edit-button" data-recipe-id="${recipe.id}">
+                                <i class="fi fi-bs-trash"></i>
+                            </button>
+                            <button type="button" class="btn" id="delete-button" data-recipe-id="${recipe.id}">
+                                <i class="fi fi-rc-pencil"></i>
+                            </button>
                         </div>
                     </div>
                 `;

@@ -38,21 +38,26 @@ $(document).ready(function() {
                 "Ei tageja";
 
             html += `
+                <button class="btn mt-3" id="back-button">
+                <i class="fi fi-rr-arrow-left"></i></button>
                 <div class="col-md-4 recipe-card">
                     <img src="${imagePath}" alt="${recipe.name}">
                     <h5>${recipe.name}</h5>
                     <p class="mb-1"><strong>Tagit:</strong> ${tagsText}</p>
                     <p class="mb-0">Annokset: ${recipe.servingSize}</p>
-                    <p class="mb-0">Valmistusaika: ${recipe.preparationTime}</p>
+                    <p class="mb-0"><i class="fi fi-sr-clock-three"></i>: ${recipe.preparationTime} min</p>
                     <p class="mb-0"><small class="text-muted">Luotu: ${createdDate}</small></p>
                     <div class="recipe-buttons">
-                        <a class="btn btn-primary" href="/pages/recipe-view.html?id=${recipe.id}">Näytä resepti</a>
-                        <button type="button" class="btn btn-primary remove-fav-button" styles="background-color: red;" data-recipe-id="${recipe.id}">Poista suosikeista</button>
+                        <a class="btn" href="/pages/recipe-view.html?id=${recipe.id}">
+                            <i class="fi fi-rr-magnifying-glass-eye"></i>
+                        </a>
+                        <button type="button" class="btn remove-fav-button" data-recipe-id="${recipe.id}">
+                            <i class="fi fi-sr-star"></i>
+                        </button>
                     </div>
                 </div>
             `;
         });
-        html += `<button class="btn btn-secondary mt-3" id="back-button">Takaisin</button>`;
         $(".favourites-section").html(html);
     }
 
