@@ -81,6 +81,7 @@ $(document).ready(function() {
                     "Ei tageja";
 
                 html += `
+                    <h3>Omat reseptit</h3>
                     <div class="col-md-4 recipe-card">
                         <img src="${imagePath}" alt="${recipe.name}">
                         <h5>${recipe.name}</h5>
