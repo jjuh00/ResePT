@@ -49,8 +49,11 @@ $(document).ready(function() {
     // Suoritetaan haku
     function searchRecipes() {
         const query = $("#search-input").val().trim();
+        selectedSearchTags = selectedSearchTags.filter(tag => tag); // Poistetaan tyhjät merkkijonot
+
         if (!query && selectedSearchTags.length === 0) {
             alert("Syötä hakusana tai valitse ainakin yksi tagi");
+            $("#search-results").html(""); // Siistitään edelliset tulokset
             return;
         }
 

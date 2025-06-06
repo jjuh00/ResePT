@@ -121,7 +121,7 @@ const searchRecipes = async (req, res) => {
         const tagArray = tags ? tags.split(",").map(t => t.trim()) : [];
         let filteredRecipes;
 
-        // Palautetaan kaikki reseptit, jos hakusana ja tagit olivat tyhjiä
+        // Palautetaan kaikki reseptit mainPagea varten
         if (!trimmedQuery && tagArray.length === 0) {
             filteredRecipes = db.recipes;
         } else {

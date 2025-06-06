@@ -37,8 +37,16 @@ $(document).ready(function() {
     // Käsitellään reseptien haku
     $(".search-form").submit(function(e) {
         e.preventDefault();
+
         const query = $("#search-input").val().trim();
-        const tags = selectedSearchTags.join(",");
+        const tagsArray = selectedSearchTags.filter(tag => tag); // Poistetaan tyhjät arvot
+
+        if (!query && tagsArray.length === 0) {
+            alert("Syötä hakusana tai valitse ainakin yksi tagi");
+            return;
+        }
+
+        const tags = tagsArray.join(",");
         window.location.href = `/pages/search-page.html?query=${encodeURIComponent(query)}&tags=${encodeURIComponent(tags)}`;
     });
 
