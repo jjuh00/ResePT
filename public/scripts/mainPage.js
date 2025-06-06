@@ -1,4 +1,4 @@
-import { tagMap, renderTagCheckboxes } from "../utils/tagUtils.js";
+import { tagMap } from "../utils/tagUtils.js";
 
 $(document).ready(function() {
     const id = localStorage.getItem("id");
@@ -14,18 +14,6 @@ $(document).ready(function() {
         $("#login-link").removeClass("d-none");
     }
 
-    // Luodaan tag-checkboxit dynaamisesti
-    renderTagCheckboxes("#search-tag-checkboxes", "search-tag-checkbox")
-
-    // Käsitellään hakutagien valinta
-    $("#save-search-tags-button").click(function() {
-        selectedSearchTags = [];
-        $("input.form-check-input:checked").each(function() {
-            selectedSearchTags.push($(this).val());
-        });
-        $("#search-tags-modal").modal("hide");
-    });
-
     // Käsitellään käyttäjän uloskirjautuminen
     $("#logout-link").click(function() {
         // Tyhjennetään kaikki tallennetut käyttäjätiedot (esim. käyttäjäid localStoragessa)
@@ -37,17 +25,14 @@ $(document).ready(function() {
     // Käsitellään reseptien haku
     $(".search-form").submit(function(e) {
         e.preventDefault();
-
         const query = $("#search-input").val().trim();
-        const tagsArray = selectedSearchTags.filter(tag => tag); // Poistetaan tyhjät arvot
 
-        if (!query && tagsArray.length === 0) {
-            alert("Syötä hakusana tai valitse ainakin yksi tagi");
+        if (!query) {
+            alert("Syötä hakusana");
             return;
         }
 
-        const tags = tagsArray.join(",");
-        window.location.href = `/pages/search-page.html?query=${encodeURIComponent(query)}&tags=${encodeURIComponent(tags)}`;
+        window.location.href = `/pages/search-page.html?query=${encodeURIComponent(query)}`;
     });
 
     loadLatestRecipes();

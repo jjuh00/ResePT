@@ -1,4 +1,4 @@
-import { tagMap, renderTagCheckboxes } from "../utils/tagUtils.js";
+import { tagMap } from "../utils/tagUtils.js";
 
 $(document).ready(function() {
     const id = localStorage.getItem("id");
@@ -13,18 +13,6 @@ $(document).ready(function() {
     } else {
         $("#login-link").removeClass("d-none");
     }
-
-    // Luodaan tag-checkboxit dynaamisesti
-    renderTagCheckboxes("#search-tag-checkboxes", "search-tag-checkbox")
-
-    // Käsitellään hakutagien valinta
-    $("#save-search-tags-button").click(function() {
-        selectedSearchTags = [];
-        $(".input.form-check-input:checked").each(function() {
-            selectedSearchTags.push($(this).val());
-        });
-        $("#search-tags-modal").modal("hide");
-    });
 
     // Käsitellään käyttäjän uloskirjautuminen
     $("#logout-link").click(function() {
@@ -41,24 +29,20 @@ $(document).ready(function() {
     // Ladataan hakutulokset URL-parametrien perusteella
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get("query") || "";
-    const tags = urlParams.get("tags") ? urlParams.get("tags").split(",") : [];
     $("#search-input").val(query);
-    selectedSearchTags = tags;
     searchRecipes();
 
     // Suoritetaan haku
     function searchRecipes() {
         const query = $("#search-input").val().trim();
-        selectedSearchTags = selectedSearchTags.filter(tag => tag); // Poistetaan tyhjät merkkijonot
 
-        if (!query && selectedSearchTags.length === 0) {
-            alert("Syötä hakusana tai valitse ainakin yksi tagi");
+        if (!query) {
+            alert("Syötä hakusana");
             $("#search-results").html(""); // Siistitään edelliset tulokset
             return;
         }
 
-        const tags = selectedSearchTags.join(",");
-        const url = `/recipes/search?query=${encodeURIComponent(query)}&tags=${encodeURIComponent(tags)}`;
+        const url = `/recipes/search?query=${encodeURIComponent(query)}`;
 
         $.ajax({
             url: url,
