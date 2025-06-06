@@ -116,24 +116,20 @@ const addRecipe = async (req, res) => {
 const searchRecipes = async (req, res) => {
     try {
         const db = JSON.parse(await fs.readFile(dbPath, "utf-8"));
-        const { query = "", tags = "" } = req.query;
+        const { query = "" } = req.query;
         const trimmedQuery = query.trim().toLowerCase();
-        const tagArray = tags ? tags.split(",").map(t => t.trim()) : [];
         let filteredRecipes;
 
         // Palautetaan kaikki reseptit mainPagea varten
-        if (!trimmedQuery && tagArray.length === 0) {
+        if (!trimmedQuery) {
             filteredRecipes = db.recipes;
         } else {
-            // Suodatetaan reseptit hakusanan ja/tai tagien perusteella
+            // Suodatetaan reseptit hakusanan perusteella
             filteredRecipes = db.recipes.filter(recipe => {
                 const matchesQuery = trimmedQuery ?
                     recipe.name.toLowerCase().includes(trimmedQuery) : false;
 
-                const matchesTags = tagArray.length > 0 ?
-                    recipe.tags.some(tag => tagArray.includes(tag)) : false;
-
-                return ((trimmedQuery && matchesQuery) || (tagArray.length > 0 && matchesTags)); 
+                return (trimmedQuery && matchesQuery); 
             });
         }
 
