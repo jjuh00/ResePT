@@ -13,57 +13,43 @@
     <main>
         <!--Kirjautumislomake-->
         <section class="login-section mx-auto">
-            <h2 class="login-title text-center mb-3" 
-            style="font-family: Merriweather, serif;">Tervetuloa</h2>
+            <h2 class="login-title text-center mb-3" >Tervetuloa</h2>
             <form class="login-form">
                 <div class="mb-3">
-                    <label for="login-username" class="form-label" 
-                    style="font-family: Fira Sans, sans-serif;">Käyttäjänimi</label>
+                    <label for="login-username" class="form-label" >Käyttäjänimi</label>
                     <input type="text" class="form-control" id="login-username" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="login-password" class="form-label"
-                    style="font-family: Fira Sans, sans-serif;">Salasana</label>
+                    <label for="login-password" class="form-label">Salasana</label>
                     <input type="password" class="form-control" id="login-password" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100"
-                style="font-family: Fira Sans, sans-serif;">Kirjaudu sisään</button>
+                <button type="submit" class="btn btn-primary w-100">Kirjaudu sisään</button>
             </form>
-            <p class="text-center mt-3" style="font-family: Fira Sans, sans-serif;">
-                Eikö sinulla ole käyttäjää? <a href="#" id="show-register">Rekisteröidy tästä</a>
-            </p>
-            <p class="text-center" style="font-family: Fira Sans, sans-serif;">
-                <a href="./pages/main-page.html" id="guest-link">Jatka kirjautumatta</a>
-            </p>
+            <p class="text-center mt-3">Eikö sinulla ole käyttäjää? <a href="#" id="show-register">Rekisteröidy tästä</a></p>
+            <p class="text-center"><a href="./pages/main-page.html" id="guest-link">Jatka kirjautumatta</a></p>
         </section>
 
         <!--Rekisteröitymislomake (piilotettu oletuksena)-->
         <section class="register-section mx-auto d-none">
-            <h2 class="register-subtitle text-center mb-3"
-            style="font-family: Merriweather, serif;">Rekisteröityminen</h2>
+            <h2 class="register-title text-center mb-3">Rekisteröityminen</h2>
             <form class="register-form">
                 <div class="mb-3">
-                    <label for="register-username" class="form-label"
-                    style="font-family: Fira Sans, sans-serif;">Käyttäjänimi</label>
+                    <label for="register-username" class="form-label">Käyttäjänimi</label>
                     <input type="text" class="form-control" id="register-username" required>
                 </div>
                 <div class="mb-3">
-                    <label for="register-email" class="form-label"
-                    style="font-family: Fira Sans, sans-serif;">Sähköposti</label>
+                    <label for="register-email" class="form-label">Sähköposti</label>
                     <input type="email" class="form-control" id="register-email" required>
                 </div>
                 <div class="mb-3">
-                    <label for="register-password" class="form-label"
-                    style="font-family: Fira Sans, sans-serif;">Salasana</label>
+                    <label for="register-password" class="form-label">Salasana</label>
                     <input type="password" class="form-control" id="register-password" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Rekisteröidy</button>
             </form>
-            <p class="text-center mt-3" style="font-family: Fira Sans, sans-serif;">
-                Onko sinulla jo käyttäjä? <a href="#" id="show-login">Kirjaudu tästä</a>
-            </p>
+            <p class="text-center mt-3">Onko sinulla jo käyttäjä? <a href="#" id="show-login">Kirjaudu tästä</a></p>
         </section>
     </main>
 

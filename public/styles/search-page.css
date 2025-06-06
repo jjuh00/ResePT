@@ -3,6 +3,10 @@
     max-width: 1200px;
 }
 
+.search-section h3 {
+    font-family: Merriweather, serif;
+}
+
 .recipe-card {
     margin-bottom: 1.5rem;
     padding: 1rem;
@@ -31,4 +35,8 @@
 .recipe-buttons .btn {
     flex: 1;
     text-align: center;
+}
+
+.modal-title {
+    font-family: Merriweather, serif;
 }

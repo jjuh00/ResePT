@@ -9,6 +9,7 @@
 
 .main-title, .welcome-message {
     margin-bottom: 1rem;
+    font-family: Merriweather, serif;
 }
 
 .recipes-section {
@@ -56,4 +57,8 @@
 .recipe-buttons .btn {
     flex: 1;
     text-align: center;
+}
+
+.modal-title {
+    font-family: Merriweather, serif;
 }

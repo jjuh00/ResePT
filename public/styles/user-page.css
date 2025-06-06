@@ -1,6 +1,10 @@
-.user-recipes-section {
+.user-profile-section {
     margin: 1.5rem auto;
     max-width: 800px;
+}
+
+.user-profle-section {
+    font-family: Merriweather, serif;
 }
 
 .user-profile {

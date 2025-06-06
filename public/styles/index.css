@@ -8,10 +8,19 @@ main {
     max-width: 400px;
 }
 
-.login-title, .login-subtitle {
+.login-title {
     margin-bottom: 1rem;
+    font-family: Merriweather, serif;
 }
 
 .login-form, .register-form {
     padding: 1rem;
+}
+
+.form-label, .form-control {
+    font-family: Fira Sans, sans-serif;
+}
+
+.register-title {
+    font-family: Merriweather, serif;
 }

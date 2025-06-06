@@ -3,6 +3,10 @@
     max-width: 800px;
 }
 
+.recipe-name {
+    font-family: Merriweather, serif;
+}
+
 .recipe-meta {
     display: flex;
     margin-bottom: 0.5rem;

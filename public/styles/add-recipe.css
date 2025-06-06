@@ -7,6 +7,10 @@
     padding: 1rem;
 }
 
+.add-recipe-title {
+    font-family: Merriweather, serif;
+}
+
 .ingredient, .step {
     margin: 0.5rem;
 }
@@ -30,4 +34,8 @@
 #selected-tags {
     margin-top: 1rem;
     font-family: Fira Sans, sans-serif;
+}
+
+.modal-title {
+    font-family: Merriweather, serif;
 }
