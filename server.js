@@ -35,6 +35,11 @@ app.get("/pages/add-recipe.html", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "pages", "add-recipe.html"));
 });
 
+// Tarjoillaan reseptin muokkaussivua
+app.get("/pages/edit-recipe.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "pages", "edit-recipe.html"));
+});
+
 // Tarjoillaan käyttäjän profiilisivua
 app.get("/pages/user-page.html", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "pages", "user-recipes.html"))
@@ -53,6 +58,17 @@ app.get("/pages/recipe-view.html", (req, res) => {
 // Tarjoillaan käyttäjän suosikkireseptien sivua
 app.get("/pages/favourites.html", (req, res) => {
     res.sendFile(__dirname, "public", "pages", "favourites.html");
+});
+
+// Käsitellään 404-virheet
+app.use((req, res, next) => {
+    res.status(404).sendFile(path.join(__dirname, "public", "pages", "error-404.html"));
+});
+
+// Käsitellään 503-virheet
+app.use((error, req, res, next) => {
+    console.error(error.stack);
+    res.status(503).sendFile(path.join(__dirname, "public", "pages", "error-503.html"));
 });
 
 // Käynnistetään palvelin

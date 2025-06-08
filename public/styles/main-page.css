@@ -1,10 +1,5 @@
 .nav-search-form {
-    margin: 0 2rem;
-    flex-grow: 1;
-}
-
-.nav-search-input {
-    max-width: 500px;
+    max-width: 600px;
 }
 
 .main-title, .welcome-message {
@@ -28,9 +23,12 @@
 }
 
 .recipe-card {
-    flex: 0 0 calc(33.333% - 1rem); /* Max. 3 yhdellä rivillä */
+    display: flex;
     padding: 1rem;
     max-width: calc(33.333% - 1rem); /* Varmistetaan, että leveys aina sama */
+    flex: 0 0 calc(33.333% - 1rem); /* Max. 3 yhdellä rivillä */
+    flex-direction: column;
+    justify-content: space-between;
     border: 1px solid #dee2e6;
     box-sizing: border-box;
     font-family: Fira Sans, sans-serif;
@@ -40,6 +38,7 @@
     margin-bottom: 1rem;
     width: 100%;
     height: 200px;
+    flex-shrink: 0;
     object-fit: cover;
 }
 
@@ -47,9 +46,13 @@
     font-family: Merriweather, serif;
 }
 
+.recipe-card h5, .recipe-card p {
+    margin-bottom: 0.5rem;
+}
+
 .recipe-buttons {
     display: flex;
-    margin-top: 1rem;
+    margin-top: auto;
     gap: 0.5rem;
     flex-wrap: nowrap;
 }

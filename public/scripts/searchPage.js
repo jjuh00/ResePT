@@ -1,8 +1,11 @@
 import { tagMap } from "../utils/tagUtils.js";
+import { formatRecipeDate } from "../utils/dateUtils.js";
 
 $(document).ready(function() {
     const id = localStorage.getItem("id");
-    let selectedSearchTags = [];
+    const recipesPerPage = 3; // Max. 3 reseptiä yhdellä sivulla
+    let currentPage = 1;
+    let totalRecipes = 0;
 
     // Päivitetään navigointipalkin menun sisältö riippuen siitä, onko käyttäjä kirjautunut sisään vai ei
     if (id) {
@@ -23,6 +26,7 @@ $(document).ready(function() {
     // Käsitellään haku
     $(".search-form").submit(function(e) {
         e.preventDefault();
+        currentPage = 1; // Palautetaan ensimmäiselle sivulle, kun uusi resepti haetaan
         searchRecipes();
     });
 
@@ -38,7 +42,7 @@ $(document).ready(function() {
 
         if (!query) {
             alert("Syötä hakusana");
-            $("#search-results").html(""); // Siistitään edelliset tulokset
+            $(".search-section").html(""); // Siistitään edelliset tulokset
             return;
         }
 
@@ -49,24 +53,31 @@ $(document).ready(function() {
             method: "GET",
             success: function(response) {
                 if (response.success && response.recipes) {
+                    totalRecipes = response.recipes.length;
                     displayRecipes(response.recipes);
+                    updatePageControls();
                 } else {
-                    $("#search-results").html('<p class="text-center">Virhe reseptien haussa</p>');
+                    $(".search-section").html('<p class="text-center">Virhe reseptien haussa</p>');
                 }
             },
             error: function() {
-                $("#search-results").html('<p class="text-center">Palvelimeen ei saatu yhteyttä</p>');
+                $(".search-section").html('<p class="text-center">Palvelimeen ei saatu yhteyttä</p>');
             }
         });
     }
 
-    // Näytetään hakutulokset
+    // Näytetään hakutulokset nykyiselle sivulle
     function displayRecipes(recipes) {
-        let html = "";
-        if (recipes.length === 0) {
-            html = '<p class="text-center">Ei tuloksia</p>';
+        let html = '<div class="back-button-div"><button type=button" class="btn" id="back-button"><i class="fi fi-rr-arrow-left"></i></button></div>';
+        const startIndex = (currentPage - 1) * recipesPerPage;
+        const endIndex = startIndex + recipesPerPage;
+        const paginatedRecipes = recipes.slice(startIndex, endIndex);
+
+        if (paginatedRecipes.length === 0) {
+            html += '<p class="text-center">Ei tuloksia</p>';
         } else {
-            recipes.forEach(recipe => {
+            html += '<div class="d-flex flex-wrap gap-1">';
+            paginatedRecipes.forEach(recipe => {
                 const isFavourited = recipe.favouritedBy?.includes(id);
                 const buttonClass = isFavourited ? "favourited" : "";
                 const imagePath = recipe.imagePath ? `/images/${recipe.imagePath}` : "";
@@ -82,7 +93,7 @@ $(document).ready(function() {
                         <p class="mb-0"><i class="fi fi-sr-plate-utensils"></i> ${recipe.servingSize} annosta</p>
                         <p class="mb-0"><i class="fi fi-sr-clock-three"></i> ${recipe.preparationTime} min</p>
                         <p class="mb-1"><i class="fi fi-sr-user-writer"></i> ${recipe.authorName}<p>
-                        <p class="mb-0"><small class="text-muted">Luotu: ${new Date(recipe.dateCreated).toLocaleString("fi-FI")}</small></p>
+                        <p class="mb-0"><small class="text-muted">${formatRecipeDate(recipe.dateCreated, recipe.dateModified)}</small></p>
                         <div class="recipe-buttons">
                             <a class="btn" href="/pages/recipe-view.html?id=${recipe.id}">
                                 <i class="fi fi-rr-magnifying-glass-eye"></i>
@@ -94,9 +105,77 @@ $(document).ready(function() {
                     </div>
                 `;
             });
+            html += "</div>";
         }
-        $("#search-results").html(html);
+        $(".search-section").html(html);
     }
+
+    // Päivitetään sivun navigointinapit
+    function updatePageControls() {
+        const totalPages = Math.ceil(totalRecipes / recipesPerPage);
+        const isFirstPage = currentPage === 1;
+        const isLastPage = currentPage === totalPages;
+
+        if (totalPages <= 1) {
+            $(".page-controls").html("");
+            return;
+        }
+
+        const html = `
+            <div>
+                <button type="button" class="btn" id="first-page-button" ${isFirstPage ? 'disabled' : ''}>
+                    <i class="fi fi-rr-angle-double-left"></i>
+                </button>
+                <button type="button" class="btn" id="prev-page-button" ${isFirstPage ? 'disabled' : ''}>
+                    <i class="fi fi-rr-angle-left"></i>
+                </button>
+                <span>${currentPage} / ${totalPages}</span>
+                <button type="button" class="btn" id="next-page-button" ${isLastPage ? 'disabled' : ''}>
+                    <i class="fi fi-rr-angle-right"></i>
+                </button>
+                <button type="button" class="btn" id="last-page-button" ${isLastPage ? 'disabled' : ''}>
+                    <i class="fi fi-rr-angle-double-right"></i>
+                </button>
+            </div>
+        `;
+        $(".page-controls").html(html);
+    }
+
+    // Navigoidaan käyttäjä takaisin "pääsivulle"
+    $(document).on("click", "#back-button", function() {
+        window.location.href = "/pages/main-page.html";
+    });
+
+    // Navigointinappien logiikka ja niiden klikkaamisen käsittely
+    $(document).on("click", "#first-page-button", function() {
+        if (currentPage !== 1) {
+            currentPage = 1;
+            searchRecipes();
+        }
+    });
+
+    $(document).on("click", "#prev-page-button", function() {
+        if (currentPage > 1) {
+            currentPage--;
+            searchRecipes();
+        }
+    });
+
+    $(document).on("click", "#next-page-button", function() {
+        const totalPages = Math.ceil(totalRecipes / recipesPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            searchRecipes();
+        }
+    });
+
+    $(document).on("click", "#last-page-button", function() {
+        const totalPages = Math.ceil(totalRecipes / recipesPerPage);
+        if (currentPage !== totalPages) {
+            currentPage = totalPages;
+            searchRecipes();
+        }
+    });
 
     $(document).on("click", ".favourite-button", function() {
         const userId = localStorage.getItem("id");

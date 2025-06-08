@@ -12,11 +12,14 @@
 }
 
 .ingredient, .step {
+    display: flex;
     margin: 0.5rem;
+    align-items: center;
 }
 
 .step-number {
-    padding-top: 0.5rem;
+    margin-right: 0.5rem;
+    padding-top: 1rem;
 }
 
 .form-buttons {

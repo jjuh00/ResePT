@@ -1,6 +1,8 @@
 import express from "express";
 import {
-    addRecipe, 
+    addRecipe,
+    updateRecipe,
+    deleteRecipe, 
     searchRecipes, 
     getUserRecipes, 
     viewRecipe, 
@@ -13,6 +15,12 @@ const router = express.Router();
 
 // Reseptin lisäysreitti
 router.post("/add", addRecipe);
+
+// Reseptin päivitysreitti
+router.put("/update/:recipeId", updateRecipe);
+
+// Reseptin poistamisreitti
+router.delete("/delete/:recipeId", deleteRecipe);
 
 // Reseptien hakureitti
 router.get("/search", searchRecipes);

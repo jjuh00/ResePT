@@ -71,8 +71,8 @@ const addRecipe = async (req, res) => {
             const servSize = parseInt(servingSize);
             const prepTime = parseInt(preparationTime);
 
-            if (servSize < 1 || servSize > 10) {
-                return res.status(400).json({ success: false, message: "Annosten määrä pitää olla 1 ja 10 välillä" });
+            if (servSize < 1 || servSize > 20) {
+                return res.status(400).json({ success: false, message: "Annosten määrä pitää olla 1 ja 20 välillä" });
             }
 
             if (prepTime < 1 || prepTime > 1000) {
@@ -110,6 +110,124 @@ const addRecipe = async (req, res) => {
             res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
         }
     });
+};
+
+// Ohjain olemassaolevan reseptin päivittämiseen
+const updateRecipe = async (req, res) => {
+    upload(req, res, async (error) => {
+        if (error) {
+            return res.status(400).json({ success: false, message: "Virhe kuvan lataamisessa: " + error.message });
+        }
+
+        try {
+            const { recipeId } = req.params;
+            const { name, ingredients, steps, tags, authorId, servingSize, preparationTime } = req.body;
+
+            const parsedIngredients = JSON.parse(ingredients);
+            const parsedSteps = JSON.parse(steps);
+            const parsedTags = JSON.parse(tags);
+
+            // Tarkistus
+            if (!name || name.length < 2 || name.length > 60) {
+                return res.status(400).json({ success: false, message: "Reseptin nimen pitää olla 2-60 merkkiä "});
+            }
+            if (!ingredients || !steps || !authorId || !servingSize || !preparationTime) {
+                return res.status(400).json({ success: false, message: "Pakollisia tietoja puuttuu" });
+            }
+            if (!Array.isArray(parsedIngredients) || parsedIngredients.length === 0 || 
+                !Array.isArray(parsedSteps) || parsedSteps.length === 0) {
+                return res.status(400).json({ success: false, message: "Ainesosat ja valmistusvaiheet ovat pakollisia tietoja" });
+            }
+            if (parsedIngredients.some(ing => !ing.amountAndUnit || !ing.ingredientName ||
+                ing.amountAndUnit.length > 15 || ing.ingredientName.length > 50)) {
+                return res.status(400).json({ success: false, message: "Virheellinen ainesosa" });
+            }
+            if (parsedSteps.some(step => step.length > 600)) {
+                return res.status(400).json({ success: false, message: "Valmistusvaihe on liian pitkä" });
+            }
+            if (!Array.isArray(parsedTags)) {
+                return res.status(400).json({ success: false, message: "Tagien pitää olla lista" });
+            }
+
+            const servSize = parseInt(servingSize);
+            const prepTime = parseInt(preparationTime);
+
+            if (servSize < 1 || servSize > 20) {
+                return res.status(400).json({ success: false, message: "Annosten määrä pitää olla 1 ja 20 välillä" });
+            }
+            
+            if (prepTime < 1 || prepTime > 1000) {
+                return res.status(400).json({ success: false, message: "Valmistusajan pitää olla 1 ja 1000 minuutin välillä" });
+            }
+
+            const db = JSON.parse(await fs.readFile(dbPath, "utf-8"));
+            const recipeIndex = db.recipes.findIndex(r => r.id === recipeId);
+
+            if (recipeIndex === -1) {
+                return res.status(404).json({ success: false, message: "Reseptiä ei löytynyt" });
+            }
+
+            if (db.recipes[recipeIndex].authorId !== authorId) {
+                return res.status(403).json({ success: false, message: "Ei oikeutta muokata reseptiä (et ole reseptin tekijä)" });
+            }
+
+            // Poistetaan edellinen kuva, jos uusi kuva ladataan
+            if (req.file && db.recipes[recipeIndex].imagePath) {
+                await fs.unlink(path.join(uploadPath, db.recipes[recipeIndex].imagePath)).catch(() => {});
+            }
+
+            // Ladataan kuva
+            db.recipes[recipeIndex] = {
+                ...db.recipes[recipeIndex],
+                name: name.trim(),
+                ingredients: parsedIngredients,
+                steps: parsedSteps,
+                tags: parsedTags,
+                servingSize: servSize,
+                preparationTime: prepTime,
+                dateModified: new Date().toISOString(),
+                imagePath: req.file ? req.file.filename : db.recipes[recipeIndex].imagePath
+            };
+
+            // Päivitetään reseptin tiedot tietokantaan
+            await fs.writeFile(dbPath, JSON.stringify(db, null, 2));
+            res.json({ success: true });
+
+        } catch (error) {
+            res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+        }
+    });
+};
+
+// Ohjain reseptin poistamiseen
+const deleteRecipe = async (req, res) => {
+    try {
+        const { recipeId } = req.params;
+        const { userId } = req.body;
+        const db = JSON.parse(await fs.readFile(dbPath, "utf-8"));
+        const recipeIndex = db.recipes.findIndex(r => r.id === recipeId);
+
+        if (recipeId === -1) {
+            return res.status(404).json({ success: false, message: "Reseptiä ei löytynyt" });
+        }
+
+        if (db.recipes[recipeIndex].authorId !== userId) {
+            return res.status(403).json({ success: false, message: "Ei oikeutta muokata reseptiä (et ole reseptin tekijä)" });
+        }
+
+        // Poistetaan reseptiin liittyvä kuva
+        if (db.recipes[recipeIndex].imagePath) {
+            await fs.unlink(path.join(uploadPath, db.recipes[recipeIndex].imagePath)).catch(() => {});
+        } 
+
+        // Poistetaan resepti tietokannasta
+        db.recipes.splice(recipeIndex, 1);
+        await fs.writeFile(dbPath, JSON.stringify(db, null, 2));
+        res.json({ success: true });
+
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+    }
 };
 
 // Ohjain reseptien hakuun
@@ -266,6 +384,8 @@ const getUserFavourites = async (req, res) => {
 
 export { 
     addRecipe, 
+    updateRecipe,
+    deleteRecipe,
     searchRecipes, 
     viewRecipe, 
     getUserRecipes, 

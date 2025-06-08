@@ -12,8 +12,11 @@
 }
 
 .recipe-card {
+    display: flex;
     margin-bottom: 1.5rem;
     padding: 1rem;
+    flex-direction: column;
+    justify-content: space-between;
     font-family: Fira Sans, sans-serif;
     border: 1px solid #dee2e6;
 }
@@ -22,6 +25,7 @@
     margin-bottom: 1rem;
     width: 100%;
     height: 200px;
+    flex-shrink: 0;
     object-fit: cover;
 }
 
@@ -29,9 +33,13 @@
     font-family: Merriweather, serif;   
 }
 
+.recipe-card h5, .recipe-card p {
+    margin-bottom: 0.5rem;
+}
+
 .recipe-buttons {
     display: flex;
-    margin-top: 1rem;
+    margin-top: auto;
     gap: 1rem;
 }
 

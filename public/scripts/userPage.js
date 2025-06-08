@@ -1,4 +1,5 @@
 import { tagMap } from "../utils/tagUtils.js";
+import { formatRecipeDate } from "../utils/dateUtils.js";
 
 $(document).ready(function() {
     const id = localStorage.getItem("id");
@@ -8,6 +9,11 @@ $(document).ready(function() {
         alert("Kirjaudu sisään nähdäksesi omat reseptit");
         window.location.href = "/index.html";
         return;
+    } else {
+        // Päivitetään navigointipalkin menun sisältö
+        $("#add-new-recipe-link").removeClass("d-none");
+        $("#favourites-link").removeClass("d-none");
+        $("#logout-link").removeClass("d-none");
     }
 
     // Käsitellään käyttäjän uloskirjautuminen
@@ -73,31 +79,30 @@ $(document).ready(function() {
         if (recipes.length === 0) {
             html = '<p class="text-center">Et ole lisännyt yhtään reseptiä</p>';
         } else {
+            html += "<h3>Omat reseptit</h3>";
             recipes.forEach(recipe => {
                 const imagePath = recipe.imagePath ? `/images/${recipe.imagePath}` : "";
-                const createdDate = new Date(recipe.dateCreated).toLocaleString("fi-FI");
                 const tagsText = recipe.tags.length > 0 ? 
                     recipe.tags.map(tag => typeof tag === "string" ? tagMap[tag] || tag : tag.label).join(", ") : 
                     "Ei tageja";
 
                 html += `
-                    <h3>Omat reseptit</h3>
                     <div class="col-md-4 recipe-card">
                         <img src="${imagePath}" alt="${recipe.name}">
                         <h5>${recipe.name}</h5>
                         <p class="mb-1"><i class="fi fi-sr-tags"></i> ${tagsText}</p>
                         <p class="mb-0"><i class="fi fi-sr-plate-utensils"></i> ${recipe.servingSize} annosta</p>
                         <p class="mb-0"><i class="fi fi-sr-clock-three"></i> ${recipe.preparationTime} min</p>
-                        <p class="mb-0"><small class="text-muted">Luotu: ${createdDate}</small></p>
+                        <p class="mb-0"><small class="text-muted">${formatRecipeDate(recipe.dateCreated, recipe.dateModified)}</small></p>
                         <div class="recipe-buttons">
                             <a class="btn" href="/pages/recipe-view.html?id=${recipe.id}">
                                 <i class="fi fi-rr-magnifying-glass-eye"></i>
                             </a>
                             <button type="button" class="btn" id="edit-button" data-recipe-id="${recipe.id}">
-                                <i class="fi fi-bs-trash"></i>
+                                <i class="fi fi-rr-pencil"></i>
                             </button>
                             <button type="button" class="btn" id="delete-button" data-recipe-id="${recipe.id}">
-                                <i class="fi fi-rc-pencil"></i>
+                                <i class="fi fi-bs-trash"></i>
                             </button>
                         </div>
                     </div>
@@ -106,4 +111,33 @@ $(document).ready(function() {
         }
         $(".recipes-list").html(html);
     }
+
+    // Käsitellään muokkaus-napin klikkaus
+    $(document).on("click", "#edit-button", function() {
+        const recipeId = $(this).data("recipe-id");
+        window.location.href = `/pages/edit-recipe.html?id=${recipeId}`;
+    });
+
+    // Käsitellään poista-napin klikkaus
+    $(document).on("click", "#delete-button", function() {
+        const recipeId = $(this).data("recipe-id");
+        if (confirm("Haluatko varmasti poistaa tämän respetin?")) {
+            $.ajax({
+                url: `/recipes/delete/${recipeId}`,
+                method: "DELETE",
+                contentType: "application/json",
+                data: JSON.stringify({ userId: id }),
+                success: function(response) {
+                    if (response.success) {
+                        location.reload();
+                    } else {
+                        alert("Reseptin poistaminen epäonnistui: " + response.message);
+                    }
+                },
+                error: function(jqXHR) {
+                    alert("Reseptin poistaminen epäonnistui: " + (jqXHR.responseJSON?.message || "Tuntematon virhe"));
+                }
+            });
+        }
+    });
 });

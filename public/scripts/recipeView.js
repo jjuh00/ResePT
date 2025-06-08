@@ -1,7 +1,18 @@
 import { tagMap } from "../utils/tagUtils.js";
+import { formatRecipeDate } from "../utils/dateUtils.js";
 
 $(document).ready(function() {
     const id = localStorage.getItem("id");
+
+    // Päivitetään navigointipalkin menun sisältö riippuen siitä, onko käyttäjä kirjautunut sisään vai ei
+    if (id) {
+        $("#add-new-recipe-link").removeClass("d-none");
+        $("#user-page-link").removeClass("d-none");
+        $("#favourites-link").removeClass("d-none");
+        $("#logout-link").removeClass("d-none");
+    } else {
+        $("#login-link").removeClass("d-none");
+    }
 
     // Käsitellään käyttäjän uloskirjautuminen
     $("#logout-link").click(function() {
@@ -9,11 +20,16 @@ $(document).ready(function() {
         window.location.href = "/index.html";
     });
 
+    // Käsitellään takaisin-napin klikkaus
+    $("#back-button").click(function() {
+        window.location.href = "/pages/main-page.html";
+    });
+
     const urlParams = new URLSearchParams(window.location.search);
     const recipeId = urlParams.get("id");
 
     if (!recipeId) {
-        $("#recipe-details").html('<p class="text-center">Reseptiä ei löytynyt</p>');
+        $(".recipe-details").html('<p class="text-center">Reseptiä ei löytynyt</p>');
         return;
     }
 
@@ -25,23 +41,21 @@ $(document).ready(function() {
             if (response.success && response.recipe) {
                 displayRecipe(response.recipe);
             } else {
-                $("#recipe-details").html('<p class="text-center">Virhe reseptin haussa</p>');
+                $(".recipe-details").html('<p class="text-center">Virhe reseptin haussa</p>');
             }
         },
         error: function() {
-            $("#recipe-details").html('<p class="text-center">Palvelimeen yhdistäminen epäonnistui<p>');
+            $(".recipe-details").html('<p class="text-center">Palvelimeen yhdistäminen epäonnistui<p>');
         }
     });
 
     // Näytetään reseptin tiedot
     function displayRecipe(recipe) {
         const imagePath = recipe.imagePath ? `/images/${recipe.imagePath}` : "";
-        const createdDate = new Date(recipe.dateCreated).toLocaleString("fi-FI");
         let ingredientsHtml = "<h4>Ainesosat</h4><ul>";
         const tagsText = recipe.tags.length > 0 ? 
             recipe.tags.map(tag => typeof tag === "string" ? tagMap[tag] || tag : tag.label).join(", ") : 
             "Ei tageja";
-
 
         recipe.ingredients.forEach(ing => {
             ingredientsHtml += `<li>${ing.amountAndUnit} ${ing.ingredientName}</li>`;
@@ -62,12 +76,12 @@ $(document).ready(function() {
             <p class="mb-0"><i class="fi fi-sr-plate-utensils"></i> ${recipe.servingSize} annosta</p>
             <p class="mb-0"><i class="fi fi-sr-clock-three"></i> ${recipe.preparationTime} min</p>
             <p class="mb-1"><i class="fi fi-sr-user-writer"></i> ${recipe.authorName}</p>
-            <p class="mb-0"><small class="text-muted">Luotu: ${createdDate}</small></p>
+            <p class="mb-0"><small class="text-muted">${formatRecipeDate(recipe.dateCreated, recipe.dateModified)}</small></p>
             <div class="recipe-details">
                 ${ingredientsHtml}
                 ${stepsHtml}
             </div>
         `;
-        $("#recipe-details").html(html);
+        $(".recipe-details").html(html);
     }
 });

@@ -1,8 +1,8 @@
 import { tagMap } from "../utils/tagUtils.js";
+import { formatRecipeDate } from "../utils/dateUtils.js";
 
 $(document).ready(function() {
     const id = localStorage.getItem("id");
-    let selectedSearchTags = [];
 
     // Päivitetään navigointipalkin menun sisältö riippuen siitä, onko käyttäjä kirjautunut sisään vai ei
     if (id) {
@@ -50,11 +50,11 @@ $(document).ready(function() {
                         .slice(0, 6);
                     displayRecipes(latestRecipes);
                 } else {
-                    $("#latest-recipes").html('<p class="text-center">Virhe reseptien lataamisessa</p>')
+                    $(".latest-recipes").html('<p class="text-center">Virhe reseptien lataamisessa</p>')
                 }
             },
             error: function() {
-                $("#latest-recipes").html('<p class="text-center">Palvelimeen yhdistäminen epäonnistui</p>')
+                $(".latest-recipes").html('<p class="text-center">Palvelimeen yhdistäminen epäonnistui</p>')
             }
         });
     }
@@ -81,7 +81,7 @@ $(document).ready(function() {
                         <p class="mb-0"><i class="fi fi-sr-plate-utensils"></i> ${recipe.servingSize} annosta</p>
                         <p class="mb-0"><i class="fi fi-sr-clock-three"></i> ${recipe.preparationTime} min</p>
                         <p class="mb-1"><i class="fi fi-sr-user-writer"></i> ${recipe.authorName}<p>
-                        <p class="mb-0"><small class="text-muted">Luotu: ${new Date(recipe.dateCreated).toLocaleString("fi-FI")}</small></p>
+                        <p class="mb-0"><small class="text-muted">${formatRecipeDate(recipe.dateCreated, recipe.dateModified)}</small></p>
                         <div class="recipe-buttons">
                             <a class="btn" href="/pages/recipe-view.html?id=${recipe.id}">
                                 <i class="fi fi-rr-magnifying-glass-eye"></i>
@@ -94,7 +94,7 @@ $(document).ready(function() {
                 `;
             });
         }
-        $("#latest-recipes").html(html);
+        $(".latest-recipes").html(html);
     }
 
     $(document).on("click", ".favourite-button", function() {
