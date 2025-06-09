@@ -3,7 +3,7 @@ import path from "path";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import recipeRoutes from "./routes/recipeRoutes.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Reitit
-app.use("/authentication", authRoutes);
+app.use("/authentication", userRoutes);
 app.use("/recipes", recipeRoutes);
 
 // Tarjoillaan kirjautumissivua
