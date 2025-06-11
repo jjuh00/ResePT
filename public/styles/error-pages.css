@@ -1,0 +1,10 @@
+.network-error-section {
+    margin: 2rem auto;
+    padding: 2rem;
+    max-width: 800px;
+    text-align: center;
+}
+
+.error-actions {
+    margin-top: 2rem;
+}

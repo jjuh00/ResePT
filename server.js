@@ -65,10 +65,15 @@ app.use((req, res, next) => {
     res.status(404).sendFile(path.join(__dirname, "public", "pages", "error-404.html"));
 });
 
-// Käsitellään 503-virheet
+// Käsitellään muut virheet (verkkovirheet ja palvelinvirheet)
 app.use((error, req, res, next) => {
     console.error(error.stack);
+    // Tarkistetaan, onko kyseessä verkkovirhe
+    if (error.code === "ENOTFOUND" || error.code === "ECONNREFUSED") {
+        res.status(503).sendFile(path.join(__dirname, "public", "pages", "error-network.html"));
+    } else {
     res.status(503).sendFile(path.join(__dirname, "public", "pages", "error-503.html"));
+    }
 });
 
 // Käynnistetään palvelin
