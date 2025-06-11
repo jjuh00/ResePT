@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>503 - Palvelu ei ole käytettävissä</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-straight/css/uicons-solid-straight.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Fira+Sans:wght@400;500&family=Dancing+Script:wght@400&display=swap">
     <link rel="stylesheet" href="../styles/global.css">
 </head>
@@ -19,10 +21,14 @@
     <main>
         <!--Osio virheilmoituksen näyttämiseen-->
         <section class="error-section text-center">
-            <h1>503 - Palvelu ei ole käytettävissä</h1>
-            <p>Palvelin on tilapäisesti poissa käytstä. Yritä myöhemmin uudelleen.</p>
-            <p><a class="btn" href="/pages/main-page.html">Palaa etusivulle</a></p>
-            <p><button class="btn btn-secondary" onclick="location.reload()">Yritä uudelleen</button></p>
+            <h1 class="mb-3 text-center">503 - Palvelu ei ole käytettävissä</h1>
+            <p id="error-message" class="text-center">Palvelin on tilapäisesti poissa käytstä. Yritä myöhemmin uudelleen.</p>
+            <div class="error-actions text-center mt-3">
+                <a class="btn" href="/pages/main-page.html"><i class="fi fi-rr-arrow-left"></i></a>
+                <p><button class="btn btn-secondary" onclick="location.reload()">
+                    <i class="fi fi-ss-refresh"></i>
+                </button></p>
+            </div>
         </section>
     </main>
 
