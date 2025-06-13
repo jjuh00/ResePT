@@ -23,6 +23,7 @@ $(document).ready(function() {
     // Käsitellään kirjautumislomakkeen lähettäminen
     $(".login-form").submit(function(e) {
         e.preventDefault();
+
         const username = $("#login-username").val();
         const password = $("#login-password").val();
 
@@ -41,8 +42,9 @@ $(document).ready(function() {
                 }
             },
             error: function(jqXHR) {
-                if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
-                    alert("Kirjautuminen epäonnistui: " + jqXHR.responseJSON.message);
+                if (jqXHR.status === 0) {
+                    // Verkkovirhe
+                    window.location.href = "/pages/error-network.html";
                 } else {
                     alert("Palvelimeen yhdistäminen epäonnistui: " + (jqXHR.statusText || "Tuntematon virhe"));
                 }
@@ -53,6 +55,7 @@ $(document).ready(function() {
     // Käsitellään rekisteröitymislomakkeen lähettäminen
     $(".register-form").submit(function(e) {
         e.preventDefault();
+
         const username = $("#register-username").val();
         const email = $("#register-email").val();
         const password = $("#register-password").val();
@@ -72,8 +75,9 @@ $(document).ready(function() {
                 }
             },
             error: function(jqXHR) {
-                if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
-                    alert("Rekisteröityminen epäonnistui: " + jqXHR.responseJSON.message);
+                if (jqXHR.status === 0) {
+                    // Verkkovirhe
+                    window.location.href = "/pages/error-network";
                 } else {
                     alert("Palvelimeen yhdistäminen epäonnistui: " + (jqXHR.statusText || "Tuntematon virhe"));
                 }

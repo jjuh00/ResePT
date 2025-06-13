@@ -87,7 +87,7 @@
                     <label for="recipe-tags" class="form-label">Tagit (valinnainen)</label>
                     <button type="button" class="btn" data-bs-toggle="modal" 
                     data-bs-target="#recipe-tags-modal"><i class="fi fi-sc-hashtag"></i></button>
-                    <div id="selected-tags" class="mt-2"></div>
+                    <div class="mt-2" id="selected-tags"></div>
                 </div>
 
                 <div class="form-buttons">
@@ -131,9 +131,11 @@
                     <h5 class="modal-title" id="recipe-tags-modal-label">Valitse tagi/tagit</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
+
                 <div class="modal-body">
                     <div class="row" id="tag-checkboxes"></div>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn" id="save-tags-button">
                         <i class="fi fi-br-check"></i>
