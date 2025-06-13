@@ -77,7 +77,7 @@ $(document).ready(function() {
             error: function(jqXHR) {
                 if (jqXHR.status === 0) {
                     // Verkkovirhe
-                    window.location.href = "/pages/error-network";
+                    window.location.href = "/pages/error-network.html";
                 } else {
                     alert("Palvelimeen yhdistäminen epäonnistui: " + (jqXHR.statusText || "Tuntematon virhe"));
                 }
