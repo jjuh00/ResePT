@@ -72,7 +72,7 @@ app.use((error, req, res, next) => {
     if (error.code === "ENOTFOUND" || error.code === "ECONNREFUSED") {
         res.status(503).sendFile(path.join(__dirname, "public", "pages", "error-network.html"));
     } else {
-    res.status(503).sendFile(path.join(__dirname, "public", "pages", "error-503.html"));
+        res.status(503).sendFile(path.join(__dirname, "public", "pages", "error-503.html"));
     }
 });
 
