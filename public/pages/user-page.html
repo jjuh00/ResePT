@@ -31,7 +31,7 @@
                     <li><a class="dropdown-item d-none" id="favourites-link" href="/pages/favourites.html">
                         <i class="fi fi-rr-features"></i>
                     </a></li>
-                    <li><a class="dropdown-item d-none" id="logout-link" href="#">
+                    <li><a class="dropdown-item d-none" id="logout-link" href=/index.html">
                         <i class="fi fi-bs-sign-out-alt"></i>
                     </a></li>
                 </ul>
@@ -53,10 +53,42 @@
                 <button type="button" class="btn me-2" id="edit-user-button">
                     <i class="fi fi-rr-pencil"></i>
                 </button>
-                <button type="button" class="btn" id="delete-user-button">
+                <button type="button" class="btn" id="delete-user-button" data-bs-toggle="modal" data-bs-target="#delete-user-modal">
                     <i class="fi fi-bs-trash"></i>
                 </button>
             </div>
+
+            <!--Modal salasanan kysymistä varten käyttäjältä-->
+            <div class="modal fade" id="delete-user-modal" tabindex="-1" aria-labelledby="delete-user-modal-label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="delete-user-modal-label">Vahvista käyttäjä</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <p>Syötä salasana poistaaksesi käyttäjän. Kaikki tiedot poistetaan, mukaan lukien reseptisi</p>
+                            <form id="delete-user-form">
+                                <div class="mb-3">
+                                    <label for="delete-password" class="form-label">Salasana*</label>
+                                    <input type="password" class="form-control" id="delete-password" required>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn" data-bs-dismiss="modal">
+                                <i class="fi fi-br-cross"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" id="confirm-delete-button">
+                                <i class="fi fi-rr-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <p class="loading-message">Ladataan reseptejä...</p>
             <!--Käyttäjän lisäämät reseptit ladataan dynaamisesti tähän-->
             <div class="row recipes-list"></div>

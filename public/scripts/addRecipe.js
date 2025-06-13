@@ -16,6 +16,14 @@ $(document).ready(function() {
         $("#logout-link").removeClass("d-none");
     }
 
+    // Käsitellään käyttäjän uloskirjautuminen
+    $("#logout-link").click(function() {
+        localStorage.removeItem("id");
+    });
+
+    // Luodaan tag-checkboxit dynaamisesti
+    renderTagCheckboxes("#tag-checkboxes", "recipe-tag-checkbox");
+
     // Lisätään uusi ainesosakenttä
     $(document).on("click", "#add-ingredient-button", function() {
         const ingredientsHtml = `
@@ -101,33 +109,21 @@ $(document).ready(function() {
         $(".step").last().find(".step-buttons").removeClass("d-none");
     }
 
-    // Luodaan tag-checkboxit dynaamisesti
-    renderTagCheckboxes("#tag-checkboxes", "recipe-tag-checkbox");
-
     // Käsitellään tagien valinta
     $("#save-tags-button").click(function() {
         selectedTags = [];
+
         $("input.form-check-input:checked").each(function() {
             const tagValue = $(this).val(); // Reseptin tagin input arvo, esim. t1
             const labelText = $(`label[for="${$(this).attr("id")}"]`).text(); // Checkboxia vastaava label, esim. air fryer
             selectedTags.push({ value: tagValue, label: labelText });
         });
+
         const labelList = selectedTags.map(t => t.label);
         $("#selected-tags").text(labelList.length > 0 ? `Valitut tagit: ${labelList.join(", ")}` :
         "Ei valittuja tageja"); // Näytetään tagin teksti (input arvon sijasta)
         $("#recipe-tags-modal").modal("hide");
     });
-
-    // Käsitellään peruuta-napin klikkaus
-    $("#cancel-button").click(function() {
-        window.location.href = "/pages/main-page.html";
-    });
-
-    // Käsitellään käyttäjän uloskirjautuminen
-    $("#logout-link").click(function() {
-        localStorage.removeItem("id");
-        window.location.href = "/index.html";
-    })
 
     // Lomakkeen lähetys
     $(".add-recipe-form").submit(function(e) {
@@ -205,7 +201,6 @@ $(document).ready(function() {
             formData.append("image", imageFile);
         }
 
-        // Lähetetään data palvelimelle
         $.ajax({
             url: "/recipes/add",
             method: "POST",
@@ -227,6 +222,11 @@ $(document).ready(function() {
                 }
             }
         });
+    });
+
+    // Käsitellään peruuta-napin klikkaus
+    $("#cancel-button").click(function() {
+        window.location.href = "/pages/main-page.html";
     });
 
     // Alustetaan nappien näkyvyys

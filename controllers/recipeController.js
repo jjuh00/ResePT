@@ -16,6 +16,7 @@ const storage = multer.diskStorage({
         cb(null, uploadPath);
     },
     filename: (req, file, cb) => {
+        // Luodaan kuvalle uniikki tiedostonimi
         const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1E9);
         cb(null, `${uniqueSuffix}-${file.originalname}`);
     }
@@ -36,7 +37,7 @@ const upload = multer({
 const addRecipe = async (req, res) => {
     upload(req, res, async (error) => {
         if (error) {
-            return res.status(400).json({ success: false, message: "Virhe kuvan lataamisessa: " + error.message });
+            return res.status(400).json({ success: false, message: error.message });
         }
 
         try {
@@ -48,7 +49,7 @@ const addRecipe = async (req, res) => {
 
             // Tarkistus
             if (!name || name.length < 2 || name.length > 60) {
-                return res.status(400).json({ success: false, message: "Reseptin nimen pitää olla 2-60 merkki" });
+                return res.status(400).json({ success: false, message: "Reseptin nimen pitää olla 2-60 merkkiä" });
             }
             if (!ingredients || !steps || !authorId || !servingSize || !preparationTime) {
                 return res.status(400).json({ success: false, message: "Pakollisia tietoja puuttuu" });
@@ -104,10 +105,10 @@ const addRecipe = async (req, res) => {
             db.recipes.push(recipe);
             await fs.writeFile(dbPath, JSON.stringify(db, null, 2));
 
-            res.json({ success: true, message: "Resepti lisätty onnistuneesti", recipeId: recipe.id });
+            res.json({ success: true, recipeId: recipe.id });
 
         } catch (error) {
-            res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+            res.status(500).json({ success: false, message: error.message });
         }
     });
 };
@@ -116,7 +117,7 @@ const addRecipe = async (req, res) => {
 const updateRecipe = async (req, res) => {
     upload(req, res, async (error) => {
         if (error) {
-            return res.status(400).json({ success: false, message: "Virhe kuvan lataamisessa: " + error.message });
+            return res.status(400).json({ success: false, message: error.message });
         }
 
         try {
@@ -194,7 +195,7 @@ const updateRecipe = async (req, res) => {
             res.json({ success: true });
 
         } catch (error) {
-            res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+            res.status(500).json({ success: false, message: error.message });
         }
     });
 };
@@ -226,7 +227,7 @@ const deleteRecipe = async (req, res) => {
         res.json({ success: true });
 
     } catch (error) {
-        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
@@ -254,7 +255,7 @@ const searchRecipes = async (req, res) => {
         res.json({ success: true, recipes: filteredRecipes });
 
     } catch (error) {
-        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
@@ -286,7 +287,7 @@ const viewRecipe = async (req, res) => {
         });
 
     } catch (error) {
-        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
@@ -313,7 +314,7 @@ const getUserRecipes = async (req, res) => {
         res.json({ success: true, recipes: recipeList });
 
     } catch (error) {
-        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
@@ -339,7 +340,7 @@ const addToFavourites = async (req, res) => {
         res.json({ success: true });
 
     } catch (error) {
-        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
@@ -364,7 +365,7 @@ const removeFromFavourites = async (req, res) => {
         res.json({ success: true });
 
     } catch (error) {
-        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
@@ -378,7 +379,7 @@ const getUserFavourites = async (req, res) => {
         const recipes = db.recipes.filter(r => r.favouritedBy?.includes(userId));
         res.json({ success: true, recipes });
     } catch (error) {
-        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 

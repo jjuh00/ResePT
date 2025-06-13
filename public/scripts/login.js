@@ -12,14 +12,6 @@ $(document).ready(function() {
         $(".login-section").removeClass("d-none");
     });
 
-    // Käsitellään "guest-link" -linkin klikkaus (käyttäjä ei ole kirjautuneena sisään)
-    $("#guest-link").click(function(e) {
-        e.preventDefault();
-        // Varmistetaan, että käyttäjän id:tä ei tallenneta
-        localStorage.removeItem("id");
-        window.location.href = "/pages/main-page.html";
-    });
-
     // Käsitellään kirjautumislomakkeen lähettäminen
     $(".login-form").submit(function(e) {
         e.preventDefault();
@@ -45,6 +37,8 @@ $(document).ready(function() {
                 if (jqXHR.status === 0) {
                     // Verkkovirhe
                     window.location.href = "/pages/error-network.html";
+                } else if (jqXHR.status === 400) {
+                    alert("Väärä käyttäjänimi tai salasana");
                 } else {
                     alert("Palvelimeen yhdistäminen epäonnistui: " + (jqXHR.statusText || "Tuntematon virhe"));
                 }
@@ -83,5 +77,14 @@ $(document).ready(function() {
                 }
             }
         });
+    });
+
+    // Käsitellään "guest-link" -linkin klikkaus (käyttäjä ei ole kirjautuneena sisään)
+    $("#guest-link").click(function(e) {
+        e.preventDefault();
+
+        // Varmistetaan, että käyttäjän id:tä ei tallenneta
+        localStorage.removeItem("id");
+        window.location.href = "/pages/main-page.html";
     });
 });

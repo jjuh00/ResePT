@@ -20,12 +20,6 @@ $(document).ready(function() {
     // Käsitellään käyttäjän uloskirjautuminen
     $("#logout-link").click(function() {
         localStorage.removeItem("id");
-        window.location.href = "/index.html";
-    });
-
-    // Käsitellään peruuta-napin klikkaus
-    $("#cancel-button").click(function() {
-        window.location.href = "/pages/main-page.html";
     });
 
     // Haetaan reseptin id URL:stä
@@ -129,6 +123,82 @@ $(document).ready(function() {
         updateButtonVisibility();
     }
 
+    // Luodaan tag-checkboxit dynaamisesti
+    renderTagCheckboxes("#tag-checkboxes", "recipe-tag-checkbox");
+
+    // Lisätään uusi ainesosakenttä
+    $(document).on("click", "#add-ingredient-button", function() {
+        const ingredientsHtml = `
+            <div class="ingredient">
+                <div class="row align-items-center">
+                    <div class="col-3">
+                        <input type="text" class="form-control ingredient-amount-and-unit" placeholder="Määrä (esim. 100g)" required>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" class="form-control ingredient-name" placeholder="Ainesosa" required>
+                    </div>
+                    <div class="col-2 ingredient-buttons">
+                        <button type="button" class="btn" id="add-ingredient-button">
+                            <i class="fi fi-br-plus"></i>
+                        </button>
+                        <button type="button" class="btn" id="delete-ingredient-button"">
+                            <i class="fi fi-br-minus-small"></i>
+                        </button>                            
+                    </div>
+                </div>
+            </div>
+        `;
+        $(".ingredients").append(ingredientsHtml);
+        updateButtonVisibility();
+    });
+
+    // Lisätään uusi vaihekenttä
+    $(document).on("click", "#add-step-button", function() {
+        const stepCount = $(".step").length + 1;
+        const stepsHtml = `
+            <div class="step">
+                <div class="row align-items-center">
+                    <div class="col-1">
+                        <span class="step-number">${stepCount}.</span>
+                    </div>
+                    <div class="col-8">
+                        <textarea class="form-control step-text" rows=3 placeholder="Vaihe ${stepCount}" required></textarea>
+                    </div>
+                    <div class="col-3 step-buttons d-flex gap-2 justify-content-end">
+                        <button type="button" class="btn" id="add-step-button">
+                            <i class="fi fi-br-plus"></i>
+                        </button>
+                        <button type="button" class="btn" id="delete-step-button">
+                            <i class="fi fi-br-minus-small"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        $(".steps").append(stepsHtml);
+        updateButtonVisibility();
+    });
+
+    // Poistetaan ainesosakenttä
+    $(document).on("click", "#delete-ingredient-button", function() {
+        if ($(".ingredient").length > 1) {
+            $(this).closest(".ingredient").remove();
+            updateButtonVisibility();
+        }
+    });
+
+    // Poistetaan vaihekenttä
+    $(document).on("click", "#delete-step-button", function() {
+        if ($(".step").length > 1) {
+            $(this).closest(".step").remove();
+            $(".step").each(function(i) {
+                $(this).find(".step-number").text(`${i + 1}.`);
+                $(this).find(".step-text").attr("placeholder", `Vaihe ${i + 1}`);
+            });
+            updateButtonVisibility();
+        }
+    });
+
     /*
         Ainesosan ja vaiheen lisäys-/poistonappien näkyvyys:
         Napit näkyvät vain viimeisimmän ainesosan/vaiheen kohdalla
@@ -140,17 +210,16 @@ $(document).ready(function() {
         $(".step").last().find(".step-buttons").removeClass("d-none");
     }
 
-    // Luodaan tag-checkboxit dynaamisesti
-    renderTagCheckboxes("#tag-checkboxes", "recipe-tag-checkbox");
-
     // Käsitellään tagien valinta
     $("#save-tags-button").click(function() {
         selectedTags = [];
+
         $("input.form-check-input:checked").each(function() {
             const tagValue = $(this).val(); // Reseptin tagin input arvo, esim. t1
             const labelText = $(`label[for="${$(this).attr("id")}"]`).text(); // Checkboxia vastaava label, esim. air fryer
             selectedTags.push({ value: tagValue, label: labelText });
         });
+
         const labelList = selectedTags.map(t => t.label);
         $("#selected-tags").text(labelList.length > 0 ? `Valitut tagit: ${labelList.join(", ")}` :
         "Ei valittuja tageja"); // Näytetään tagin teksti (input arvon sijasta)
@@ -233,7 +302,6 @@ $(document).ready(function() {
             formData.append("image", imageFile);
         }
 
-        // Lähetetään muokattu resepti palvelimelle
         $.ajax({
             url: `/recipes/update/${recipeId}`,
             method: "PUT",
@@ -253,77 +321,9 @@ $(document).ready(function() {
         });
     });
 
-    // Lisätään uusi ainesosakenttä
-    $(document).on("click", "#add-ingredient-button", function() {
-        const ingredientsHtml = `
-            <div class="ingredient">
-                <div class="row align-items-center">
-                    <div class="col-3">
-                        <input type="text" class="form-control ingredient-amount-and-unit" placeholder="Määrä (esim. 100g)" required>
-                    </div>
-                    <div class="col-6">
-                        <input type="text" class="form-control ingredient-name" placeholder="Ainesosa" required>
-                    </div>
-                    <div class="col-2 ingredient-buttons">
-                        <button type="button" class="btn" id="add-ingredient-button">
-                            <i class="fi fi-br-plus"></i>
-                        </button>
-                        <button type="button" class="btn" id="delete-ingredient-button"">
-                            <i class="fi fi-br-minus-small"></i>
-                        </button>                            
-                    </div>
-                </div>
-            </div>
-        `;
-        $(".ingredients").append(ingredientsHtml);
-        updateButtonVisibility();
-    });
-
-    // Lisätään uusi vaihekenttä
-    $(document).on("click", "#add-step-button", function() {
-        const stepCount = $(".step").length + 1;
-        const stepsHtml = `
-            <div class="step">
-                <div class="row align-items-center">
-                    <div class="col-1">
-                        <span class="step-number">${stepCount}.</span>
-                    </div>
-                    <div class="col-8">
-                        <textarea class="form-control step-text" rows=3 placeholder="Vaihe ${stepCount}" required></textarea>
-                    </div>
-                    <div class="col-3 step-buttons d-flex gap-2 justify-content-end">
-                        <button type="button" class="btn" id="add-step-button">
-                            <i class="fi fi-br-plus"></i>
-                        </button>
-                        <button type="button" class="btn" id="delete-step-button">
-                            <i class="fi fi-br-minus-small"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-        $(".steps").append(stepsHtml);
-        updateButtonVisibility();
-    });
-
-    // Poistetaan ainesosakenttä
-    $(document).on("click", "#delete-ingredient-button", function() {
-        if ($(".ingredient").length > 1) {
-            $(this).closest(".ingredient").remove();
-            updateButtonVisibility();
-        }
-    });
-
-    // Poistetaan vaihekenttä
-    $(document).on("click", "#delete-step-button", function() {
-        if ($(".step").length > 1) {
-            $(this).closest(".step").remove();
-            $(".step").each(function(i) {
-                $(this).find(".step-number").text(`${i + 1}.`);
-                $(this).find(".step-text").attr("placeholder", `Vaihe ${i + 1}`);
-            });
-            updateButtonVisibility();
-        }
+    // Käsitellään peruuta-napin klikkaus
+    $("#cancel-button").click(function() {
+        window.location.href = "/pages/main-page.html";
     });
 
     // Alustetaan nappien näkyvyys

@@ -26,10 +26,10 @@ const login = async (req, res) => {
             return res.status(400).json({ success: false, message: "Virheellinen salasana" });
         }
 
-        res.json({ success: true, message: "Kirjautuminen onnistui ", id: user.id });
+        res.json({ success: true, id: user.id });
         
     } catch (error) {
-        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
@@ -67,40 +67,12 @@ const register = async (req, res) => {
         db.users.push(newUser);
         await fs.writeFile(dbPath, JSON.stringify(db, null, 2));
 
-        res.json({ success: true, message: "Rekisteröityminen onnistui", id: newUser.id });
+        res.json({ success: true, id: newUser.id });
 
     } catch (error) {
         if (!res.headersSent) {
-            res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+            res.status(500).json({ success: false, message: error.message });
         }
-    }
-};
-
-// Ohjain salasanan tarkistamisene
-const verifyPassword = async (req, res) => {
-    try {
-        const { id, password } = req.body;
-
-        if (!id || !password) {
-            return res.status(400).json({ success: false, message: "Käyttäjän id tai salasana puuttuu" });
-        }
-
-        const db = JSON.parse(await fs.readFile(dbPath, "utf-8"));
-        const user = db.users.find(u => u.id === id);
-
-        if (!id) {
-            return res.status(404).json({ success: false, message: "Käyttäjää ei löytynyt" });
-        }
-
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).json({ success: false, message: "Virheellinen salasana" });
-        }
-
-        res.json({ success: true });
-
-    } catch (error) {
-        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
     }
 };
 
@@ -161,7 +133,7 @@ const updateUser = async (req, res) => {
         res.json({ success: true });
 
     } catch (error) {
-        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
@@ -205,7 +177,7 @@ const deleteUser = async (req, res) => {
         res.json({ success: true });
 
     } catch (error) {
-        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
@@ -223,15 +195,8 @@ const getUserProfile = async (req, res) => {
         res.json({ success: true, user: { username: user.username, email: user.email } });
 
     } catch (error) {
-        res.status(500).json({ success: false, message: "Palvelinvirhe: " + error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
-export { 
-    login, 
-    register, 
-    verifyPassword,
-    updateUser, 
-    deleteUser, 
-    getUserProfile 
-};
+export { login, register, updateUser, deleteUser, getUserProfile };

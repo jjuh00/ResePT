@@ -22,7 +22,6 @@ $(document).ready(function() {
     // Käsitellään käyttäjän uloskirjautuminen
     $("#logout-link").click(function() {
         localStorage.removeItem("id");
-        window.location.href = "/index.html";
     });
 
     // Haetaan käyttäjän suosikkireseptit
@@ -149,6 +148,7 @@ $(document).ready(function() {
     // Käsitellään reseptin poistaminen käyttäjän suosikeista
     $(document).on("click", "#remove-fav-button", function() {
         const recipeId = $(this).data("recipe-id");
+        
         $.ajax({
             url: `/recipes/favourites/${recipeId}`,
             method: "DELETE",

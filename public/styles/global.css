@@ -22,6 +22,10 @@ body {
     width: 200px;
 }
 
+.fi {
+    font-size: 20px;
+}
+
 main {
     margin: 2rem;
     padding: 2rem;
@@ -51,8 +55,4 @@ footer {
 .footer-designed img, .footer-developed img, .footer-powered img {
     display: block;
     margin: 0 auto;
-}
-
-.fi {
-    font-size: 20px;
 }

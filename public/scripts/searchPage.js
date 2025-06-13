@@ -20,8 +20,11 @@ $(document).ready(function() {
     // Käsitellään käyttäjän uloskirjautuminen
     $("#logout-link").click(function() {
         localStorage.removeItem("id");
-        window.location.href = "/index.html";
     });
+
+    // Ladataan hakutulokset URL-parametrien perusteella
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get("query") || "";
 
     // Käsitellään haku
     $(".search-form").submit(function(e) {
@@ -30,9 +33,6 @@ $(document).ready(function() {
         searchRecipes();
     });
 
-    // Ladataan hakutulokset URL-parametrien perusteella
-    const urlParams = new URLSearchParams(window.location.search);
-    const query = urlParams.get("query") || "";
     $("#search-input").val(query);
     searchRecipes();
 
@@ -42,7 +42,7 @@ $(document).ready(function() {
 
         if (!query) {
             alert("Syötä hakusana");
-            $(".search-section").html(""); // Siistitään edelliset tulokset
+            $(".search-section").html(""); // Siivotaan edelliset tulokset
             return;
         }
 

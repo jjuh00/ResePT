@@ -16,10 +16,7 @@ $(document).ready(function() {
 
     // Käsitellään käyttäjän uloskirjautuminen
     $("#logout-link").click(function() {
-        // Tyhjennetään kaikki tallennetut käyttäjätiedot (esim. käyttäjäid localStoragessa)
         localStorage.removeItem("id");
-        // Uudelleenohjataan kirjautumissivulle
-        window.location.href = "/index.html";
     });
 
     // Käsitellään reseptien haku

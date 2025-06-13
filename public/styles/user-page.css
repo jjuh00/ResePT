@@ -1,14 +1,21 @@
 .user-profile-section {
-    margin: 1.5rem auto;
+    margin: 2rem auto;
+    padding: 2rem;
     max-width: 800px;
-}
-
-.user-profle-section {
     font-family: Merriweather, serif;
 }
 
 .user-profile {
     margin-bottom: 2rem;
+}
+
+.user-actions {
+    margin-top: 2rem;
+    gap: 1rem
+}
+
+#delete-user-modal .form-control {
+    width: 100%;
 }
 
 .recipe-card {

@@ -17,12 +17,6 @@ $(document).ready(function() {
     // Käsitellään käyttäjän uloskirjautuminen
     $("#logout-link").click(function() {
         localStorage.removeItem("id");
-        window.location.href = "/index.html";
-    });
-
-    // Käsitellään takaisin-napin klikkaus
-    $("#back-button").click(function() {
-        window.location.href = "/pages/main-page.html";
     });
 
     const urlParams = new URLSearchParams(window.location.search);

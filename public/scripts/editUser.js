@@ -17,12 +17,6 @@ $(document).ready(function() {
     // Käsitellään käyttäjän uloskirjautuminen
     $("#logout-link").click(function() {
         localStorage.removeItem("id");
-        window.location.href = "/index.html";
-    });
-
-    // Käsitellään peruuta-napin klikkaus
-    $("#cancel-button").click(function() {
-        window.location.href = "/pages/user-page.html";
     });
 
     // Käsitellään käyttäjätietojen muokkaus
@@ -66,5 +60,10 @@ $(document).ready(function() {
                 }
             }
         });
+    });
+
+    // Käsitellään peruuta-napin klikkaus
+    $("#cancel-button").click(function() {
+        window.location.href = "/pages/user-page.html";
     });
 });
