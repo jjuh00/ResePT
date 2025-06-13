@@ -25,6 +25,76 @@ $(document).ready(function() {
     loadUserProfile();
     loadUserRecipes();
 
+    // Käsitellään muokkaus-napin klikkaus
+    $("#edit-user-button").click(function() {
+        // Kysytään käyttäjältä salasana
+        const password = prompt("Syötä salasana muokataksesi käyttäjätietoja:");
+        if (!password) {
+            alert("Salasana puuttuu");
+            return;
+        }
+
+        $.ajax({
+            url: "/authentication/verify",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ id, password }),
+            success: function(response) {
+                if (response.success) {
+                    window.location.href = "/pages/edit-user.html";
+                } else {
+                    alert("Virheellinen salasana: " + response.message);
+                }
+            },
+            error: function(jqXHR) {
+                if (jqXHR.status === 0) {
+                    // Verkkovirhe
+                    window.location.href = "/pages/error-network.html";
+                } else {
+                    alert("Salasanan tarkistaminen epäonnistui: " + (jqXHR.responseJSON?.message || "Tuntematon virhe"));
+                }
+            }
+        });
+    });
+
+    // Käsitellään poisto-napin klikkaus
+    $("#delete-user-button").click(function() {
+        // Kysytään käyttäjältä salasana
+        const password = prompt("Syötä salasana poistaaksesi käyttäjän:");
+        if (!password) {
+            alert("Salasana puuttuu");
+            return;
+        }
+
+        if (!confirm("Haluatko varmasti poistaa käyttäjäsi? Kaikki tiedot poistetaan, mukaan lukien reseptisi")) {
+            return;
+        }
+
+        $.ajax({
+            url: `/authentication/delete/${id}`,
+            method: "DELETE",
+            contentType: "application/json",
+            data: JSON.stringify({ password }),
+            success: function(response) {
+                if (response.success) {
+                    localStorage.removeItem("id");
+                    alert("Käyttäjä poistettu onnistuneesti");
+                    window.location.href = "/index.html";
+                } else {
+                    alert("Käyttäjän poistaminen epäonnistui: " + response.message);
+                }
+            },
+            error: function(jqXHR) {
+                if (jqXHR.status === 0) {
+                    // Verkkovirhe
+                    window.location.href = "/pages/error-network.html";
+                } else {    
+                    alert("Käyttäjän poistaminen epäonnistui: " + (jqXHR.responseJSON?.message || "Tuntematon virhe"));
+                }
+            }
+        });
+    });
+
     // Ladataan käyttäjän tiedot
     function loadUserProfile(){
         $.ajax({

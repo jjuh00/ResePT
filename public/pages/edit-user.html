@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="fi">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResePT - Profiili</title>
+    <title>ResePT - Käyttäjätietojen muokkaus</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css">
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css">
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css">
-    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css"> 
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-straight/css/uicons-bold-straight.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Fira+Sans:wght@400;500&family=Dancing+Script:wght@400&display=swap">
     <link rel="stylesheet" href="../styles/global.css">
-    <link rel="stylesheet" href="../styles/user-page.css">
+    <link rel="stylesheet" href="../styles/edit-user.css">
 </head>
 <body>
     <!--Navigointipalkki-->
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <!--Käyttäjän klikatessa "ResePT"-tekstiä, navigoidaan "pääsivulle"-->
+            <!--Käyttäjän klikatessa "ResePT"-tekstiä, navigoidaan "pääsivulle"-->            
             <a class="navbar-brand" href="/pages/main-page.html">ResePT</a>
             <!--Alasvetovalikko, johon aukeaa lista sivuista joihin käyttäjä voi navigoida-->
             <div class="nav-dropdown">
@@ -27,6 +27,9 @@
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu">
                     <li><a class="dropdown-item d-none" id="add-new-recipe-link" href="/pages/add-recipe.html">
                         <i class="fi fi-sr-pen-clip"></i>
+                    </a></li>
+                    <li><a class="dropdown-item d-none" id="user-page-link" href="/pages/user-page.html">
+                        <i class="fi fi-rr-user"></i>
                     </a></li>
                     <li><a class="dropdown-item d-none" id="favourites-link" href="/pages/favourites.html">
                         <i class="fi fi-rr-features"></i>
@@ -40,26 +43,38 @@
     </nav>
 
     <main>
-        <section class="user-profile-section">
-            <h3>Käyttäjätiedot</h3>
-            <div class="user-profile">
-                <!--Käyttäjätiedot ladataan dynaamisesti tähän-->
-                <table class="table">
-                    <tbody id="user-profile-meta"></tbody>
-                </table>
-            </div>
-            <!--Napit käyttäjätietojen muokkausta ja poistamista varten-->
-            <div class="user-actions d-flex mb-3">
-                <button type="button" class="btn me-2" id="edit-user-button">
-                    <i class="fi fi-rr-pencil"></i>
-                </button>
-                <button type="button" class="btn" id="delete-user-button">
-                    <i class="fi fi-bs-trash"></i>
-                </button>
-            </div>
-            <p class="loading-message">Ladataan reseptejä...</p>
-            <!--Käyttäjän lisäämät reseptit ladataan dynaamisesti tähän-->
-            <div class="row recipes-list"></div>
+        <!--Osio käyttäjätietojen muokkaukselle-->
+        <section class="edit-user-section">
+            <h1 class="edit-user-title mb-3">Muokkaa Käyttäjätietoja</h1>
+            <form class="edit-user-form">
+                <div class="mb-3">
+                    <label for="new-username" class="form-label">Uusi käyttäjänimi</label>
+                    <input type="text" class="form-control" id="new-username">
+                </div>
+
+                <div class="mb-3">
+                    <label for="new-email" class="form-label">Uusi sähköposti</label>
+                    <input type="email" class="form-control" id="new-email">
+                </div>
+
+                <!--Pyydetään käyttäjän salasanaa ennen tietojen muokkausta-->
+                <div class="mb-3">
+                    <label for="current-password" class="form-label">Nykyinen salasana*</label>
+                    <input type="password" class="form-control" id="current-password" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="new-password" class="form-label">Uusi salasana</label>
+                    <input type="password" class="form-control" id="new-password">
+                </div>
+
+                <div class="form-buttons d-flex">
+                    <button type="submit" class="btn btn-primary"><i class="fi fi-rr-inbox-out"></i></button>
+                    <button type="button" class="btn btn-primary" id="cancel-button">
+                        <i class="fi fi-br-cross"></i>
+                    </button>
+                </div>
+            </form>
         </section>
     </main>
 
@@ -84,10 +99,10 @@
                 </div>
             </div>
         </div>
-    </footer>
-
+    </footer>   
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script type="module" src="../scripts/userPage.js"></script>
+    <script src="../scripts/editUser.js"></script>
 </body>
 </html>
