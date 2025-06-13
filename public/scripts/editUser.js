@@ -60,7 +60,7 @@ $(document).ready(function() {
             error: function(jqXHR) {
                 if (jqXHR.status === 0) {
                     // Verkkovirhe
-                    window.location.href = "/pages/user-page.html";
+                    window.location.href = "/pages/error-network.html";
                 } else {
                     alert("Päivittäminen epäonnistui: " + (jqXHR.responseJSON?.message || "Tuntematon virhe"));
                 }
