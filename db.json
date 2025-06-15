@@ -1,0 +1,450 @@
+{
+  "users": [
+    {
+      "id": "743a4fa2-9aca-43ea-b2d6-ebc6a35d1d6e",
+      "username": "jjuh00",
+      "email": "juho@testi.com",
+      "password": "$2b$10$/..Nuag.bZfRsIK2jeJPQO7cBbvF.e0a143UYU5/j9mH/ftxuSo6m"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "e171fade-d95c-46ea-930c-e708064f0fa0",
+      "name": "Minttuinen suklaa-juustokakku",
+      "ingredients": [
+        {
+          "amountAndUnit": "200 g",
+          "ingredientName": "minttu-dominokeksejä"
+        },
+        {
+          "amountAndUnit": "50 g",
+          "ingredientName": "margariinia"
+        },
+        {
+          "amountAndUnit": "200 g",
+          "ingredientName": "Marabou minttukrokanttia"
+        },
+        {
+          "amountAndUnit": "200 g",
+          "ingredientName": "maustamatonta tuorejuustoa"
+        },
+        {
+          "amountAndUnit": "1 dl",
+          "ingredientName": "sokeria"
+        },
+        {
+          "amountAndUnit": "1 tl",
+          "ingredientName": "vaniljasokeria"
+        },
+        {
+          "amountAndUnit": "3 rkl",
+          "ingredientName": "kahvia"
+        },
+        {
+          "amountAndUnit": "3 1/2 kpl",
+          "ingredientName": "liivatelehteä"
+        },
+        {
+          "amountAndUnit": "2 1/2 dl",
+          "ingredientName": "kuohukermaa"
+        }
+      ],
+      "steps": [
+        "Valmista pohja sekoittamalla murskatut keksit ja sulatettu margariini pohjalle ja painele irtopohjavuoan (18 cm) pohjalle. Vuoan pohjalle on hyvä laittaa leivinpaperi.",
+        "Laita liivatteet likoamaan kylmään veteen.",
+        "Sulata suklaa ja sekoita kulhossa tuorejuustoon. Lisää sokeri ja vaniljasokeri.",
+        "Sekoita liivatteet kuumaan kahvitilkkaan ja lisää suklaa-tuorejuustomassaan.",
+        "Vatkaa kuohukerma ja lisää se jäähtyneeseen massaan.",
+        "Kaada seos vuokaan keksipohjan päälle, peitä foliolla ja anna hyytyä jääkaapissa muutaman tunnin."
+      ],
+      "tags": [
+        {
+          "value": "t14",
+          "label": "jälkiruoka"
+        },
+        {
+          "value": "t15",
+          "label": "kakku"
+        },
+        {
+          "value": "t55",
+          "label": "sokerillinen"
+        },
+        {
+          "value": "t57",
+          "label": "suklaa"
+        }
+      ],
+      "servingSize": 10,
+      "preparationTime": 210,
+      "authorId": "743a4fa2-9aca-43ea-b2d6-ebc6a35d1d6e",
+      "authorName": "jjuh00",
+      "dateCreated": "2025-05-27T15:20:29.538Z",
+      "dateModified": "2025-05-27T15:20:29.538Z",
+      "imagePath": "1748359229533-21104909-original.jpg",
+      "favouritedBy": []
+    },
+    {
+      "id": "c562cfa0-a6ab-4f12-8143-5ce986a6d770",
+      "name": "Ruis smash burger",
+      "ingredients": [
+        {
+          "amountAndUnit": "1 pkt",
+          "ingredientName": "ruisleipää"
+        },
+        {
+          "amountAndUnit": "400 g",
+          "ingredientName": "jauhelihaa"
+        },
+        {
+          "amountAndUnit": "1 tl",
+          "ingredientName": "grillausmaustetta"
+        },
+        {
+          "amountAndUnit": "ripaus",
+          "ingredientName": "mustapippuria"
+        },
+        {
+          "amountAndUnit": "6",
+          "ingredientName": "cheddar-juustoviipaletta"
+        },
+        {
+          "amountAndUnit": "1 ps",
+          "ingredientName": "salaattia"
+        },
+        {
+          "amountAndUnit": "2",
+          "ingredientName": "tomaattia"
+        },
+        {
+          "amountAndUnit": "1",
+          "ingredientName": "punasipuli"
+        },
+        {
+          "amountAndUnit": "1 dl",
+          "ingredientName": "maustekurkkuviipaleita"
+        },
+        {
+          "amountAndUnit": "2",
+          "ingredientName": "jalapenoa"
+        },
+        {
+          "amountAndUnit": "1 dl",
+          "ingredientName": "majoneesia"
+        },
+        {
+          "amountAndUnit": "2 tl",
+          "ingredientName": "dijon-sinappia"
+        }
+      ],
+      "steps": [
+        "Irrota ruisleivistä kannet. Jaa jauheliha kuuteen osaan ja painele se tasaisesti ruisleipien pohille ohueksi kerrokseksi aivan reunoille saakka. Mausta grillausmausteella ja pippurilla.",
+        "Grillaa ruisleipiä jauhelihapuoli alaspäin kevyesti öljytyllä parilalla tai paista pannulla muutaman minuutin ajan kunnes jauheliha on kypsää. Käännä leivät ja paista kevyesti myös toinen puoli.",
+        "Lisää pihvipuolelle cheddarviipaleet. Anna sulaa hetki. Lämmitä leipien kannet grillissä tai pannulla.",
+        "Mausta majoneesi dijonilla. Täytä burgerit täytteille, lisää kannet ja tarjoa heti."
+      ],
+      "tags": [
+        {
+          "value": "t4",
+          "label": "grilliruoka"
+        },
+        {
+          "value": "t42",
+          "label": "nopea"
+        },
+        {
+          "value": "t43",
+          "label": "paistettu"
+        }
+      ],
+      "servingSize": 6,
+      "preparationTime": 30,
+      "authorId": "743a4fa2-9aca-43ea-b2d6-ebc6a35d1d6e",
+      "authorName": "jjuh00",
+      "dateCreated": "2025-06-06T09:07:22.391Z",
+      "dateModified": "2025-06-06T09:07:22.392Z",
+      "imagePath": "1749200842385-54573886-KR6_25_ruis_smash_burg.avif",
+      "favouritedBy": [
+        "743a4fa2-9aca-43ea-b2d6-ebc6a35d1d6e"
+      ]
+    },
+    {
+      "id": "140908ff-44c1-407c-bde8-5fb725b8e3c1",
+      "name": "Lihapullat",
+      "ingredients": [
+        {
+          "amountAndUnit": "600 g",
+          "ingredientName": "jauhelihaa"
+        },
+        {
+          "amountAndUnit": "1 tl",
+          "ingredientName": "suolaa"
+        },
+        {
+          "amountAndUnit": "1",
+          "ingredientName": "sipuli"
+        },
+        {
+          "amountAndUnit": "2",
+          "ingredientName": "kananmunaa"
+        },
+        {
+          "amountAndUnit": "ripaus",
+          "ingredientName": "pippuria"
+        },
+        {
+          "amountAndUnit": "1 dl",
+          "ingredientName": "maitoa"
+        },
+        {
+          "amountAndUnit": "40 g",
+          "ingredientName": "kaurahiutaleita"
+        },
+        {
+          "amountAndUnit": "25 g",
+          "ingredientName": "voita paistamiseen"
+        }
+      ],
+      "steps": [
+        "Sekoita jauhelihaa ja suolaa noin 1 minuutti.",
+        "Lisää sipuli, munat ja pippuri.",
+        "Lisää maito vähitellen ja lopuksi kaurahiutaleet.",
+        "Peitä jauheliha ja anna sen levätä jääkaapissa noin 15 minuuttia.",
+        "Muotoile jauhelihasta noin 14 lihapullaa.",
+        "Anna voin ruskistua hieman pannulla kovalla lämmöllä.",
+        "Käännä pannu pienemmälle ja paista lihapullia molemmin puolin miedolla lämmöllä noin 15 minuuttia - lisää lämpöä, kun käännät niitä..'"
+      ],
+      "tags": [
+        {
+          "value": "t2",
+          "label": "arki"
+        },
+        {
+          "value": "t28",
+          "label": "liharuoka"
+        },
+        {
+          "value": "t43",
+          "label": "paistettu"
+        }
+      ],
+      "servingSize": 2,
+      "preparationTime": 45,
+      "authorId": "743a4fa2-9aca-43ea-b2d6-ebc6a35d1d6e",
+      "authorName": "jjuh00",
+      "dateCreated": "2025-06-06T09:24:29.132Z",
+      "dateModified": "2025-06-06T09:24:29.132Z",
+      "imagePath": "1749201869127-983345267-herkulliset-lihapullat.jpg",
+      "favouritedBy": [
+        "743a4fa2-9aca-43ea-b2d6-ebc6a35d1d6e"
+      ]
+    },
+    {
+      "id": "42b09485-2429-43c1-9b99-7f1f9017e7d1",
+      "name": "Kreikkalainen kalapannu",
+      "ingredients": [
+        {
+          "amountAndUnit": "200 g",
+          "ingredientName": "vihreitä papuja"
+        },
+        {
+          "amountAndUnit": "4",
+          "ingredientName": "siikafilettä"
+        },
+        {
+          "amountAndUnit": "3/4 tl",
+          "ingredientName": "suolaa"
+        },
+        {
+          "amountAndUnit": "250 g",
+          "ingredientName": "kirsikkatomaatteja"
+        },
+        {
+          "amountAndUnit": "150 g",
+          "ingredientName": "fenkolia"
+        },
+        {
+          "amountAndUnit": "2",
+          "ingredientName": "valkosipulin kynttä"
+        },
+        {
+          "amountAndUnit": "3 rkl",
+          "ingredientName": "öljyä"
+        },
+        {
+          "amountAndUnit": "1 dl",
+          "ingredientName": "vettä"
+        },
+        {
+          "amountAndUnit": "1/2",
+          "ingredientName": "sitruunan mehu"
+        },
+        {
+          "amountAndUnit": "1/2 dl",
+          "ingredientName": "kalamataoliiveja"
+        },
+        {
+          "amountAndUnit": "1 rkl",
+          "ingredientName": "sokeria"
+        },
+        {
+          "amountAndUnit": "1 tl",
+          "ingredientName": "oreganoa"
+        },
+        {
+          "amountAndUnit": "50 g",
+          "ingredientName": "fetan tyyppistä salaattijuustoa"
+        }
+      ],
+      "steps": [
+        "Ota pavut sulamaan. Nypi siikafileistä ruodot ja mausta kalat 1/4 tl:lla suolaa. Puolita fileet halutessa - pienempiä paloja voi olla helpompi käsitellä kypsennettäessä.",
+        "Viipaloi kirsikkatomaatit, fenkoli sekä valkosipulin kynnet. Sulata pavut tarvittaessa mikrossa.",
+        "Paista siikafileet pannulla öljytilkassa (1-2 rkl) kypsiksi. Kypsymisaika on pari minuuttia/puoli. Nosta kypsät kalat lautaselle.",
+        "Lisää pannulle öljyä, fenkolit, pavut ja valkosipulit. Paista sekoitellen 2-3 minuuttia. Lisää myös tomaattipalat, vesi, sitruunanmehu, sokeri, loppu suola (1/2 tl), puolitetut oliivit ja oregano. Hauduta 3-4 minuuttia.",
+        "Lisää pannulle kalapalat ja kypsennä pari minuuttia eli kunnes kalapalat lämpenevät. Murustele pinnalle salaattijuustoa."
+      ],
+      "tags": [
+        {
+          "value": "t16",
+          "label": "kala"
+        },
+        {
+          "value": "t43",
+          "label": "paistettu"
+        }
+      ],
+      "servingSize": 4,
+      "preparationTime": 40,
+      "authorId": "743a4fa2-9aca-43ea-b2d6-ebc6a35d1d6e",
+      "authorName": "jjuh00",
+      "dateCreated": "2025-06-06T09:43:58.689Z",
+      "dateModified": "2025-06-06T09:43:58.689Z",
+      "imagePath": "1749203038685-790945917-kreikkalainen_kalapannu1_eh.webp"
+    },
+    {
+      "id": "8ce990e1-f022-4a36-a9f9-ec7fb6135bf3",
+      "name": "Kasvispiirakka",
+      "ingredients": [
+        {
+          "amountAndUnit": "2 1/2 dl",
+          "ingredientName": "vettä"
+        },
+        {
+          "amountAndUnit": "25 g",
+          "ingredientName": "hiivaa"
+        },
+        {
+          "amountAndUnit": "1/2 tl",
+          "ingredientName": "suolaa"
+        },
+        {
+          "amountAndUnit": "3 rkl",
+          "ingredientName": "öljyä"
+        },
+        {
+          "amountAndUnit": "5-6 dl",
+          "ingredientName": "hiivaleipäjauhoja"
+        },
+        {
+          "amountAndUnit": "1",
+          "ingredientName": "sipuli"
+        },
+        {
+          "amountAndUnit": "3",
+          "ingredientName": "valkosipulin kynttä"
+        },
+        {
+          "amountAndUnit": "170 g",
+          "ingredientName": "sinihomejuustoa"
+        },
+        {
+          "amountAndUnit": "2",
+          "ingredientName": "munaa"
+        },
+        {
+          "amountAndUnit": "1/2 tl",
+          "ingredientName": "rouhittua mustapippuria"
+        },
+        {
+          "amountAndUnit": "1/2 ruukkua",
+          "ingredientName": "tuoretta persiljaa tai basilikaa"
+        },
+        {
+          "amountAndUnit": "2 dl",
+          "ingredientName": "juustoraastetta"
+        }
+      ],
+      "steps": [
+        "Tee ensin pohja. Kuumenna vesi kädenlämpöiseksi. Lisää hiiva, suola ja öljy sekä jauhoja niin, että saat pehmeän taikinan. Taputtele taikina heti pellille leivinpaperin päälle. Voit tehdä piirakan myös kahteen piirakkavuokaan. Anna pohjan kohota täytteen tekemisen ajan.",
+        "Suikaloi täytteen sipulit, raasta porkkanat karkeaksi raasteeksi ja hienonna selleri. Kuullota kasviksi öljyssä muutama minuutti. Murustele mukaan sinihomejuusto. Anna jäähtyä 15 minuuttia.",
+        "Lisää kasvisten joukkoon munat, mausteet sekä yrtti hienonnettuna. Levitä täyte pohjalle ja ripottele pinnalle juustoa.",
+        "Paista 225 asteessa noin 20 minuuttia tai kunnes piirakka on saanut kauniin värin."
+      ],
+      "tags": [
+        {
+          "value": "t19",
+          "label": "kasvis"
+        },
+        {
+          "value": "t48",
+          "label": "piirakka"
+        }
+      ],
+      "servingSize": 10,
+      "preparationTime": 80,
+      "authorId": "743a4fa2-9aca-43ea-b2d6-ebc6a35d1d6e",
+      "authorName": "jjuh00",
+      "dateCreated": "2025-06-06T09:50:10.153Z",
+      "dateModified": "2025-06-08T09:18:38.729Z",
+      "imagePath": "1749203410150-960095855-kasvispiiras_elinahimanen.webp"
+    },
+    {
+      "id": "0e905c4d-b15d-4a92-8341-9cbab97ccd0e",
+      "name": "Lämmin valkosuklaa-vaahtokarkkijuoma",
+      "ingredients": [
+        {
+          "amountAndUnit": "1 dl",
+          "ingredientName": "kuohukermaa"
+        },
+        {
+          "amountAndUnit": "1 tl",
+          "ingredientName": "vaniljasokeria"
+        },
+        {
+          "amountAndUnit": "5 dl",
+          "ingredientName": "maitoa"
+        },
+        {
+          "amountAndUnit": "90 g",
+          "ingredientName": "suklaata"
+        },
+        {
+          "amountAndUnit": "40 g",
+          "ingredientName": "vaahtokarkkeja"
+        }
+      ],
+      "steps": [
+        "Vaahdota kuohokerma ja vaniljasokeri löysähköksi vaahdoksi.",
+        "Kuumenna maito kiehuvaksi. Sammuta levy ja sulata valkosuklaapalat maitoon.",
+        "Kaada kuuma juoma esim. glögilaseihin tai mukeihin. Laita juomien päälle vaahtokarkit - isot vaahtokarkit kannattaa puolittaa saksilla. Nostele päälle kermavaahto.",
+        "Koristele annokset valkosuklaarouheella."
+      ],
+      "tags": [
+        {
+          "value": "t13",
+          "label": "juoma"
+        }
+      ],
+      "servingSize": 4,
+      "preparationTime": 15,
+      "authorId": "743a4fa2-9aca-43ea-b2d6-ebc6a35d1d6e",
+      "authorName": "jjuh00",
+      "dateCreated": "2025-06-06T10:02:10.178Z",
+      "dateModified": "2025-06-06T10:02:10.178Z",
+      "imagePath": "1749204130175-209473734-41957-lammin-valkosuklaa-vaahtokarkkijuoma-1300x867.avif",
+      "favouritedBy": [
+        "743a4fa2-9aca-43ea-b2d6-ebc6a35d1d6e"
+      ]
+    }
+  ]
+}
