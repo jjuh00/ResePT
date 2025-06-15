@@ -11,7 +11,7 @@ Tämän projektin tarkoituksena oli harjoitella seuraavien teknologioiden käytt
 - Node.js + Express.js: Palvelinpuoli
 
 ## Hakemistorakenne
-ResePT/
+ResePT/ <br />
 db.json <br />
 server.js <br />
 package.json <br />
