@@ -12,20 +12,20 @@ Tämän projektin tarkoituksena oli harjoitella/kehittää seuraavien teknologio
 
 ## Hakemistorakenne
 ResePT/
-db.json # Tietokanta
-server.js # Express.js-palvelin
-package.json # Projektin metatiedot
-routes/ # Reitit
-...
-controllers/ # Reittien logiikka
-public/ # Julkiset tiedostot
-index.html
-pages/ # Näkymät
-...
-styles/ CSS-tyylit
-...
-scripts/ # JavaScript-logiikka näkymille
-...
+db.json <br />
+server.js <br />
+package.json <br />
+routes/ <br />
+... <br />
+controllers/ <br />
+public/ <br />
+index.html <br />
+pages/ <br />
+... <br />
+styles/ <br />
+... <br />
+scripts/ <br />
+... <br />
 
 ## Kuinka ohjelma toimii?
 1. Käynnistä Express.js-pavelin (alla ohje).
