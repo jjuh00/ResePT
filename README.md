@@ -4,7 +4,7 @@
 
 ## Projektin tarkoitus
 
-Tämän projektin tarkoituksena oli harjoitella/kehittää seuraavien teknologioiden käyttöä:
+Tämän projektin tarkoituksena oli harjoitella seuraavien teknologioiden käyttöä:
 
 - HTML & CSS: Käyttöliittymä <br />
 - JavaScript: Toiminnallisuus <br />
