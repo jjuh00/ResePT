@@ -31,16 +31,16 @@ scripts/ <br />
 1. Käynnistä Express.js-pavelin (alla ohje).
 2. Avaa selaimessa osoite `http://localhost:<PORTTI>`. Katso portti kohdasta Asennus ja käyttöönotto.
 3. Käyttäjät voivat:
-    - Rekisteröityä/kirjautua sisään. On myös mahdollista olla tekemättä käyttäjää, mutta käyttäjän oikeudet ovat tällöin rajalliset.
-    - Lisätä reseptejä.
-    - Muokata tai poistaa omia reseptejään.
+    - Rekisteröityä/kirjautua sisään. On myös mahdollista olla tekemättä käyttäjää, mutta käyttäjän oikeudet ovat tällöin rajalliset
+    - Lisätä reseptejä
+    - Muokata tai poistaa omia reseptejään
     - Selailla reseptejä
     - Merkitä reseptejä suosikeiksi
 
 Sovelluksessa * tarkoittaa pakollista kohtaa.
 
 ## Asennus ja käyttöönotto
-1. Kloonaa projekti.
+1. Kloonaa projekti
 2. Asenna tarvittavat paketit: Anna ./ResePT-hakemistossa komentokehotteessa komento npm install
 3. Käynnistä palvelin: Anna ./ResePT-hakemistossa komentokehotteessa komento npm start
 4. Tarkista tai muuta käytössä oleva portti tiedostosta server.js:
