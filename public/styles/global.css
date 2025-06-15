@@ -163,32 +163,3 @@ footer img {
 footer img:hover {
     transform: scale(1.1);
 }
-
-/* Responsiivinen muotoilu */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 0.75rem 1rem;
-    }
-
-    .navbar-brand {
-        margin-right: 1rem;
-        font-size: 1.5rem;
-    }
-
-    main {
-        margin: 1rem;
-        padding: 1.5rem;
-    }
-
-    footer {
-        margin: 1rem;
-        padding: 1.5rem;
-        gap: 1.5rem;
-        flex-direction: column;
-    }
-
-    .footer-designed, .footer-developed, .footer-powered {
-        width: 100%;
-        flex: none;
-    }
-}
