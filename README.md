@@ -7,7 +7,7 @@
 Tämän projektin tarkoituksena oli harjoitella/kehittää seuraavien teknologioiden käyttöä:
 
 - HTML & CSS: Käyttöliittymä <br />
--JavaScript: Toiminnallisuus <br />
+- JavaScript: Toiminnallisuus <br />
 - Node.js + Express.js: Palvelinpuoli
 
 ## Hakemistorakenne
