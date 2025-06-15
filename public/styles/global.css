@@ -29,6 +29,8 @@ body {
 /* Navigointipalkin tyyli (lasimaisuus-efekti) */
 .navbar {
     padding: 1rem 2rem;
+    position: relative;
+    z-index: 1000;
     background: rgba(25, 25, 45, 0.9);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -62,6 +64,8 @@ body {
 .dropdown-menu {
     margin-top: 0.5rem;
     width: 200px;
+    top: 100%;
+    z-index: 1100;
     background: rgba(25, 25, 45, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
@@ -105,6 +109,8 @@ main {
    margin: 2rem;
    padding: 2rem;
    flex: 1 0 auto; /* Main täyttää vapaan tilan */
+   position: relative;
+   z-index: 1;
    background: rgba(25, 25, 45, 0.3);
    border-radius: 16px;
    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
