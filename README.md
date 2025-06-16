@@ -41,9 +41,10 @@ Sovelluksessa * tarkoittaa pakollista kohtaa.
 
 ## Asennus ja käyttöönotto
 1. Kloonaa projekti
-2. Asenna tarvittavat paketit: Anna ./ResePT-hakemistossa komentokehotteessa komento npm install
-3. Käynnistä palvelin: Anna ./ResePT-hakemistossa komentokehotteessa komento npm start
-4. Tarkista tai muuta käytössä oleva portti tiedostosta server.js:
+2. Asenna tarvittaessa Node.js (https://nodejs.org/en)
+3. Asenna tarvittavat paketit: Anna ./ResePT-hakemistossa komentokehotteessa komento npm install
+4. Käynnistä palvelin: Anna ./ResePT-hakemistossa komentokehotteessa komento npm start
+5. Tarkista tai muuta käytössä oleva portti tiedostosta server.js:
 const PORT = process.env.PORT || 3002;
 → Voit vaihtaa portin numeroa, jos haluat.
 
