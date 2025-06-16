@@ -108,9 +108,10 @@ i[class^="fi-"], i[class=" fi-"]{
     line-height: 1;
 }
 
-.btn i, a i {
+button i, a i {
     top: 0.15rem;
     position: relative;
+    font-size: 18px;
 }
 
 main {
@@ -170,4 +171,73 @@ footer img {
 
 footer img:hover {
     transform: scale(1.1);
+}
+
+/* Responsiivinen muotoilu */
+@media (max-width: 1440px) {
+    .navbar-brand {
+        font-size: 24px;
+    }
+
+    .nav-dropdown .btn {
+        padding: 0.5rem;
+    }
+
+    .nav-dropdown .dropdown-menu {
+        min-width: 150px;
+    }
+
+    .footer-designed, .footer-developed, .footer-powered {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 960px) {
+    .navbar-brand {
+        font-size: 20px;
+    }
+
+    .nav-search-form .input-group {
+        max-width: 300px;
+    }
+
+    .nav-dropdown .btn {
+        padding: 0.4rem;
+    }
+
+    .nav-dropdown .dropdown-menu {
+        min-width: 120px;
+    }
+
+    .footer-designed, .footer-developed, .footer-powered {
+        text-align: center;
+    }
+
+    .footer-designed img, .footer-powered img {
+        width: 50px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-brand {
+        font-size: 18px;
+    }
+
+    .nav-search-form .input-group {
+        max-width: 200px;
+    }
+
+    .nav-dropdown .btn {
+        padding: 0.3rem;
+    }
+
+    .nav-dropdown .dropdown-menu {
+        min-width: 100px;
+    }
+
+    .footer-designed img, .footer-powered img {
+        width: 40px;
+        height: 30px;
+    }
 }
