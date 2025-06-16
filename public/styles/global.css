@@ -47,11 +47,11 @@ body {
 }
 
 .nav-dropdown .btn {
-    padding: 0.5rem 0.75rem;
     background: rgba(40, 44, 52, 0.8);
     color: lightgray;
     border: 2px solid rgba(108, 117, 125, 0.3);
     border-radius: 8px;
+    font-weight: 500;
     transition: all 0.25s ease;
 }
 
@@ -62,7 +62,6 @@ body {
 }
 
 .dropdown-menu {
-    margin-top: 0.5rem;
     width: 200px;
     top: 100%;
     z-index: 1100;
@@ -100,8 +99,18 @@ body {
     transform: translateX(5px);
 }
 
-.fi {
-    font-size: 20px;
+/* Kuvakkeiden tasaus globaalisti */
+i[class^="fi-"], i[class=" fi-"]{
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+    line-height: 1;
+}
+
+button i, a i {
+    top: 0.15rem;
+    position: relative;
 }
 
 main {
