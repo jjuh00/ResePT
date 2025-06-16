@@ -30,7 +30,7 @@
                     <li><a class="dropdown-item d-none" id="favourites-link" href="/pages/favourites.html">
                         <i class="fi fi-rr-features"></i>
                     </a></li>
-                    <li><a class="dropdown-item d-none" id="logout-link" href=/index.html">
+                    <li><a class="dropdown-item d-none" id="logout-link" href="/index.html">
                         <i class="fi fi-bs-sign-out-alt"></i>
                     </a></li>
                 </ul>
@@ -52,43 +52,31 @@
                 <button type="button" class="btn me-2" id="edit-user-button">
                     <i class="fi fi-rr-pencil"></i>
                 </button>
-                <button type="button" class="btn" id="delete-user-button" data-bs-toggle="modal" data-bs-target="#delete-user-modal">
+                <button type="button" class="btn" id="delete-user-button">
                     <i class="fi fi-bs-trash"></i>
                 </button>
             </div>
 
-            <!--Modal salasanan kysymistä varten käyttäjältä-->
-            <div class="modal fade" id="delete-user-modal" tabindex="-1" aria-labelledby="delete-user-modal-label" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="delete-user-modal-label">Vahvista käyttäjä</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-
-                        <div class="modal-body">
-                            <p>Syötä salasana poistaaksesi käyttäjän. Kaikki tiedot poistetaan, mukaan lukien reseptisi</p>
-                            <form id="delete-user-form">
-                                <div class="mb-3">
-                                    <label for="delete-password" class="form-label">Salasana*</label>
-                                    <input type="password" class="form-control" id="delete-password" required>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn" data-bs-dismiss="modal">
-                                <i class="fi fi-br-cross"></i>
-                            </button>
-                            <button type="button" class="btn btn-danger" id="confirm-delete-button">
-                                <i class="fi fi-rr-trash"></i>
-                            </button>
-                        </div>
+            <!--Kysytään käyttäjältä salasana ennen käyttäjän poistamista-->
+            <div class="delete-user-confirmation d-none">
+                <p id="delete-warning">Syötä salasana poistaaksesi käyttäjän. Kaikki tiedot poistetaan, mukaan lukien kaikki reseptisi. Tätä toimintoa ei voi peruuttaa</p>
+                <form class="delete-user-form">
+                    <div class="mb-3">
+                        <label for="delete-password" class="form-label">Salasana*</label>
+                        <input type="password" class="form-control" id="delete-password" required>
                     </div>
+                </form>
+                <div class="delete-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-delete-button">
+                        <i class="fi fi-rr-cross"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger" id="confirm-delete-button">
+                        <i class="fi fi-rr-check"></i>
+                    </button>
                 </div>
             </div>
 
-            <p class="loading-message">Ladataan reseptejä...</p>
+            <p id="loading-message">Ladataan reseptejä...</p>
             <!--Käyttäjän lisäämät reseptit ladataan dynaamisesti tähän-->
             <div class="row recipes-list"></div>
         </section>
@@ -98,20 +86,20 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-md-4 footer-designed">
-                    <h6>Tyylisuunnittelu</h6>
+                    <h6>Tyylisuunnittelu</h5>
                     <div class="d-flex gap-2">
-                        <a href="https://getbootstrap.com/" target="_blank"><img src="../images/bootstrap-logo.png" alt="Bootstrap Logo" width="50" height="50"></a>
-                        <a href="http://flaticon.com/" target="_blank"><img src="../images/flaticon-logo.jpg" alt="Flaticon Logo" width="50" height="50"></a>
-                        <a href="https://fonts.google.com/" target="_blank"><img src="../images/googlefonts-logo.png" alt="Google Fonts Logo" width="50" height="50"></a>
+                        <a href="https://getbootstrap.com/" target="_blank"><img src="../images/bootstrap-logo.png" alt="Bootstrap Logo" width="60" height="50"></a>
+                        <a href="http://flaticon.com/" target="_blank"><img src="../images/flaticon-logo.jpg" alt="Flaticon Logo" width="60" height="50"></a>
+                        <a href="https://fonts.google.com/" target="_blank"><img src="../images/googlefonts-logo.png" alt="Google Fonts Logo" width="60" height="50"></a>
                     </div>
                 </div>
                 <div class="col-md-4 footer-developed">
-                    <h6>Kehittänyt</h6>
+                    <h6>Kehittänyt</h5>
                     <a href="https://github.com/jjuh00" target="_blank"><p>jjuh00</p></a>
                 </div>
                 <div class="col-md-4 footer-powered">
-                    <h6>Voimanlähteenä</h6>
-                    <a href="https://expressjs.com/" target="_blank"><img src="../images/express-logo.png" alt="Express.js Logo" width="50" height="50"></a>
+                    <h6>Voimanlähteenä</h5>
+                    <a href="https://expressjs.com/" target="_blank"><img src="../images/express-logo.png" alt="Express.js Logo" width="60" height="50"></a>
                 </div>
             </div>
         </div>

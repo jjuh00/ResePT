@@ -93,9 +93,7 @@ $(document).ready(function() {
                             <span class="step-number">${i + 1}.</span>
                         </div>
                         <div class="col-8">
-                            <textarea class="form-control step-text" rows=3 placeholder="Vaihe ${i + 1}" required>
-                                ${step.trimStart()}
-                            </textarea>
+                            <textarea class="form-control step-text" rows="3" placeholder="Vaihe ${i + 1}" required>${step}</textarea>
                         </div>
                         <div class="col-3 step-buttons d-flex gap-2 justify-content-end">
                             <button type="button" class="btn" id="add-step-button">
@@ -316,7 +314,12 @@ $(document).ready(function() {
                 }
             },
             error: function(jqXHR) {
-                alert("Reseptin päivittäminen epäonnistui: " + (jqXHR.responseJSON?.message || "Tuntematon virhe"));
+                if (jqXHR.status === 0) {
+                    // Verkkovirhe
+                    window.location.href = "/pages/error-network.html";
+                } else {
+                    alert("Reseptin päivittäminen epäonnistui: " + (jqXHR.responseJSON?.message || "Tuntematon virhe"));
+                }
             }
         });
     });

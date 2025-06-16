@@ -1,10 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Fira+Sans:wght@400;500&display=swap");
+
 .edit-user-section {
     margin: 2rem auto;
+    padding: 2.5rem;
+    max-width: 600px;
+    background: rgba(25, 25, 45, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    /* Sivun latautumisanimaatio */
+    animation: slideInFromRight 0.6s ease-out;
+}
+
+/* Sivun liukuanimaatio */
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Takaisin-napin tyyli */
+.edit-user-section .btn:first-child {
+    padding: 0.75rem 1rem;
+    background: rgba(25, 25, 45, 0.8);
+    color: lightgray;
+    text-decoration: none;
+    border: 2px solid rgba(108, 117, 125, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    font-weight: 500;
+    transition: all 0.25s ease;
+}
+
+.edit-user-section .btn:first-child:hover {
+    background: rgba(40, 44, 52, 0.95);
+    color: gold;
+    border-color: gold;
+    box-shadow: 0 6px 20px rgba(255, 201, 7, 0.3);
+    transform: translateX(-3px);
+}
+
+.edit-user-section .btn:first-child .fi {
+    font-size: 18px;
+}
+
+.edit-user-title {
+    margin-bottom: 2rem;
+    text-align: center;
+    color: gold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 28px;
+    font-family: "Merriweather", serif;
+    font-weight: 700;
+}
+
+.edit-user-form {
     padding: 2rem;
-    max-width: 800px;
+    background: rgba(40, 44, 52, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+.edit-user-form .form-label {
+    margin-bottom: 0.75rem;
+    color: azure;
+    font-size: 16px;
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.edit-user-form .form-control {
+    padding: 1rem;
+    background: rgba(25, 25, 45, 0.6);
+    color: lightgray;
+    border: 2px solid rgba(108, 117, 125, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    font-family: "Fira Sans", sans-serif;
+    transition: all 0.25s ease;
+}
+
+.edit-user-form .mb-3 {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.edit-user-form .mb-3:last-of-type {
+    margin-bottom: 0;
 }
 
 .form-buttons {
-    margin-top: 2rem;
+    display: flex;
+    margin-top: 2.5rem;
     gap: 1rem;
+    justify-content: center;
+}
+
+.form-buttons .btn {
+    padding: 1rem 2rem;
+    min-width: 120px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+/* Tallenna-napin tyyli */
+.form-buttons .btn[type="submit"] {
+    background: linear-gradient(45deg, limegreen, navajowhite);
+    color: white;
+    border-color: #28a745;
+}
+
+.form-buttons .btn[type="submit"]:hover {
+    background: linear-gradient(45deg, mediumaquamarine, cornflowerblue);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    transform: translateY(-2px);
+}
+
+.form-buttons #cancel-button {
+    background: rgba(40, 44, 52, 0.8);
+    color: lightgray;
+    border-color: rgba(108, 117, 125, 0.3);
+}
+
+.form-buttons #cancel-button:hover {
+    background: linear-gradient(45deg, crimson, tomato);
+    color: white;
+    border-color: #dc3545;
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Responsiivinen muotoilu */
+@media (max-width: 1440px) {
+    .edit-user-section {
+        padding: 1.5rem;
+        max-width: 600px;
+    }
+
+    .edit-user-title {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 960px) {
+    .edit-user-section {
+        padding: 1rem;
+        max-width: 500px;
+    }
+
+    .edit-user-title {
+        font-size: 20px;
+    }
+
+    .edit-user-form .form-control {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .edit-user-section {
+        padding: 0.5rem;
+    }
+
+    .edit-user-title {
+        font-size: 18px;
+    }
+
+    .edit-user-form .form-control {
+        font-size: 12px;
+    }
+
+    .form-buttons .btn {
+        padding: 0.5rem;
+        font-size: 14px;
+    }
+
+    .delete-account-div .btn {
+        padding: 0.5rem;
+        font-size: 14px;
+    }
 }

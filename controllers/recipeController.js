@@ -270,6 +270,7 @@ const viewRecipe = async (req, res) => {
             return res.status(404).json({ success: false, message: "Reseptiä ei löytynyt" });
         }
 
+        // Haetaan reseptin tiedot
         res.json({
             success: true,
             recipe: {
@@ -280,6 +281,7 @@ const viewRecipe = async (req, res) => {
                 preparationTime: recipe.preparationTime,
                 authorName: recipe.authorName,
                 dateCreated: recipe.dateCreated,
+                dateModified: recipe.dateModified,
                 imagePath: recipe.imagePath,
                 ingredients: recipe.ingredients,
                 steps: recipe.steps
@@ -308,6 +310,7 @@ const getUserRecipes = async (req, res) => {
             preparationTime: recipe.preparationTime,
             authorName: recipe.authorName,
             dateCreated: recipe.dateCreated,
+            dateModified: recipe.dateModified,
             imagePath: recipe.imagePath
         }));
 

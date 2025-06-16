@@ -58,7 +58,7 @@ $(document).ready(function() {
             url: `/recipes/user/${id}`,
             method: "GET",
             success: function(response) {
-                $(".loading-message").hide();
+                $("#loading-message").hide();
                 if (response.recipes) {
                     displayRecipes(response.recipes);
                 } else {
@@ -66,7 +66,7 @@ $(document).ready(function() {
                 }
             },
             error: function() {
-                $(".loading-message").hide();
+                $("#loading-message").hide();
                 $(".recipes-list").html('<p class="text-center">Virhe omien reseptien lataamisessa</p>')
             }
         });
@@ -97,10 +97,10 @@ $(document).ready(function() {
                             <a class="btn" href="/pages/recipe-view.html?id=${recipe.id}">
                                 <i class="fi fi-rr-magnifying-glass-eye"></i>
                             </a>
-                            <button type="button" class="btn" id="edit-button" data-recipe-id="${recipe.id}">
+                            <button type="button" class="btn btn-secondary" id="edit-button" data-recipe-id="${recipe.id}">
                                 <i class="fi fi-rr-pencil"></i>
                             </button>
-                            <button type="button" class="btn" id="delete-button" data-recipe-id="${recipe.id}">
+                            <button type="button" class="btn btn-danger" id="delete-button" data-recipe-id="${recipe.id}">
                                 <i class="fi fi-bs-trash"></i>
                             </button>
                         </div>
@@ -117,6 +117,17 @@ $(document).ready(function() {
     });
 
     // Käsitellään käyttäjän poisto-napin klikkaus
+    $("#delete-user-button").click(function() {
+        $(".delete-user-confirmation").removeClass("d-none");
+    });
+
+    // Käsitellään käyttäjän poiston peruuttaminen
+    $("#cancel-delete-button").click(function() {
+        $(".delete-user-confirmation").addClass("d-none");
+        $("#delete-password").val("");
+    });
+
+    // Käsitellään käyttäjän poistaminen
     $("#confirm-delete-button").click(function() {
         const password = $("#delete-password").val().trim();
 
@@ -125,36 +136,35 @@ $(document).ready(function() {
             return;
         }
 
-        if (!confirm("Haluatko varmasti poistaa käyttäjäsi?")) {
-            return;
+        if (confirm("Haluatko varmasti poistaa käyttäjäsi?")) {
+            $.ajax({
+                url: `/authentication/delete/${id}`,
+                method: "DELETE",
+                contentType: "application/json",
+                data: JSON.stringify({ password }),
+                success: function(response) {
+                    if (response.success) {
+                        localStorage.removeItem("id");
+                        alert("Käyttäjä poistettu onnistuneesti");
+                        window.location.href = "/index.html";
+                    } else {
+                        alert("Käyttäjän pistaminen epäonnistui: " + response.message);
+                    }
+                },
+                error: function(jqXHR) {
+                    if (jqXHR.status === 0) {
+                        // Verkkovirhe
+                        window.location.href = "/pages/error-network.html";
+                    } else {
+                        alert("Käyttäjän poistaminen epäonnistui: " + (jqXHR.responseJSON?.message || "Tuntematon virhe"));
+                    }
+                },
+                complete: function() {
+                    $("#delete-password").val("");
+                    $(".delete-user-confirmation").addClass("d-none");
+                }
+            });
         }
-
-        $.ajax({
-            url: `/authentication/delete/${id}`,
-            method: "DELETE",
-            contentType: "application/json",
-            data: JSON.stringify({ password }),
-            success: function(response) {
-                if (response.success) {
-                    localStorage.removeItem("id");
-                    alert("Käyttäjä poistettu onnistuneesti");
-                    window.location.href = "/index.html";
-                } else {
-                    alert("Käyttäjän poistaminen epäonnistui: " + response.message);
-                }
-            },
-            error: function(jqXHR) {
-                if (jqXHR.status === 0) {
-                    // Verkkovirhe
-                    window.location.href = "/pages/error-network.html";
-                } else {    
-                    alert("Käyttäjän poistaminen epäonnistui: " + (jqXHR.responseJSON?.message || "Tuntematon virhe"));
-                }
-            }
-        });
-
-        $("#delete-user-modal").hide();
-        $("#delete-password").val("");
     });
 
     // Käsitellään reseptin muokkaus-napin klikkaus
@@ -180,7 +190,12 @@ $(document).ready(function() {
                     }
                 },
                 error: function(jqXHR) {
-                    alert("Reseptin poistaminen epäonnistui: " + (jqXHR.responseJSON?.message || "Tuntematon virhe"));
+                    if (jqXHR.status === 0) {
+                        // Verkkovirhe
+                        window.location.href = "/pages/error-network.html";
+                    } else {
+                        alert("Reseptin poistaminen epäonnistui: " + (jqXHR.responseJSON?.message || "Tuntematon virhe"));
+                    }
                 }
             });
         }

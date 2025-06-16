@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Fira+Sans:wght@400;500&family=Dancing+Script:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Fira+Sans:wght@400;500&display=swap");
 
 .nav-search-form {
     max-width: 600px;
@@ -6,34 +6,66 @@
 
 .main-title, .welcome-message {
     margin-bottom: 1rem;
-    font-family: Merriweather, serif;
+    color: azure;
+    align-items: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0.4);
+    font-size: 32px;
+    font-family: "Merriweather", serif;
+    font-weight: 700;
 }
 
 .recipes-section {
-    margin: 1.5rem auto;
-    max-width: 800px;
+    margin: 2rem auto;
+    max-width: 1200px;
 }
 
 .repices-list {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
 }
 
-#latest-recipes {
+.latest-recipes {
     display: flex;
+    margin-top: 2rem;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
+/* Yksittäisen reseptikortin tyyli (lasimaisuus-efekti) */
 .recipe-card {
     display: flex;
-    padding: 1rem;
+    padding: 1.5rem;
     max-width: calc(33.333% - 1rem); /* Varmistetaan, että leveys aina sama */
     flex: 0 0 calc(33.333% - 1rem); /* Max. 3 yhdellä rivillä */
     flex-direction: column;
     justify-content: space-between;
-    border: 1px solid #dee2e6;
+    background: rgba(25, 25, 45, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
-    font-family: Fira Sans, sans-serif;
+    backdrop-filter: blur(10px);
+    font-family: "Fira Sans", sans-serif;
+    transition: all 0.25s ease;
+    /* Kortin animaatio */
+    animation: cardSlideIn 0.5s ease-out;
+}
+
+/* Reseptikortin liukuanimaatio */
+@keyframes cardSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.recipe-card:hover {
+    border-color: rgba(255, 201, 7, 0.3);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    transform: translateY(-5px);
 }
 
 .recipe-card img {
@@ -41,25 +73,151 @@
     width: 100%;
     height: 200px;
     flex-shrink: 0;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     object-fit: cover;
+    transition: transform 0.25s ease;
+}
+
+.recipe-card:hover img {
+    transition: scale(1.02);
 }
 
 .recipe-card h5 {
-    font-family: Merriweather, serif;
+    margin-bottom: 1rem;
+    color: azure;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    font-size: 20px;
+    font-family: "Merriweather", serif;
+    font-weight: 700;
 }
 
-.recipe-card h5, .recipe-card p {
-    margin-bottom: 0.5rem;
+.recipe-card p {
+    margin-bottom: 0.6rem;
+    color: lightgray;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.recipe-card .fi {
+    color: gold;
+    font-size: 16px;
+}
+
+.recipe-card .text-muted {
+    color: gray !important;
+    font-size: 14px;
+    font-style: italic;
 }
 
 .recipe-buttons {
     display: flex;
     margin-top: auto;
-    gap: 0.5rem;
+    padding-top: 1rem;
+    gap: 0.75rem;
     flex-wrap: nowrap;
 }
 
 .recipe-buttons .btn {
+    padding: 0.75rem;
     flex: 1;
     text-align: center;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.recipe-buttons a.btn {
+    background: linear-gradient(45deg, gold, orange);
+    color: black;
+    font-weight: 600;
+}
+
+.recipe-buttons a.btn:hover {
+    background: linear-gradient(45deg, orange, crimson);
+    box-shadow: 0 6px 16px rgba(255, 201, 7, 0.4);
+    transform: translateY(-2px);
+}
+
+.favourite-button {
+    background: rgba(40, 44, 52, 0.8);
+    color: lightgray;
+    border-color: rgba(108, 117, 125, 0.3);
+}
+
+.favourite-button:hover {
+    background: rgba(40, 44, 52, 0.95);
+    color: gold;
+    border-color: gold;
+}
+
+/* favourite-button tyyli, kun resepti on lisätty suosikkeihin */
+.favourite-button.favourited {
+    background: linear-gradient(45deg, purple, mediumvioletred);
+    color: white;
+    border-color: purple;
+}
+
+.favourite-button.favourited:hover {
+    background: linear-gradient(45deg, mediumvioletred, purple);
+    transform: scale(1.05);
+}
+
+.text-center {
+    padding: 2rem;
+    text-align: center;
+    color: lightgray;
+    font-size: 18px;
+    font-style: italic;
+}
+
+/* Responsiivinen muotoilu */
+@media (max-width: 1440px) {
+    .recipes-section {
+        padding: 1.5rem;
+    }
+
+    .recipe-card {
+        max-width: calc(50% - 1rem);
+        flex: 0 0 calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 960px) {
+    .recipes-section {
+        padding: 1rem;
+    }
+
+    .recipe-card {
+        max-width: calc(100% - 1rem);
+        flex: 0 0 calc(100% - 1rem);
+    }
+
+    .welcome-message {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .recipes-section {
+        padding: 0.5rem;
+    }
+
+    .welcome-message {
+        font-size: 18px;
+    }
+
+    .recipe-card {
+        padding: 1rem;
+    }
+
+    .recipe-card img {
+        height: 150px;
+    }
+
+    .recipe-buttons .btn {
+        padding: 0.5rem;
+        font-size: 14px;
+    }
 }

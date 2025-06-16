@@ -1,27 +1,317 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Fira+Sans:wght@400;500&display=swap");
+
 .edit-recipe-section {
-    margin: 1.5rem auto;
+    margin: 2rem auto;
+    padding: 2.5rem;
     max-width: 800px;
+    background: rgba(25, 25, 45, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    /* Sivun latautumisanimaatio */
+    animation: slideInFromLeft 0.6s ease-out;
+}
+
+/* Liukuanimaatio */
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .edit-recipe-form {
+    padding: 2rem;
+    background: rgba(40, 44, 52, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+.edit-recipe-title {
+    margin-bottom: 2rem;
+    text-align: center;
+    color: gold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 28px;
+    font-family: "Merriweather", serif;
+    font-weight: 700;
+}
+
+.edit-recipe-form .form-label {
+    margin-bottom: 0.75rem;
+    color: azure;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    font-size: 16px;
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 600;
+}
+
+.edit-recipe-form .form-control {
     padding: 1rem;
+    background: rgba(25, 25, 45, 0.6);
+    color: lightgray;
+    border: 2px solid rgba(108, 117, 125, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    font-family: "Fira Sans", sans-serif;
+    transition: all 0.25s ease;
+}
+
+.edit-recipe-form .mb-3 {
+    position: relative;
 }
 
 .ingredient, .step {
-    margin: 0.5rem;
+    display: flex;
+    margin: 0.5rem 0.5re,;
+    padding: 1rem;
     align-items: center;
+    background: rgba(25, 25, 45, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    transition: all 0.25s ease;
 }
 
 .step-number {
-    margin-right: 0.5rem;
-    padding-top: 1rem;
+    padding: 0.4rem 0.5rem;
+    min-width: 30px;
+    text-align: center;
+    background: linear-gradient(45deg, gold, orange);
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(255, 201, 7, 0.3);
 }
 
-.form-buttons {
-    margin-top: 2rem;
-    gap: 1rem;
+.ingredient .form-control, .step .form-control {
+    margin: 0 0.25rem;
+    background: rgba(40, 44, 52, 0.6);
+}
+
+.ingredient-buttons, .step-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+/* Ainesosan ja vaiheen lisäys- ja poisto-nappien tyyli */
+.ingredient-buttons .btn, .step-buttons .btn {
+    padding: 0.5rem;
+    min-width: 40px;
+    background: rgba(25, 25, 45, 0.8);
+    color: lightgray;
+    border: 2px solid rgba(108, 117, 125, 0.3);
+    border-radius: 8px;
+    transition: all 0.25s ease;
+}
+
+.ingredient-buttons .btn:first-child:hover, .step-buttons .btn:first-child:hover {
+    background: linear-gradient(45deg, limegreen, navajowhite);
+    color: white;
+    border-color: limegreen;
+    box-shadow: 0 4px 12px rgba(50, 205, 50, 0.3);
+    transform: translateY(-1px);
+}
+
+.ingredient-buttons .btn:last-child:hover, .step-buttons .btn:last-child:hover {
+    background: linear-gradient(45deg, crimson, tomato);
+    color: white;
+    border-color: crimson;
+    box-shadow: 0 4px 12px rgba(220, 20, 60, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Tagien lisäys -napin tyyli */
+.edit-recipe-form .btn[data-bs-toggle="modal"] {
+    padding: 0.75rem 1rem;
+    background: rgba(25, 25, 45, 0.8);
+    color: lightgray;
+    border: 2px solid rgba(108, 117, 125, 0.3);
+    border-radius: 10px;
+    transition: all 0.25s ease;
+}
+
+.edit-recipe-form .btn[data-bs-toggle="modal"]:hover {
+    background: linear-gradient(45deg, mediumorchid, mediumpurple);
+    color: white;
+    border-color: mediumorchid;
+    box-shadow: 0 4px 12px rgba(186, 85, 211, 0.3);
+    transform: translateY(-1px);
 }
 
 #selected-tags {
     margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(40, 44, 52, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    font-family: "Fira Sans", sans-serif;
+    min-height: 40px;
+}
+
+.form-buttons {
+    display: flex;
+    margin-top: 2.5rem;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.form-buttons .btn {
+    padding: 1rem 2rem;
+    min-width: 120px;
+    flex: 1;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.form-buttons .btn[type="submit"] {
+    background: linear-gradient(45deg, limegreen, navajowhite);
+    color: white;
+    border-color: limegreen;
+}
+
+.form-buttons .btn[type="submit"]:hover {
+    background: linear-gradient(45deg, mediumaquamarine, cornflowerblue);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    transform: translateY(-2px);
+}
+
+.form-buttons #cancel-button {
+    background: rgba(40, 44, 52, 0.8);
+    color: lightgray;
+    border-color: rgba(108, 117, 125, 0.3);
+}
+
+.form-buttons #cancel-button:hover {
+    background: linear-gradient(45deg, crimson, tomato);
+    color: white;
+    border-color: crimson;
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+    transform: translateY(-2px);
+}
+
+.modal-title {
+    color: gold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    font-family: "Merriweather", serif;
+    font-weight: 700;
+}
+
+.modal-content {
+    background: rgba(25, 25, 45, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: deepskyblue;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-footer .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+}
+
+#save-tags-button {
+    background: linear-gradient(45deg, limegreen, navajowhite);
+    color: white;
+    border: 2px solid limegreen;
+}
+
+#save-tags-button:hover {
+    background: linear-gradient(45deg, mediumaquamarine, cornflowerblue);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+/* Sulje-napin tyyli */
+.modal-footer .btn[data-bs-dismiss="modal"] {
+    background: rgba(40, 44, 52, 0.8);
+    color: lightgray;
+    border: 2px solid rgba(108, 117, 125, 0.3);
+}
+
+.modal-footer .btn[data-bs-dismiss="modal"]:hover {
+    background: linear-gradient(45deg, crimson, tomato);
+    color: white;
+    border-color: crimson;
+    box-shadow: 0 4px 12px rgba(220, 20, 60, 0.3);
+}
+
+/* Responsiivinen muotoilu */
+@media (max-width: 1440px) {
+    .edit-recipe-section {
+        padding: 1.5rem;
+        max-width: 700px;
+    }
+
+    .edit-recipe-title {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 960px) {
+    .edit-recipe-section {
+        padding: 1rem;
+        max-width: 500px;
+    }
+
+    .edit-recipe-title {
+        font-size: 20px;
+    }
+
+    .ingredient .col-3, .ingredient .col-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .ingredient-buttons {
+        margin-top: 0.5rem;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .edit-recipe-section {
+        padding: 0.5rem;
+    }
+
+    .edit-recipe-title {
+        font-size: 18px;
+    }
+
+    .form-buttons .btn {
+        padding: 0.5rem;
+        font-size: 14px;
+    }
+
+    .step .col-1, .step .col-8, .step .col-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .step-buttons {
+        margin-top: 0.5rem;
+        justify-content: flex-start;
+    }
 }

@@ -1,31 +1,249 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Fira+Sans:wght@400;500&display=swap");
+
 .user-profile-section {
     margin: 2rem auto;
     padding: 2rem;
-    max-width: 800px;
-    font-family: Merriweather, serif;
+    max-width: 1000;
+    background: rgba(25, 25, 45, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    /* Sivun latautumisanimaatio */
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* Käyttäjäprofiilin häivitysanimaatio */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.user-profile-section h3 {
+    margin-bottom: 2rem;
+    text-align: center;
+    color: gold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 28px;
+    font-family: "Merriweather", serif;
+    font-weight: 700;
 }
 
 .user-profile {
     margin-bottom: 2rem;
+    background: rgba(40, 44, 52, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.user-profile .table {
+    margin-bottom: 0;
+    background: rgba(25, 25, 45, 0.8);
+    color: lightgray;
+    font-size: 16px;
+    font-family: "Fira Sans", sans-serif;
+}
+
+/* Viimeisellä taulukon rivillä ei ole alareunaa */
+.user-profile .table tbody tr:last-child {
+    border-bottom: none;
 }
 
 .user-actions {
+    display: flex;
     margin-top: 2rem;
-    gap: 1rem
+    gap: 1rem;
+    justify-content: center;
 }
 
-#delete-user-modal .form-control {
-    width: 100%;
+.user-actions .btn {
+    padding: 0.75rem 1.5rem;
+    background: rgba(40, 44, 52, 0.8);
+    color: lightgray;
+    border: 2px solid rgba(108, 117, 125, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    font-weight: 500;
+    transition: all 0.25s ease;
 }
 
+#edit-user-button:hover {
+    background: linear-gradient(45def, limegreen, navajowhite);
+    color: white;
+    border-color: limegreen;
+    box-shadow: 0 6px 20px rgba(40, 170, 70, 0.25);
+    transform: translateY(-2px);
+}
+
+#delete-user-button:hover {
+    background: linear-gradient(45deg, crimson, tomato);
+    color: white;
+    border-color: crimson;
+    box-shadow: 0 6px 20px rgba(240, 50, 60, 0.3);
+    transform: translateY(-2px);
+}
+
+.user-actions .btn .fi {
+    font-size: 16px;
+}
+
+.delete-user-confirmation {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: rgba(220, 53, 69, 0.1);
+    border: 2px solid rgba(220, 53, 69, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(255, 201, 7, 0.2);
+    backdrop-filter: blur(10px);
+    /* Osion animaatio */
+    animation: slideInAnimation 0.4s ease-out;   
+}
+
+/* Liukuanimaatio */
+@keyframes slideInAnimation {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+#delete-warning {
+    padding: 1.5rem;
+    background: rgba(220, 53, 69, 0.15);
+    color: lightpink;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.delete-user-form .form-label {
+    margin-bottom: 0.75rem;
+    color: lightgray;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.delete-user-confirmation .form-control {
+    padding: 0.75rem 1rem;
+    background: rgba(40, 44, 52, 0.8);
+    color: lightgray;
+    border: 2px solid rgba(220, 53, 69, 0.3);
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    font-size: 16px;
+}
+
+.delete-actions {
+    display: flex;
+    margin-top: 1.5rem;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Peruuta-napin tyyli */
+.delete-actions .btn-secondary {
+    background: rgba(108, 117, 125, 0.8);
+    color: lightgray;
+    border: 2px solid rgba(108, 117, 125, 0.5);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.delete-actions .btn-secondary:hover {
+    background: rgba(108, 117, 125, 0.95);
+    color: white;
+    border-color: lightslategray;
+    box-shadow: 0 4px 16px rgba(108, 117, 125, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Vahvista poisto -napin tyyli */
+.delete-actions .btn-danger {
+    background: linear-gradient(45deg, rgba(220, 53, 69, 0.9), rgba(178, 34, 34, 0.9));
+    color: white;
+    border: 2px solid rgba(220, 53, 69, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(220, 53, 69, 0.3);
+    backdrop-filter: blur(10px);
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.delete-actions .btn-danger:hover {
+    background: linear-gradient(45deg, rgba(220, 53, 69, 1), rgba(139, 0, 0, 1));
+    border-color: darkred;
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.5);
+    transform: translateY(-2px);
+}
+
+#loading-message {
+    margin: 2rem 0;
+    padding: 2rem;
+    text-align: center;
+    color: gold;
+    background: rgba(25, 25, 45, 0.5);
+    border: 1px solid rgba(255, 201, 7, 0.3);
+    border-radius: 12px;
+    font-size: 18px;
+    font-family: "Fira Sans", sans-serif;
+    font-style: italic;
+}
+
+.recipes-list {
+    display: flex;
+    margin-top: 2rem;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Yksittäisen reseptikortin tyyli */
 .recipe-card {
     display: flex;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
+    padding: 1.5rem;
+    max-width: calc(33.33% - 1rem); /* Leveys aina sama */
+    flex: 0 0 calc(33.33% - 1rem); /* 3 reseptiä/rivi */
     flex-direction: column;
     justify-content: space-between;
-    font-family: Fira Sans, sans-serif;
-    border: 1px solid #dee2e6;
+    background: rgba(25, 25, 45, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    font-family: "Fira Sans", sans-serif;
+    transition: all 0.25s ease;
+    /* Kortin animaatio */
+    animation: cardSlideIn 0.5s ease-out;
+}
+
+/* Reseptikortin liukuanimaatio */
+@keyframes cardSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
 .recipe-card img {
@@ -33,24 +251,158 @@
     width: 100%;
     height: 200px;
     flex-shrink: 0;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     object-fit: cover;
+    transition: transform 0.25s ease;
+}
+
+.recipe-card:hover img {
+    transform: scale(1.02);
 }
 
 .recipe-card h5 {
-    font-family: Merriweather, serif;   
+    margin-bottom: 1rem;
+    color: azure;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    font-size: 20px;
+    font-family: "Merriweather", serif;
+    font-weight: 700;
 }
 
-.recipe-card h5, .recipe-card p {
-    margin-bottom: 0.5rem;
+.recipe-card p {
+    margin-bottom: 0.6rem;
+    color: lightgray;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.recipe-card .fi {
+    color: gold;
+    font-size: 16px;
+}
+
+.recipe-card .text-muted {
+    color: gray !important;
+    font-size: 14px;
+    font-style: italic;
 }
 
 .recipe-buttons {
     display: flex;
     margin-top: auto;
-    gap: 1rem;
+    padding-top: 1rem;
+    gap: 0.75rem;
+    flex-wrap: nowrap;
 }
 
 .recipe-buttons .btn {
+    padding: 0.75rem;
     flex: 1;
     text-align: center;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+/* Reseptikortin "katso"-napin tyyli */
+.recipe-buttons a.btn {
+    background: linear-gradient(45deg, gold, orange);
+    color: black;
+    background-clip: padding-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.recipe-buttons a.btn:hover {
+    background: linear-gradient(45deg, orange, crimson);
+    background-clip: padding-box;
+    transform: translateY(-2px);
+}
+
+/* Reseptin muokkaa-napin tyyli */
+.recipe-buttons .btn-secondary {
+    background: rgba(40, 44, 52, 0.8);
+    color: lightgray;
+    border-color: rgba(108, 117, 125, 0.3);
+}
+
+.recipe-buttons .btn-secondary:hover {
+    background: linear-gradient(45deg, limegreen, navajowhite);
+    color: white;
+    border-color: #28a745;
+    box-shadow: 0 6px 16px rgba(40, 167, 69, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Reseptin poista-napin tyyli */
+.recipe-buttons .btn-danger {
+    background: rgba(220, 53, 69, 0.8);
+    color: white;
+    border-color: crimson;
+}
+
+.recipe-buttons .btn-danger:hover {
+    background: rgba(220, 53, 69, 0.95);
+    border-color: darkred;
+    box-shadow: 0 4px 16px rgba(220, 53, 69, 0.4);
+}
+
+/* Responsiivinen muotoilu */
+@media (max-width: 1440px) {
+    .user-page-section {
+        padding: 1.5rem;
+    }
+
+    .recipe-card {
+        max-width: calc(50% - 1rem);
+        flex: 0 0 calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 960px) {
+    .user-page-section {
+        padding: 1rem;
+    }
+
+    .recipe-card {
+        max-width: calc(100% - 1rem);
+        flex: 0 0 calc(100% - 1rem);
+    }
+
+    .user-details {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-page-section {
+        padding: 0.5rem;
+    }
+
+    .user-details {
+        font-size: 18px;
+    }
+
+    .recipe-card img {
+        height: 150px;
+    }
+
+    .recipe-buttons .btn {
+        padding: 0.5rem;
+        font-size: 14px;
+    }
+
+    .page-controls {
+        margin: 1rem 0;
+    }
+
+    .page-controls .btn {
+        padding: 0.4rem;
+        min-width: 30px;
+    }
+
+    .page-controls span {
+        font-size: 14px;
+    }
 }

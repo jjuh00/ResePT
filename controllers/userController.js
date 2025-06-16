@@ -199,4 +199,10 @@ const getUserProfile = async (req, res) => {
     }
 };
 
-export { login, register, updateUser, deleteUser, getUserProfile };
+export { 
+    login, 
+    register, 
+    updateUser, 
+    deleteUser, 
+    getUserProfile 
+};
