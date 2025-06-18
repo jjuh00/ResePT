@@ -445,6 +445,51 @@
       "favouritedBy": [
         "743a4fa2-9aca-43ea-b2d6-ebc6a35d1d6e"
       ]
+    },
+    {
+      "id": "2d747534-1a9e-4c44-93ae-79faadff2bd7",
+      "name": "Saunajuoma",
+      "ingredients": [
+        {
+          "amountAndUnit": "2 dl",
+          "ingredientName": "mustikkamehua"
+        },
+        {
+          "amountAndUnit": "4 rkl",
+          "ingredientName": "seljankukkamehua"
+        },
+        {
+          "amountAndUnit": "2 rkl",
+          "ingredientName": "limemehua"
+        },
+        {
+          "amountAndUnit": "2 dl",
+          "ingredientName": "kivennäisvettä"
+        },
+        {
+          "amountAndUnit": "hieman",
+          "ingredientName": "jääpaloja"
+        }
+      ],
+      "steps": [
+        "Kokoa yrttivihdat sitomalla yhteen mieluisia yrttejä.",
+        "Täytä lasit jääpaloilla",
+        "Jaa lasehin mustikkamehu, seljankukkamehutiiviste ja limenmehu. Sekoita",
+        "Lisää kuplavesi. Viimeistele juomat yrttivihdoilla"
+      ],
+      "tags": [
+        {
+          "value": "t13",
+          "label": "juoma"
+        }
+      ],
+      "servingSize": 2,
+      "preparationTime": 20,
+      "authorId": "743a4fa2-9aca-43ea-b2d6-ebc6a35d1d6e",
+      "authorName": "jjuh00",
+      "dateCreated": "2025-06-18T21:27:20.529Z",
+      "dateModified": "2025-06-18T21:27:20.530Z",
+      "imagePath": "1750282040517-856566364-43833-saunajuoma-1300x867.avif"
     }
   ]
 }
