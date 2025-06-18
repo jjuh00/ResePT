@@ -26,6 +26,7 @@ styles/ <br />
 ... <br />
 scripts/ <br />
 ... <br />
+images/ (tässä kansiossa sijaitsee kuvia resepteistä, footerin logot sekä kuvankaappaukset ohjelman ulkoasusta)
 
 ## Kuinka ohjelma toimii?
 1. Käynnistä Express.js-pavelin (alla ohje).
