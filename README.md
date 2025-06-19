@@ -50,6 +50,7 @@ const PORT = process.env.PORT || 3002;
 → Voit vaihtaa portin numeroa, jos haluat.
 
 ## Tulevaisuuden kehitysideoita
-Projektiin on tulossa seuraavaksi yksikkötestit ja testausautomaatio. Lisäksi projektiin on suunnitteilla seuraavat ominaisuudet, jos niihin riitää tarpeeksi aikaa, osaamista ja motivaatiota
+Projektiin on mahdollisesti tulossa seuraavat ominaisuudet, jos niihin riitää tarpeeksi aikaa ja osaamista kehitellä:
 - Reseptien arvostelut ja kommentointi
 - Filtterit reseptien hakuun esimerkiksi arvoisteluiden, tagien, valmistusajan tai annoskoon mukaan
+- Reseptinäkymässä annoskoon vaihtaminen, jolloin ainesosien mitat vaihtuvat annoskoon mukaan
