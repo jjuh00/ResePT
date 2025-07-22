@@ -7,7 +7,6 @@
     - Näytetään "Luotu" tai "Muokattu" teksti ennen pvm:ää, riippuen siitä onko reseptiä muokattu.
 */
 function formatRecipeDate(dateCreated, dateModified) {
-    const today = new Date();
     const created = new Date(dateCreated);
     const modified = new Date(dateModified);
     const isModified = dateCreated && (modified.getTime() - created.getTime() > 1000); // Reseptiä pidetään muokattuna, jos muokattu pvm väh. 1 sekunti lisätty pvm jälkeen
