@@ -99,7 +99,7 @@ $(document).ready(function() {
                                 <i class="fi fi-rr-magnifying-glass-eye"></i>
                             </a>
                             <button class="btn ${id ? '' : 'd-none'} favourite-button ${buttonClass}" data-recipe-id="${recipe.id}">
-                                <i class="fi ${isFavourited ? 'fi-sr-star' : 'fi-rr-star'}"></i>
+                                <i class="fi ${isFavourited ? 'fi-ss-heart' : 'fi-ts-heart'}"></i>
                             </button>
                         </div>
                     </div>

@@ -68,7 +68,7 @@ $(document).ready(function() {
                             <i class="fi fi-rr-magnifying-glass-eye"></i>
                         </a>
                         <button type="button" class="btn" id="remove-fav-button" data-recipe-id="${recipe.id}">
-                            <i class="fi fi-sr-star"></i>
+                            <i class="fi fi-ss-heart"></i>
                         </button>
                     </div>
                 </div>

@@ -66,10 +66,10 @@ $(document).ready(function() {
 
         const html = `
             <img src="${imagePath}" alt="${recipe.name}">
-            <p class="mb-1"><i class="fi fi-sr-tags"></i> ${tagsText}</p>
-            <p class="mb-0"><i class="fi fi-sr-plate-utensils"></i> ${recipe.servingSize} annosta</p>
-            <p class="mb-0"><i class="fi fi-sr-clock-three"></i> ${recipe.preparationTime} min</p>
-            <p class="mb-1"><i class="fi fi-sr-user-writer"></i> ${recipe.authorName}</p>
+            <p class="mb-1"><i class="fi fi-sr-tags"></i>&nbsp;${tagsText}</p>
+            <p class="mb-0"><i class="fi fi-sr-plate-utensils"></i>&nbsp;${recipe.servingSize} annosta</p>
+            <p class="mb-0"><i class="fi fi-sr-clock-three"></i>&nbsp;${recipe.preparationTime} min</p>
+            <p class="mb-1"><i class="fi fi-sr-user-writer"></i>&nbsp;${recipe.authorName}</p>
             <p class="mb-0"><small class="text-muted">${formatRecipeDate(recipe.dateCreated, recipe.dateModified)}</small></p>
             <div class="recipe-details">
                 ${ingredientsHtml}

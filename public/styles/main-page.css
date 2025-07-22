@@ -130,12 +130,15 @@
 
 .recipe-buttons a.btn {
     background: linear-gradient(45deg, gold, orange);
-    color: black;
+    background-clip: padding-box;
+    border-color: darkorange;
     font-weight: 600;
 }
 
 .recipe-buttons a.btn:hover {
     background: linear-gradient(45deg, orange, crimson);
+    background-clip: padding-box;
+    border-color: linear-gradient(45deg, gold, orange);
     box-shadow: 0 6px 16px rgba(255, 201, 7, 0.4);
     transform: translateY(-2px);
 }
